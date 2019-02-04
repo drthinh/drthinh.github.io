@@ -3,10 +3,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<div class="row" id = "firework">
+<div id = "firework" style="height:50px;"></div>
+<div class="row">
     <form class="col s12">
       <div class="container">
-	    <div class="caption center-align"><h2>Dịch nhanh tiếng Nghệ Tĩnh</h2></div>
+	    <div class="caption center-align"><h2>Dịch nhanh</h2></div>
         <div class="input-field col s12 m6">
           <textarea id="in_text" class="materialize-textarea" onkeyup="translateToHT()" onclick = "this.select();">Nhập vào đây</textarea>
           <label for="in_text">Hà Nội</label>
@@ -41,7 +42,7 @@ html {
 <script>
 var input_text = document.getElementById("in_text");
 var output_text = document.getElementById("out_text");
-var tracking_text = document.getElementById("track_text");
+
 var dic = {};
 
 function LoadDict(){
@@ -214,10 +215,6 @@ document.execCommand("copy");
             }
         };
 
-        // ----------------------------------------
-        // Example
-        // ----------------------------------------
-
         var MAX_PARTICLES = 280;
         var COLOURS = [ '#69D2E7', '#A7DBD8', '#E0E4CC', '#F38630', '#FA6900', '#FF4E50', '#F9D423' ];
 
@@ -230,8 +227,6 @@ document.execCommand("copy");
         });
 
         demo.setup = function() {
-
-            // Set off some initial particles.
             var i, x, y;
 
             for ( i = 0; i < 20; i++ ) {
@@ -307,4 +302,5 @@ document.execCommand("copy");
       Tác giả: <a href="https://www.instagram.com/dr_thinh">dr_thinh</a> <br/>
       Chương trình viết dựa trên tham khảo từ bài viết theo <a href="https://www.facebook.com/notes/ph%E1%BA%A1m-hi%E1%BA%BFu/h%E1%BB%8Dc-ti%E1%BA%BFng-h%C3%A0-t%C4%A9nh-c%E1%BA%A5p-t%E1%BB%91c-%C4%91%C3%A2y/138398066247033/">link</a>. 
 </blockquote>
+
 </html>
