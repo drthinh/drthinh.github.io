@@ -1,0 +1,310 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<div class="row" id = "firework">
+    <form class="col s12">
+      <div class="container">
+	    <div class="caption center-align"><h2>Dịch nhanh</h2></div>
+        <div class="input-field col s12 m6">
+          <textarea id="in_text" class="materialize-textarea" onkeyup="translateToHT()" onclick = "this.select();">Nhập vào đây</textarea>
+          <label for="in_text">Hà Nội</label>
+		  <a class="waves-effect waves-light btn-small" onclick = Copy1()>Copy</a>
+        </div>
+		<div class="input-field col s12 m6">
+          <textarea id="out_text" class="materialize-textarea" onkeyup="translateToHN()" onclick = "this.select();">Nhập vào đây</textarea>
+          <label for="out_text">Nghệ Tĩnh</label>
+		  <a class="waves-effect waves-light btn-small" onclick = Copy2()>Copy</a>
+        </div>
+      </div>
+    </form>
+</div>
+
+
+<style>
+html {
+  font-size: 16px;
+}
+@media screen and (min-width: 320px) {
+  html {
+    font-size: calc(16px + 6 * ((100vw - 320px) / 680));
+  }
+}
+@media screen and (min-width: 1000px) {
+  html {
+    font-size: 32px;
+  }
+}
+}
+</style>
+<script>
+var input_text = document.getElementById("in_text");
+var output_text = document.getElementById("out_text");
+var tracking_text = document.getElementById("track_text");
+var dic = {};
+
+function LoadDict(){
+dic['tru'] = 'trâu';
+dic['mi'] = 'mày';
+dic['tau'] = 'tao';
+dic['choa'] = 'chúng tao';
+dic['bây'] = 'bạn';
+dic['hấn'] = 'hắn';
+dic['ci'] = 'cái';
+dic['cấy'] = 'cái';
+dic['cưa'] = 'cửa';
+dic['quả bù'] = 'quả bầu';
+dic['mô'] = 'đâu';
+dic['khi mô'] = 'khi nào';
+dic['lúc mô'] = 'lúc nào';
+dic['mồ'] = 'nào';
+dic['bữa ni'] = 'hôm nay';
+dic['ni'] = 'này';
+dic['tê'] = 'kia';
+dic['tề'] = 'kìa';
+dic['răng'] = 'sao';
+dic['chi'] = 'gì';
+dic['nỏ'] = 'không';
+dic['ri'] = 'thế này';
+dic['a ri'] = 'như thế này';
+dic['hầy'] = 'nhỉ';
+dic['rành'] = 'rất';
+dic['đại'] = 'bừa';
+dic['hay đại'] = 'khá hay';
+dic['nhứt'] = 'nhất';
+dic['nhít'] = 'nhất'; // tính từ
+dic['bổ'] = 'ngã';
+dic['bứt'] = 'bẻ';
+dic['chưởi'] = 'chửi';
+dic['ẻ'] = 'ỉa';
+dic['đấy'] = 'đái';
+dic['đút'] = 'đốt';
+dic['đập'] = 'đánh';
+dic['dắc'] = 'dắt';
+dic['gưởi'] = 'gửi';
+dic['hun'] = 'hôn';
+dic['mần'] = 'làm';
+dic['nhởi'] = 'chơi';
+dic['rầy'] = 'xấu hổ';
+dic['vô'] = 'vào';
+dic['cù trắp'] = 'nói dối';
+dic['troạng'] = 'rách';
+dic['nhít'] = 'kỳ cọ'; // động từ
+dic['cảy'] = 'sưng';
+dic['ngái'] = 'xa';
+dic['su'] = 'sâu';
+dic['ngá'] = 'ngứa';
+dic['con du'] = 'con dâu';
+dic['chạc'] = 'dây';
+dic['chủi'] = 'chổi';
+dic['gấy nhôông'] = 'vợ chồng';
+dic['côộc'] = 'gậy';
+dic['toóc'] = 'rạ';
+dic['gốc cơn'] = 'gốc cây';
+dic['con me'] = 'con bê';
+dic['đàng'] = 'đường';
+dic['rọng'] = 'ruộng';
+dic['cươi'] = 'sân';
+dic['nương'] = 'vườn';
+dic['mọi'] = 'muỗi';
+dic['ròi'] = 'ruồi';
+dic['trập vã'] = 'đùi';
+dic['nác'] = 'nước';
+dic['nốc'] = 'thuyền';
+dic['cục đớ'] = 'cục đá';
+dic['hòn đớ'] = 'hòn đá';
+dic['cây ló'] = 'cây lúa';
+dic['hạt ló'] = 'hạt lúa';
+dic['bông ló'] = 'bông lúa';
+dic['đọi'] = 'cái bát';
+dic['nạm'] = 'nắm';
+dic['trốc'] = 'đầu';
+dic['trốc tru'] = 'đồ ngu';
+dic['trốc gúi'] = 'đầu gối';
+dic['khu'] = 'mông';
+dic['mấn'] = 'váy';
+dic['đom'] = 'rắm';
+}
+
+LoadDict();
+
+String.prototype.replaceAll = function(search, replacement) {
+    var target = this;
+    return target.replace(new RegExp(search, 'g'), replacement);
+};
+
+function translateToHT() {
+  tmp = input_text.value;
+  for (var i in dic){
+  tmp = tmp.replaceAll(dic[i],i); 
+  }
+  output_text.value = tmp;
+}
+
+function translateToHN() {
+  tmp = output_text.value;
+  for (var i in dic){
+  tmp = tmp.replaceAll(i, dic[i]); 
+  }
+  input_text.value = tmp;
+}
+
+function Clear(){
+  output_text.value = input_text.value = '';
+}
+function Copy1(){
+input_text.select();
+document.execCommand("copy");
+}
+function Copy2(){
+output_text.select();
+document.execCommand("copy");
+}
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+<script src="sketch.js"></script>
+<script>
+        function Particle( x, y, radius ) {
+            this.init( x, y, radius );
+        }
+
+        Particle.prototype = {
+
+            init: function( x, y, radius ) {
+
+                this.alive = true;
+
+                this.radius = radius || 10;
+                this.wander = 0.15;
+                this.theta = random( TWO_PI );
+                this.drag = 0.92;
+                this.color = '#fff';
+
+                this.x = x || 0.0;
+                this.y = y || 0.0;
+
+                this.vx = 0.0;
+                this.vy = 0.0;
+            },
+
+            move: function() {
+
+                this.x += this.vx;
+                this.y += this.vy;
+
+                this.vx *= this.drag;
+                this.vy *= this.drag;
+
+                this.theta += random( -0.5, 0.5 ) * this.wander;
+                this.vx += sin( this.theta ) * 0.1;
+                this.vy += cos( this.theta ) * 0.1;
+
+                this.radius *= 0.96;
+                this.alive = this.radius > 0.5;
+            },
+
+            draw: function( ctx ) {
+
+                ctx.beginPath();
+                ctx.arc( this.x, this.y, this.radius, 0, TWO_PI );
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+        };
+
+        // ----------------------------------------
+        // Example
+        // ----------------------------------------
+
+        var MAX_PARTICLES = 280;
+        var COLOURS = [ '#69D2E7', '#A7DBD8', '#E0E4CC', '#F38630', '#FA6900', '#FF4E50', '#F9D423' ];
+
+        var particles = [];
+        var pool = [];
+
+        var demo = Sketch.create({
+            container: document.getElementById( 'firework' ),
+            retina: 'auto'
+        });
+
+        demo.setup = function() {
+
+            // Set off some initial particles.
+            var i, x, y;
+
+            for ( i = 0; i < 20; i++ ) {
+                x = ( demo.width * 0.5 ) + random( -100, 100 );
+                y = ( demo.height * 0.5 ) + random( -100, 100 );
+                demo.spawn( x, y );
+            }
+        };
+
+        demo.spawn = function( x, y ) {
+            
+            var particle, theta, force;
+
+            if ( particles.length >= MAX_PARTICLES )
+                pool.push( particles.shift() );
+
+            particle = pool.length ? pool.pop() : new Particle();
+            particle.init( x, y, random( 5, 40 ) );
+
+            particle.wander = random( 0.5, 2.0 );
+            particle.color = random( COLOURS );
+            particle.drag = random( 0.9, 0.99 );
+
+            theta = random( TWO_PI );
+            force = random( 2, 8 );
+
+            particle.vx = sin( theta ) * force;
+            particle.vy = cos( theta ) * force;
+
+            particles.push( particle );
+        };
+
+        demo.update = function() {
+
+            var i, particle;
+
+            for ( i = particles.length - 1; i >= 0; i-- ) {
+
+                particle = particles[i];
+
+                if ( particle.alive ) particle.move();
+                else pool.push( particles.splice( i, 1 )[0] );
+            }
+        };
+
+        demo.draw = function() {
+
+            demo.globalCompositeOperation  = 'lighter';
+
+            for ( var i = particles.length - 1; i >= 0; i-- ) {
+                particles[i].draw( demo );
+            }
+        };
+
+        demo.mousemove = function() {
+
+            var particle, theta, force, touch, max, i, j, n;
+
+            for ( i = 0, n = demo.touches.length; i < n; i++ ) {
+
+                touch = demo.touches[i], max = random( 1, 4 );
+                for ( j = 0; j < max; j++ ) {
+                  demo.spawn( touch.x, touch.y );
+                }
+
+            }
+        };
+        
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<blockquote>
+      Tác giả: <a href="https://www.instagram.com/dr_thinh">dr_thinh</a> <br/>
+      Chương trình viết dựa trên tham khảo từ bài viết theo <a href="https://www.facebook.com/notes/ph%E1%BA%A1m-hi%E1%BA%BFu/h%E1%BB%8Dc-ti%E1%BA%BFng-h%C3%A0-t%C4%A9nh-c%E1%BA%A5p-t%E1%BB%91c-%C4%91%C3%A2y/138398066247033/">link</a>. 
+</blockquote>
+</html>
