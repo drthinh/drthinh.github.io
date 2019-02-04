@@ -1,11 +1,12 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <div class="row">
     <form class="col s12">
       <div class="container">
-	    <div class="col s12" align = "center"><h2>Dịch nhanh</h2></div>
+	    <div class="caption center-align" ><h2>Dịch nhanh</h2></div>
         <div class="input-field col s12 m6">
           <textarea id="in_text" class="materialize-textarea" onkeyup="translateToHT()" onclick = "SelectText(this);">Nhập vào đây</textarea>
           <label for="in_text">Hà Nội</label>
@@ -21,16 +22,22 @@
 </div>
 
 
-<!-- <style> -->
-<!-- @media only screen and (max-width: 767px) { -->
-   <!-- h1 { -->
-      <!-- font-size: 3em; -->
-   <!-- } -->
-   <!-- h2 { -->
-      <!-- font-size: 2em; -->
-   <!-- } -->
-<!-- } -->
-<!-- </style> -->
+<style>
+html {
+  font-size: 16px;
+}
+@media screen and (min-width: 320px) {
+  html {
+    font-size: calc(16px + 6 * ((100vw - 320px) / 680));
+  }
+}
+@media screen and (min-width: 1000px) {
+  html {
+    font-size: 22px;
+  }
+}
+}
+</style>
 <script>
 var input_text = document.getElementById("in_text");
 var output_text = document.getElementById("out_text");
