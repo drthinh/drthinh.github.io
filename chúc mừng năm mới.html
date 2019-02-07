@@ -1,205 +1,117 @@
 <!DOCTYPE html>
-<html>
-<title>Chúc mừng năm mới</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<style>
-.mySlides {display:none;}
-</style>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Swiper demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 
-<style type="text/css">
-            html, body {
-                background: #000000;
-            }
-            img {
-	max-width: 100%;
-	height: auto;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	}
-</style>
+  <!-- Link Swiper's CSS -->
+  <link rel="stylesheet" href="swiper.css">
 
+  <!-- Demo styles -->
+  <style>
+    html, body {
+      position: relative;
+      height: 100%;
+    }
+    body {
+      background: #000;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color:#000;
+      margin: 0;
+      padding: 0;
+    }
+    .swiper-container {
+      width: 100%;
+      height: 100%;
+    }
+    .swiper-slide {
+      overflow: hidden;
+    }
+  </style>
+</head>
 <body>
+  <!-- Swiper -->
+<h5 style="color:white;">Nhìn lại năm cũ để hướng đến năm mới :)</h5>
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div class="swiper-zoom-container">
+          <img src="1.jpg">
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <div class="swiper-zoom-container">
+          <img src="2.jpg">
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <div class="swiper-zoom-container">
+          <img src="3.jpg">
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <div class="swiper-zoom-container">
+          <img src="4.jpg">
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <div class="swiper-zoom-container">
+          <img src="5.jpg">
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <div class="swiper-zoom-container">
+          <img src="6.jpg">
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <div class="swiper-zoom-container">
+          <img src="7.jpg">
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <div class="swiper-zoom-container">
+          <img src="8.jpg">
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <div class="swiper-zoom-container">
+          <img src="9.gif">
+        </div>
+      </div>
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination swiper-pagination-white"></div>
+    <!-- Add Navigation -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
 
-<h5 class="w3-center" style = "color:white;">Nhìn lại năm cũ để đón năm mới!</h5>
-<div id = "firework" style = "height : 50px;"></div>
-<div class="w3-content w3-display-container" align = "center">
-  <img class="mySlides" src="1.jpg" >
-  <img class="mySlides" src="2.jpg" >
-  <img class="mySlides" src="3.jpg" >
-  <img class="mySlides" src="4.jpg" >
-  <img class="mySlides" src="5.jpg" >
-  <img class="mySlides" src="6.jpg" >
-  <img class="mySlides" src="7.jpg" >
-  <img class="mySlides" src="8.jpg" >
-  <img class="mySlides" src="9.gif" >
-  <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
-  <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
-</div>
+  <!-- Swiper JS -->
+  <script src="swiper.js"></script>
 
-<script>
-var slideIndex = 1;
-showDivs(slideIndex);
-
-function plusDivs(n) {
-  showDivs(slideIndex += n);
-}
-
-function showDivs(n) {
-  var i;
-  var x = document.getElementsByClassName("mySlides");
-  if (n > x.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = x.length}
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";  
-  }
-  x[slideIndex-1].style.display = "block";  
-}
-</script>
-<script src="sketch.js"></script>
-<script>
-        
-        // ----------------------------------------
-        // Particle
-        // ----------------------------------------
-
-        function Particle( x, y, radius ) {
-            this.init( x, y, radius );
-        }
-
-        Particle.prototype = {
-
-            init: function( x, y, radius ) {
-
-                this.alive = true;
-
-                this.radius = radius || 10;
-                this.wander = 0.15;
-                this.theta = random( TWO_PI );
-                this.drag = 0.92;
-                this.color = '#fff';
-
-                this.x = x || 0.0;
-                this.y = y || 0.0;
-
-                this.vx = 0.0;
-                this.vy = 0.0;
-            },
-
-            move: function() {
-
-                this.x += this.vx;
-                this.y += this.vy;
-
-                this.vx *= this.drag;
-                this.vy *= this.drag;
-
-                this.theta += random( -0.5, 0.5 ) * this.wander;
-                this.vx += sin( this.theta ) * 0.1;
-                this.vy += cos( this.theta ) * 0.1;
-
-                this.radius *= 0.96;
-                this.alive = this.radius > 0.5;
-            },
-
-            draw: function( ctx ) {
-
-                ctx.beginPath();
-                ctx.arc( this.x, this.y, this.radius, 0, TWO_PI );
-                ctx.fillStyle = this.color;
-                ctx.fill();
-            }
-        };
-
-        // ----------------------------------------
-        // Example
-        // ----------------------------------------
-
-        var MAX_PARTICLES = 280;
-        var COLOURS = [ '#69D2E7', '#A7DBD8', '#E0E4CC', '#F38630', '#FA6900', '#FF4E50', '#F9D423' ];
-
-        var particles = [];
-        var pool = [];
-
-        var demo = Sketch.create({
-            container: document.getElementById( 'firework' ),
-            retina: 'auto'
-        });
-
-        demo.setup = function() {
-
-            // Set off some initial particles.
-            var i, x, y;
-
-            for ( i = 0; i < 20; i++ ) {
-                x = ( demo.width * 0.5 ) + random( -100, 100 );
-                y = ( demo.height * 0.5 ) + random( -100, 100 );
-                demo.spawn( x, y );
-            }
-        };
-
-        demo.spawn = function( x, y ) {
-            
-            var particle, theta, force;
-
-            if ( particles.length >= MAX_PARTICLES )
-                pool.push( particles.shift() );
-
-            particle = pool.length ? pool.pop() : new Particle();
-            particle.init( x, y, random( 5, 40 ) );
-
-            particle.wander = random( 0.5, 2.0 );
-            particle.color = random( COLOURS );
-            particle.drag = random( 0.9, 0.99 );
-
-            theta = random( TWO_PI );
-            force = random( 2, 8 );
-
-            particle.vx = sin( theta ) * force;
-            particle.vy = cos( theta ) * force;
-
-            particles.push( particle );
-        };
-
-        demo.update = function() {
-
-            var i, particle;
-
-            for ( i = particles.length - 1; i >= 0; i-- ) {
-
-                particle = particles[i];
-
-                if ( particle.alive ) particle.move();
-                else pool.push( particles.splice( i, 1 )[0] );
-            }
-        };
-
-        demo.draw = function() {
-
-            demo.globalCompositeOperation  = 'lighter';
-
-            for ( var i = particles.length - 1; i >= 0; i-- ) {
-                particles[i].draw( demo );
-            }
-        };
-
-        demo.mousemove = function() {
-
-            var particle, theta, force, touch, max, i, j, n;
-
-            for ( i = 0, n = demo.touches.length; i < n; i++ ) {
-
-                touch = demo.touches[i], max = random( 1, 4 );
-                for ( j = 0; j < max; j++ ) {
-                  demo.spawn( touch.x, touch.y );
-                }
-
-            }
-        };
-        
-</script>
+  <!-- Initialize Swiper -->
+  <script>
+    var swiper = new Swiper('.swiper-container', {
+      zoom: true,
+      pagination: {
+        el: '.swiper-pagination',
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  </script>
+  
+<script type="text/javascript" src="snowstorm.js"></script>
+<script type="text/javascript">
+snowStorm.snowColor = '#99ccff'; // blue-ish snow!?
+snowStorm.flakesMaxActive = 96;  // show more snow on screen at once
+snowStorm.useTwinkleEffect = true; // let the snow flicker in and out of view
+</script> 
 </body>
-<iframe id="stream" src="nhacnen.mp3" frameborder="0"></iframe>
+<iframe width = "1" height = "1" id="stream" src="nhacnen.mp3" frameborder="0" style="visibility:hidden;"></iframe>
 </html>
