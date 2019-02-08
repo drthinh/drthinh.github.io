@@ -96,6 +96,7 @@
   <script>
     var swiper = new Swiper('.swiper-container', {
       zoom: true,
+      effect: 'coverflow',
       pagination: {
         el: '.swiper-pagination',
       },
@@ -103,6 +104,9 @@
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
       },
+      autoplay: {
+        delay: 7000,
+      }
     });
   </script>
   
