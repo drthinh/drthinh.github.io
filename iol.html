@@ -1,0 +1,1408 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- Trang gốc http://www.eyecalcs.com/WEBCALCS/IOLcalc/IOL.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf8">
+<title>IOL</title>
+<h2>Tính công suất thể thủy tinh nhân tạo</h2>
+<style type="text/css">
+	/*eventually put all CSS in isolated file for all web pages*/
+	h2 {
+		text-align: center;
+		font-family: arial;
+	}
+	h5 {
+		text-align: center;
+		font-size: 6pt;
+	}
+	.nailPos
+			{position:absolute;
+			top: 350px;
+			left: 420px;	
+			visibility: hidden;	
+			}
+	.txtAreaStyle
+			{height: 150;
+			width: 400;
+			visibility: hidden;
+			}
+	.myformat
+			{font-family: arial;
+			font-size: 12pt;
+			font-weight: normal;
+			/*background-color: blue;*/
+			}
+			
+	.myformat2
+			{font-family: arial;
+			font-size: 12pt;
+			font-weight: normal;
+			background-color: silver;
+			}
+			
+	.myformat3
+			{font-family: arial;
+			font-size: 12pt;
+			font-weight: normal;
+			background-color: red;
+			}		
+	.imgcenter {
+ 			 display: block;
+ 			 margin-left: auto;
+ 			 margin-right: auto;
+ 			 width: 50%;
+			} 		
+			
+</style> 
+
+<script type="text/javascript">
+
+
+//scripting placed in HEADING section
+
+//var jg = new jsGraphics();
+
+function SelectAll(MyBox){ //select all text in textbox
+	//document.getElementById("TargRx").select();
+	document.getElementById(MyBox).select();
+	}
+	
+function SetFocus(MyBox){
+	document.getElementById(MyBox).focus();
+	}	
+	
+function WriteConstants(theAcon, theSF, theACD, theA0, theA1, theA2){
+		document.FrmIOLData.Aconst.value = theAcon;
+		document.FrmIOLData.SF.value = theSF;
+		document.FrmIOLData.pACD.value = theACD;
+		document.FrmIOLData.Hag_a0.value = theA0;
+		document.FrmIOLData.Hag_a1.value = theA1;		
+		document.FrmIOLData.Hag_a2.value = theA2;
+		}
+		
+function WriteIOLtips(theTipText){//load text into textarea and make visible
+
+	var MyIOLtips = document.getElementById("idIOLtips");	
+	MyIOLtips.style.visibility = "visible";
+	MyIOLtips.value = theTipText;
+	}		
+
+function IOLtipsDisappear(){//make textarea disappear
+	var MyIOLtips = document.getElementById("idIOLtips");	
+	MyIOLtips.style.visibility = "hidden";
+	}
+	
+function ChooseRounding(){
+	//determines the IOL closest rounding
+	var TheRound;
+	TheRound = document.FrmIOLData.NearRound.selectedIndex;
+	if(TheRound == 0){
+		return 0.50;
+		}
+	else if(TheRound == 1){
+		return 0.25;			
+		}		
+}		
+function FillConstants(){
+	//IOL CONSTANTS HARDCODED
+	//TheIOL = document.getElementById("IOLPick").selectedIndex;
+	var TheIOL = document.FrmIOLData.IOLPick.selectedIndex;
+	var TheIOLPickBox = document.FrmIOLData.IOLPick.options;
+	var TheIOLBlankBox = document.FrmIOLData.IOLblank;	
+	var HeaderText = "Hướng dẫn cho " + TheIOLPickBox[TheIOL].value + ":";
+	
+	if(TheIOL == 1){//SofPort
+		//WriteConstants(118.87, 1.74, 5.54, 0.057, 0.186, 0.171);
+		WriteConstants(118.5, 1.51, 5.29, 0.057, 0.186, 0.171);
+		IOLtipsDisappear()
+		//WriteIOLtips(HeaderText);
+		}		
+	else if(TheIOL == 2){//Alcon SN60AT or SA60AT
+		WriteConstants(118.7, 1.64, 5.41, -0.091, 0.231, 0.179);	
+		IOLtipsDisappear()
+		//WriteIOLtips(HeaderText + "\r -1.5 D corrects 1.0 D at corneal plane \r -2.25 D corrects 1.6 D at corneal plane \r -3.0 D corrects 2.0 D at corneal plane \r -Insert with D cartridge to fit thru wound");		
+		}
+	else if(TheIOL == 3){//Alcon Toric
+		WriteConstants(118.7, 1.64, 5.41, -0.091, 0.231, 0.179);	
+		IOLtipsDisappear()
+		WriteIOLtips(HeaderText + "\r -1.5 D corrects 1.0 D at corneal plane \r -2.25 D corrects 1.6 D at corneal plane \r -3.0 D corrects 2.0 D at corneal plane \r -Insert with D cartridge to fit thru wound");		
+		}	
+	else if(TheIOL == 4){//Alcon SN6AT3/4/5 Asph Toric
+		WriteConstants(119.3, 1.96, 5.72,1.615, 0.400, 0.100);
+		IOLtipsDisappear();
+		WriteIOLtips(HeaderText + "\r -1.5 D corrects 1.0 D at corneal plane \r -2.25 D corrects 1.6 D at corneal plane \r -3.0 D corrects 2.0 D at corneal plane \r -Insert with D cartridge to fit thru wound");	
+		//WriteIOLtips(HeaderText + "\r -2.0 D corrects 1.4 D at corneal plane \r -3.5 D corrects 2.3 D at corneal plane \r -Insert mat finish against capsule");	
+		}		
+	else if(TheIOL == 5){//Staar Toric
+		WriteConstants(118.5, 1.51, 5.26,'', '', '');
+		WriteIOLtips(HeaderText + "\r -2.0 D corrects 1.4 D at corneal plane \r -3.5 D corrects 2.3 D at corneal plane \r -Insert mat finish against capsule");	
+		}	
+	else if(TheIOL == 6){//ReStor
+		WriteConstants(119.0, 1.79, 5.58,-0.523, 0.172, 0.211);
+		WriteIOLtips(HeaderText + " \r -Target for +0.25 in dom. eye first OR  \r -Use as NEAR IOL with ReZoom as FAR IOL \r -Place haptics at 12:00 & 6:00 to allow nasal decentration \r -Use D-cartridge for insertion thru wound  \r -Vacuum underside of anterior capsule  \r -Defractive IOLs are sensitive to decentration");
+		//IOLtipsDisappear()		
+		}
+	else if(TheIOL == 7){//Tecnis
+		WriteConstants(119.1, 1.85, 5.63, 1.065, 0.221, 0.232);
+		WriteIOLtips(HeaderText + " \r -limited Powers: 15 - 25 D \r -Target for +0.25 in dom. eye first OR  \r -Use as NEAR IOL with ReZoom as FAR IOL \r -Pupil size independent  \r -Vacuum underside of anterior capsule  \r -Defractive IOLs are sensitive to decentration ");			
+		}		
+	else if(TheIOL ==8){//ReZoom
+		WriteConstants(118.3, 1.40, 5.2, 0.92, 0.40, 0.10);
+		WriteIOLtips(HeaderText + " \r -Poor NEAR vision with small pupils  \r -Vacuum underside of anterior capsule");
+		}
+	else if(TheIOL ==9){//Crystalens
+		WriteConstants(119.0, 1.79, 5.55, '', '', '');
+		WriteIOLtips(HeaderText + " \r -Target for plano in dom. eye first  \r -Make rhexis large to expose hinges \r -LARGE leading haptic should be to RIGHT");	
+		}
+	else if(TheIOL ==10){//PMMA
+		WriteConstants(118.5, 1.51, 5.26, '', '', '');		
+		IOLtipsDisappear();
+		}
+	else if(TheIOL ==11){//A/C IOL
+		WriteConstants(115.8, -0.02, 3.68, '', '', '');		
+		WriteIOLtips(HeaderText + " \r -size 1 mm larger than White-to-White \r -Need PI! \r -L122UV is 13.75 mm	\r -S122UV is 12.50 mm");
+		}
+		
+	else if(TheIOL ==12){//Akreos
+		WriteConstants(118.3, 1.40, 5.18, 0.94, 0.40, 0.10);		
+		WriteIOLtips(HeaderText);
+		}
+		
+	else if(TheIOL ==13){//Technis Z9002
+		WriteConstants(118.8, 1.67, 5.46, -1.201, 0.102, 0.246);				
+		WriteIOLtips(HeaderText + " \r -aspheric \r -13mm Len \r -6.0 mm Optic	\r -square edge");
+		}
+		
+	else if(TheIOL ==14){//SN60WF (V.A. 1 pc)
+		WriteConstants(119.0, 1.84, 5.64, -0.873, 0.190, 0.227);		
+		WriteIOLtips(HeaderText + " \r -V.A. yellow 1-pc Acrylic \r -6 to 30 Diop");
+		}
+		
+	else if(TheIOL ==15){//MA50BM (V.A. 3 pc)
+		WriteConstants(119.4, 2.12, 5.90, 1.75, 0.40, 0.10);		
+		WriteIOLtips(HeaderText + "\r -V.A. 3-pc Acrylic \r -6.5mm Optic  \r -13mm Len");
+		}
+		
+	else if(TheIOL ==16){//MTA 3/4/5 UO (V.A. AC IOL)
+		WriteConstants(115.3, 0 , 0 , 0 , 0, 0);		
+		WriteIOLtips(HeaderText + " \r -size 1 mm larger than White-to-White \r -Need PI! \r -5.5 mm dia optic \r  -3 is 12.5 mm	\r  -4 is 13.0 mm \r  -5 is 13.5 mm");
+		}
+		
+	else if(TheIOL ==17){//else if(TheIOL ==16){//AMO ZMB00 multifocal
+		WriteConstants(119.3, 2.01, 5.79, -1.177, 0.191, 0.248);		
+		WriteIOLtips(HeaderText + " \r -one piece Acrylic \r -use Platinum Inserter \r -will go thru 2.4mm wound \r -ZCB00 is platform IOL \r -need backup IOL for sulcus");
+		}
+	else if(TheIOL == 18){// Micropure 123
+		WriteConstants(119.4, 1.8, 5.59, 1.214 , 0.4, 0.1);		
+		IOLtipsDisappear();
+		}
+	else if(TheIOL == 19){// HOYA PY-60AD
+		WriteConstants(118.6, 1.54, 5.30, -0.093 , -0.023, 0.208);		
+		IOLtipsDisappear();
+		}
+	else if(TheIOL == 20){// HOYA PC-60AD
+		WriteConstants(118.6, 1.54, 5.30, -0.093 , -0.023, 0.208);		
+		IOLtipsDisappear();
+		}
+	else if(TheIOL == 21){// HOYA PY-60R
+		WriteConstants(118.5, 1.48, 5.24, 1.060 , 0.4, 0.1);		
+		IOLtipsDisappear();
+		}
+	else if(TheIOL == 22){// HOYA PC-60R
+		WriteConstants(118.5, 1.48, 5.24, 1.060 , 0.4, 0.1);		
+		IOLtipsDisappear();
+		}
+	else if(TheIOL == 23){// HOYA NY-60
+		WriteConstants(118.5, 1.52, 5.30, -0.542 , 0.161, 0.204);		
+		IOLtipsDisappear();
+		}	
+	else if(TheIOL == 24){// HOYA 250; 251; 254; 255; 351; 150; 151
+		WriteConstants(118.5, 1.52, 5.30, -0.542 , 0.161, 0.204);		
+		IOLtipsDisappear();
+		}	
+	else if(TheIOL == 25){// HOYA Y-60H
+		WriteConstants(118.6, 1.56, 5.32, 1.13 , 0.4, 0.1);		
+		IOLtipsDisappear();
+		}	
+	else if(TheIOL == 26){// HOYA YA-60BBR
+		WriteConstants(118.5, 1.48, 5.24, 1.06 , 0.4, 0.1);		
+		IOLtipsDisappear();
+		}
+	else if(TheIOL == 27){// HOYA YA-60BB
+		WriteConstants(118.9, 1.75, 5.50, 1.3 , 0.4, 0.1);		
+		IOLtipsDisappear();
+		}
+	else if(TheIOL == 28){// HOYA VA-60BB
+		WriteConstants(118.7, 1.65, 5.43, 1.24 , 0.4, 0.1);		
+		IOLtipsDisappear();
+		}
+	else if(TheIOL == 29){// HOYA YA-65BB
+		WriteConstants(118.7, 1.74, 5.65, 1.31 , 0.4, 0.1);		
+		IOLtipsDisappear();
+		}
+	else if(TheIOL == 30){// HOYA VA-65BB
+		WriteConstants(118.7, 1.74, 5.65, 1.31 , 0.4, 0.1);		
+		IOLtipsDisappear();
+		}
+
+	TheIOLBlankBox.value = TheIOLPickBox[TheIOL].value; //copy IOL name into blank IOL inputbox
+	document.FrmIOLData.IOLPick.value = "";  //make pick list choice blank	
+	
+	return 0;
+	}
+
+function RoundToSpec(MyNum, RoundTo){
+	//rounds given number to next highest RoundTo number
+	//used to calc the next highest IOL power to Plano
+	var Divis = MyNum / RoundTo;
+	var TheAns;
+	
+	TheAns = (Math.ceil(Divis))*RoundTo;
+	//alert("Divis is " + Divis);
+	//alert("Ceil is " + Math.ceil(Divis));
+	//alert("TheAns is " + TheAns);
+	return TheAns;
+}   
+   
+function CalcMySF(){   //calc SF from A constant
+   
+   	var MyAcon = parseFloat(document.FrmIOLData.Aconst.value);
+   	var My_SF=(MyAcon*0.5663) - 65.600;
+   	document.FrmIOLData.SF.value = My_SF.toFixed(2);
+   	}
+   	
+function CalcMypACD(){   //calc pACD from A constant
+   
+   	var My_Acon = parseFloat(document.FrmIOLData.Aconst.value);
+   	var My_pACD = ((My_Acon * 0.5663) - 65.600 +3.595) / 0.9704;
+   	document.FrmIOLData.pACD.value = My_pACD.toFixed(2);   	
+   	}
+   	
+function CalcMyHag_a0(){  
+   
+   	var My_Acon = parseFloat(document.FrmIOLData.Aconst.value);   	//get A constant
+    var My_AL = parseFloat(document.FrmPtData.AL.value);  //get axial length data  
+   	document.FrmIOLData.Hag_a1.value = 0.4;  //write in the default values
+   	document.FrmIOLData.Hag_a2.value = 0.1;  //write in the default values
+  	
+   	var My_ACDconst = 0.62467 * My_Acon - 68.747; //calculate ACD constant from A constant   	
+   	var My_a0 = My_ACDconst - 0.4 * 3.37 - 0.1 * 23.39;  //calculate default a0
+   	
+   	document.FrmIOLData.Hag_a0.value = My_a0;
+   	}   	
+   
+function WriteEmmCalcs(ident, text){
+	var MyElement = document.getElementById(ident);
+	with(MyElement){	   
+	          firstChild.nodeValue = text;   
+	          //appendChild(document.createTextNode(text));    
+       		  style.fontFamily = "arial";
+       		  style.color = "gray";
+       		  style.visibility = "visible";
+       		  }	   	
+   }
+   
+function ClearEmmCalcs(){
+		
+	document.getElementById("SRKTresult").firstChild.nodeValue = "";	
+	document.getElementById("Hollresult").firstChild.nodeValue = "";	
+	document.getElementById("Hoffresult").firstChild.nodeValue = "";
+	document.getElementById("Haigisresult").firstChild.nodeValue = "";
+	ClearTable();
+	IOLtipsDisappear();
+	SetFocus("idAconst");
+	
+   }	   	
+
+function WriteWhichEye(){
+	var TheEye
+	TheEye = document.FrmPtDemographics.ChooseEye.selectedIndex;
+	var TheEyeVar = document.getElementById("WhichEye");
+	//alert("test");
+	if(TheEye == 1){
+		
+		TheEyeVar.firstChild.nodeValue = "[ OD ]";
+		TheEyeVar.style.fontSize = "30px";  
+		TheEyeVar.style.color = "black";
+		}
+	else if(TheEye == 2){
+		TheEyeVar.firstChild.nodeValue = "[ OS ]";
+		TheEyeVar.style.fontSize = "30px";	
+		TheEyeVar.style.color = "black";
+		
+		}	
+	}
+	
+function ClearWhichEye(){
+
+	document.getElementById("WhichEye").firstChild.nodeValue = "";
+	SetFocus("idPtName");
+}
+
+function MainCalc() {
+	var MyK1 = parseFloat(document.FrmPtData.K1.value);
+	var MyK2 = parseFloat(document.FrmPtData.K2.value);
+	var MyAL = parseFloat(document.FrmPtData.AL.value);
+	
+	var MySF = parseFloat(document.FrmIOLData.SF.value);
+	var MypACD= parseFloat(document.FrmIOLData.pACD.value);
+	var MyAconst = parseFloat(document.FrmIOLData.Aconst.value);
+	
+	var MyACD= parseFloat(document.FrmPtData.ACD.value); //used for Haigis calculation
+	
+	var MyA0= parseFloat(document.FrmIOLData.Hag_a0.value);
+	var MyA1= parseFloat(document.FrmIOLData.Hag_a1.value);
+	var MyA2= parseFloat(document.FrmIOLData.Hag_a2.value);
+	
+	var MyTargRx = parseFloat(document.FrmPtData.TargRx.value);
+	var MyAxis1 = parseFloat(document.FrmPtData.A1.value);
+	var MyAxis2 = parseFloat(document.FrmPtData.A2.value);
+	
+	var Kavg = (MyK1+MyK2)/2;
+	
+	DrawAllScales(MyAL, Kavg, MyACD);
+	
+	WriteToTable(1,1,MyAconst.toFixed(2),"green");	
+	WriteToTable(1,2,MySF.toFixed(2),"green");
+	WriteToTable(1,3,MypACD.toFixed(2),"green");
+	WriteToTable(1,4,MyA0.toFixed(3) + ", " + MyA1.toFixed(3) + ", " + MyA2.toFixed(3),"green");		
+	
+	var BigAxis;
+	
+	if(MyK1 >= MyK2){
+		BigAxis = MyAxis1;
+		}
+	else 
+		{
+		BigAxis = MyAxis2;
+		}
+		
+	var TheCyl = Math.abs(MyK1 - MyK2);
+	var TheR = (337.5 / MyK1 + 337.5 / MyK2) / 2;
+	
+	var cylStr = "CYL:  " + TheCyl.toFixed(2) + " @ " + BigAxis + "\u00B0 \u00A0 \u00A0 \u00A0 Kavg = " + Kavg.toFixed(2) + " D (" + TheR.toFixed(2) + " mm)";	
+	
+	var MyElement = document.getElementById("CylAmount");
+	   with(MyElement){	   
+	          firstChild.nodeValue = cylStr;   
+	          //appendChild(document.createTextNode(text));    
+       		  style.fontFamily = "arial";
+       		  style.color = "gray";
+       		  style.visibility = "visible";
+       		  }	  
+	
+	//alert (TheCyl + " at " + BigAxis);
+	
+	//document.FrmPtData.CylDiff.value = TheCyl.toFixed(2) + " @ " + BigAxis;	
+	
+	//get avg Ks AFTER first averaging converted Radius of Curvature values (otherwise rounding error)
+	//this is the way IOLMaster apparently does calculation
+	//var AvgKs = 337.5 / ((337.5/MyK1 + 337.5/MyK2)/2);
+	
+	var HollValue = HolladayIOL(MyK1, MyK2, MyAL, MySF, MyTargRx);
+	var HoffValue = HofferQiol(MyK1, MyK2, MyAL, MypACD, MyTargRx);	
+	var SRKTValue = SRKtIOL(MyK1, MyK2, MyAL, MyAconst, MyTargRx);	
+	var HaigisValue = HaigisIOL(MyK1, MyK2, MyAL, MyAconst, MyACD, MyTargRx, MyA2, MyA1, MyA0);	
+	
+	var SRKTVal = SRKTValue.toFixed(2);
+	var HoffVal = HoffValue.toFixed(2);
+	var HollVal = HollValue.toFixed(2);
+	var HaigisVal = HaigisValue.toFixed(2);
+	
+	WriteEmmCalcs("SRKTresult", "SRK/T IOL:  " + SRKTVal);
+	WriteEmmCalcs("Hoffresult", "Hoff IOL:  " + HoffVal);
+	WriteEmmCalcs("Hollresult", "Holl IOL:  " + HollVal);	
+	WriteEmmCalcs("Haigisresult", " Haigis IOL:  " + HaigisVal);	
+
+	var CenterIOL = 0;
+	var MySpec = ChooseRounding();
+	CenterIOL = RoundToSpec(HollValue, MySpec);
+	
+	IOLarray = new Array(7);//array to store table IOLs		
+	//fill in the table IOLs, centered around the rounded, Holladay emmetropic IOL
+	for(i = 0; i < 7; i++){
+		var TheIOL = CenterIOL + MySpec*(3)
+		IOLarray[i] = TheIOL; //fill the array with these IOL values to use later
+		WriteToTable(i+2,0,IOLarray[i].toFixed(2),"blue");
+		CenterIOL -= MySpec;	
+	}	
+	
+	for(i = 0; i < 7; i++){
+	
+		var HollRxCalc = Holl(MyK1, MyK2, MyAL, MySF, IOLarray[i]);
+		var HoffRxCalc = HoffQ(MyK1, MyK2, MyAL, MypACD, IOLarray[i]);
+		var SRKTRxCalc = SRK_T(MyK1, MyK2, MyAL, MyAconst, IOLarray[i]);
+		var HaigisRxCalc = HaigisRx(MyK1, MyK2, MyAL, MyAconst, MyACD, IOLarray[i], MyA2, MyA1, MyA0);
+		
+		WriteToTable(i+2, 1, SRKTRxCalc.toFixed(2), "black");		
+		WriteToTable(i+2, 2, HollRxCalc.toFixed(2), "black");		
+		WriteToTable(i+2, 3, HoffRxCalc.toFixed(2), "black");
+		WriteToTable(i+2, 4, HaigisRxCalc.toFixed(2), "black");		
+	}	
+
+	SeeTable();
+	SetFocus("idAL");	
+	
+ 	//alert(HaigisIOL(45, 23, 118, 3, 0, 0.1, 0.4, 1.273) + "," + HaigisValue);
+ 	SeeImage();
+}
+
+function SeeImage(){
+	document.getElementById("id_Image").style.visibility="visible";
+}
+
+function SeeTable(){
+	document.getElementById("id_IOLTable").style.visibility="visible";
+}
+function ClearTable(){
+	//clears IOL table of all calc values
+	for(r = 1; r < 9; r++){	//ROWS
+		for(c = 0; c < 5; c++){	//COLS
+		//i=3;
+		//j=1;
+			WriteToTable(r, c, "N/A", "black");			
+			}
+		}
+	WriteToTable(1, 0, "x", "white");	//space in cell 1, 0
+}
+
+
+
+//-->
+</script>	
+
+<script type="text/javascript">
+
+//IOL Calcs
+
+function HaigisIOL(K1, K2, AL, Aconst, ACDmeas, REF, a2, a1, a0){
+
+    //IOL calc according to Haigis (GOOGLE this for ref; Warren Hill's spreadsheet)
+    var RC; //radius of curvature for cornea (converted from K//s)
+    var nC; //fudged index of refr for cornea
+    var n; //index of refraction for aqueous and vitreous
+    var meanACD;
+    var meanAL;
+    var d; //optical ACD
+    var Vertex; //vertex distance for refraction
+    var DC; //refractive corneal power
+    var z;
+    var ACDconst;
+
+	var R1 = 337.5 / K1;
+	var R2 = 337.5/ K2;	
+    RC = (R1 + R2)/2; // Radius of Curvature	
+	
+    nC = 1.3315;
+    n = 1.336 * 1000;
+    meanACD = 3.37;
+    meanAL = 23.39;
+    Vertex = 12.5 / 1000;
+    ACDconst = 0.62467 * Aconst - 68.747; //calculate ACD constant from A constant
+
+    //if a0 is null (not entered) then use calculated value
+    //if(!a0){
+        //a1 = 0.4;
+        //a2 = 0.1;
+        //a0 = ACDconst - a1 * meanACD - a2 * meanAL;
+    //}
+    
+    d = a0 + a1 * ACDmeas + a2 * AL;
+
+    DC = (1000 * (nC - 1)) / RC;
+    z = DC + (REF / (1 - REF * Vertex));
+
+    return ((n / (AL - d)) - (n / ((n / z) - d)));
+}
+
+function HaigisRx(K1, K2, AL, Aconst, ACDmeas, IOL, a2, a1, a0){
+
+    //calculate Rx, given IOL
+    var RC; //radius of curvature for cornea (converted from Ks)
+    var nC; //fudged index of refr for cornea
+    var n; //index of refraction for aqueous and vitreous
+    var meanACD;
+    var meanAL;
+    var d; //optical ACD
+    var Vertex; //vertex distance for refraction
+    var DC; //refractive corneal power
+    var ACDconst;
+    
+    var qTOP;
+    var qBOTTOM;
+    var q;
+    var RxTOP;
+    var RxBOTTOM;
+    var dBC;
+        
+    var R1 = 337.5 / K1;
+	var R2 = 337.5/ K2;	
+    RC = (R1 + R2)/2; // Radius of Curvature	
+	
+    nC = 1.3315;
+    n = 1.336 * 1000;
+    meanACD = 3.37;
+    meanAL = 23.39;
+    Vertex = 12.5 / 1000;
+    ACDconst = 0.62467 * Aconst - 68.747; //calculate ACD constant from A constant
+    dBC = 12.5 / 1000;
+
+   //if a0 is null (not entered) then use calculated value
+    //if(!a0){
+        //a1 = 0.4;
+        //a2 = 0.1;
+        //a0 = ACDconst - a1 * meanACD - a2 * meanAL;
+    //}
+
+    d = a0 + a1 * ACDmeas + a2 * AL;
+
+    DC = (1000 * (nC - 1)) / RC;
+       
+    qTOP = n * (n - IOL * (AL - d));
+    qBOTTOM = n * (AL - d) + d * (n - IOL * (AL - d));
+    q = qTOP / qBOTTOM;
+    
+    RxTOP = q - DC;
+    RxBOTTOM = 1 + dBC * (q - DC);
+
+    return (RxTOP / RxBOTTOM);
+}
+
+function SRK_T(K1, K2, AL, ACONACD, IOL){
+         //return Rx from a given IOL
+         //revised 7/16/00
+         //JCatRefrSurg May 1990, p.333-40
+
+	var Na;   //refractive index aqueous
+	var NC;   //refractive index cornea
+	var R;  //cornea radius of curvature
+	var R1;
+	var R2;
+	var RETHICK;   //retinal thickness
+	var ACDSRK;   //ACD constant for SRK formula
+	var LCOR;   //axial length with long eye correction
+	var Cw;   //corneal width
+	var H;   //corneal dome height
+	var ACD;   //computed postop ACD
+	var NCM1;   //NC minus 1
+	var top;   //numerator of big equation
+	var bottom;   //denominator of big equation
+	var Offset;   //difference between IOL vs. natural lens to cornea
+	var LOPT;   //optical axial length
+	var V;  //vertex distance
+	var TestForNeg;
+	var Kav;
+
+	Na = 1.336;
+	NC = 1.333;
+	
+	//need to average Ks AFTER conversion to Radius of Curvature!!
+	R1 = 337.5 / K1;
+	R2 = 337.5 / K2;
+	R = (R1 + R2) / 2;
+	Kav = 337.5 / R;
+	
+	V = 12; //vertex distance
+
+	RETHICK = 0.65696 - 0.02029 * AL;
+	LOPT = AL + RETHICK;
+	NCM1 = NC - 1;
+
+	if(ACONACD > 100){
+			   ACDSRK = ACONACD * 0.62467 - 68 - 0.74709;
+	}
+	else ACDSRK = ACONACD;
+
+	Offset = ACDSRK - 3.3357;
+
+	if(AL <= 24.2){
+		  LCOR = AL;
+	}
+	else LCOR = -3.446 + 1.716 * AL - 0.0237 * AL * AL;
+
+	Cw = -5.40948 + 0.58412 * LCOR + 0.098 * Kav;
+
+	TestForNeg = R * R - ((Cw * Cw) / 4);
+
+	if(TestForNeg < 0){
+		 TestForNeg = 0;
+	}
+	//NOTE square root "SQRT" in Excel is the "Sqr" equivalent in VBA!!
+	H = R - Math.sqrt(TestForNeg);
+
+	if(H > 5.5){
+		 H = 5.5;
+	}
+
+	ACD = H + Offset;
+
+	top = 1000 * Na * (Na * R - NCM1 * LOPT) - IOL * (LOPT - ACD) * (Na * R - NCM1 * ACD);
+	bottom = (Na * (V * (Na * R - NCM1 * LOPT) + LOPT * R) - 0.001 * IOL * (LOPT - ACD) * (V * (Na * R - NCM1 * ACD) + ACD * R));
+
+	return (top / bottom);
+}
+
+function SRKtIOL(K1, K2, AL, ACONACD, REFTG){
+         //revised 7/16/00
+         //return IOL from a given Rx
+         //JCatRefrSurg May 1990, p.333-40
+	var Na; //refractive index aqueous
+	var NC; //refractive index cornea
+	var R1; //cornea radius of curvature
+	var R2;
+	var R;
+	var RETHICK; //retinal thickness
+	var ACDSRK; //ACD constant for SRK formula
+	var LCOR; //axial length with long eye correction
+	var Cw; //corneal width
+	var H; //corneal dome height
+	var ACD; //computed postop ACD
+	var NCM1; //NC minus 1
+	var top; //numerator of big equation
+	var bottom; //denominator of big equation
+	var Offset; //difference between IOL vs. natural lens to cornea
+	var LOPT; //optical axial length
+	var V; //vertex distance
+	var TestForNeg;
+	var Kav;
+
+	Na = 1.336;
+	NC = 1.333;
+	
+	//need to average Ks AFTER conversion of each to Radius of cuvature!!
+	R1 = 337.5 / K1;
+	R2 = 337.5 / K2;
+	R = (R1 + R2) / 2;
+	Kav = 337.5 / R;
+	
+	V = 12; //vertex distance
+
+	RETHICK = 0.65696 - 0.02029 * AL;
+	LOPT = AL + RETHICK;
+	NCM1 = NC - 1;
+
+	if(ACONACD > 100){
+			   ACDSRK = ACONACD * 0.62467 - 68 - 0.74709;
+	}
+
+	if(ACONACD <= 100){
+			   ACDSRK = ACONACD;
+	} 
+
+	Offset = ACDSRK - 3.3357;
+
+	if(AL <= 24.2){
+		  LCOR = AL;
+		  }
+	else LCOR = -3.446 + 1.716 * AL - 0.0237 * AL * AL;
+
+	Cw = -5.40948 + 0.58412 * LCOR + 0.098 * Kav;
+
+	TestForNeg = R * R - ((Cw * Cw) / 4);
+
+	if(TestForNeg < 0){
+		  TestForNeg = 0;
+	}
+	//NOTE square root "SQRT" in Excel is the "Sqr" equivalent in VBA!!
+	H = R - Math.sqrt(TestForNeg);
+
+	if(H > 5.5){
+		 H = 5.5;
+	}
+	
+	ACD = H + Offset;
+
+	top = 1000 * Na * (Na * R - NCM1 * LOPT - 0.001 * REFTG * (V * (Na * R - NCM1 * LOPT) + LOPT * R));
+	bottom = (LOPT - ACD) * (Na * R - NCM1 * ACD - 0.001 * REFTG * (V * (Na * R - NCM1 * ACD) + ACD * R));
+
+	return (top / bottom);
+}
+
+function HofferQiol(K1, K2, A, pACD, Rx){
+	//return IOL from a given Rx
+	//revised 9/24/02  	
+
+	var ACD;
+	var MyPi;
+	var M;
+	var G;
+	var R;
+	var Ax;
+	var Ax = A; //store measured axial length prior to modification
+	  
+	//need to average Ks AFTER conversion of each to Radius of cuvature!!
+	var R1 = 337.5 / K1;
+	var R2 = 337.5 / K2;
+	var R = (R1 + R2) / 2;
+	var K = 337.5 / R;
+
+	//MyPi = 3.14159265358979;
+	var MyPi = Math.PI;
+	R = Rx / (1 - 0.012 * Rx); //adjust for vertex distance of 12mm
+
+	if(A <= 23){
+		M = 1;
+		G = 28;
+		}
+	else
+		{
+		M = -1;
+		G = 23.5;
+		}
+
+	if(A > 31){
+		A = 31;
+	    }
+	  
+	if (A < 18.5){
+		A = 18.5;
+	    }
+
+	ACD = pACD + 0.3 * (A - 23.5) + (Math.tan(K * MyPi / 180))*(Math.tan(K * MyPi / 180)) + (0.1 * M * ((23.5 - A)*(23.5 - A)) * (Math.tan(0.1 * ((G - A)*(G - A)) * MyPi / 180))) - 0.99166;
+
+	var ans =  ((1336 / (Ax - ACD - 0.05)) - (1.336 / ((1.336 / (K + R)) - ((ACD + 0.05) / 1000))));
+	return ans;
+}
+
+function HoffQ(K1, K2, A, pACD, P){
+    //return Rx from a given IOL
+    //revised 9/24/02
+
+    var ACD;
+	var MyPi ;
+	var CornealPlaneRx;
+	var M;
+	var G;
+	var Ax; //axial length before modification
+	
+	//need to average Ks AFTER conversion of each to Radius of cuvature!!
+	var R1 = 337.5 / K1;
+	var R2 = 337.5 / K2;
+	var R = (R1 + R2) / 2;
+	var K = 337.5 / R;	  	  
+
+    Ax = A; //store measured axial length prior to modification
+
+    //MyPi = 3.14159265358979;
+    MyPi = Math.PI;
+
+    if(A <= 23){
+		M = 1;
+		G = 28;
+    }
+    else {
+	   M = -1;
+	   G = 23.5;
+    }
+
+    if(A > 31){
+		A = 31;
+    }
+    if(A < 18.5){
+		A = 18.5;
+    }
+
+    ACD = pACD + 0.3 * (A - 23.5) + (Math.tan(K * MyPi / 180))*(Math.tan(K * MyPi / 180)) + (0.1 * M * ((23.5 - A)*(23.5 - A)) * (Math.tan(0.1 * ((G - A)*(G - A)) * MyPi / 180))) - 0.99166;
+
+    CornealPlaneRx = (1.336 / (1.336 / (1336 / (Ax - ACD - 0.05) - P) + (ACD + 0.05) / 1000)) - K;
+
+    return (CornealPlaneRx / (1 + 0.012 * CornealPlaneRx));
+}
+
+function HolladayIOL(K1, K2, AL, SF, REF){
+	//return IOL for a given target Rx
+	//J Cat Refr Surg Jan 1988 p. 24
+
+	var Rag;
+	var AG;
+	var Alm;
+	var NcTerm;
+	var Na;
+	var V; //vertex distance (initialize the variable!!)
+	var ACD;
+	var R;
+	var top;
+	var bottom;
+	
+	//need to average Ks AFTER conversion of each to Radius of cuvature!!
+	var R1 = 337.5 / K1;
+	var R2 = 337.5 / K2;
+	var R = (R1 + R2) / 2;
+	var K = 337.5 / R;	 
+
+	Alm = 0.2 + AL;
+	NcTerm = (4 / 3) - 1;
+	Na = 1.336;
+	V = 12;
+	R = 337.5 / K;
+
+	if(R < 7) Rag = 7;
+	else Rag = R;
+	
+	if((12.5 * AL / 23.45) > 13.5) AG = 13.5;
+	else AG = (12.5 * AL / 23.45);
+
+	//calculates ACD value 
+	ACD = 0.56 + Rag - (Math.sqrt(Rag * Rag - (AG * AG / 4)));
+
+	top = 1000 * Na * (Na * R - NcTerm * Alm - 0.001 * REF * (V * (Na * R - NcTerm * Alm) + Alm * R));
+	bottom = (Alm - ACD - SF) * (Na * R - NcTerm * (ACD + SF) - 0.001 * REF * (V * (Na * R - NcTerm * (ACD + SF)) + (ACD + SF) * R));
+
+	return (top/bottom);
+	}
+
+function Holl(K1, K2, AL, SF, I){ 
+	//return Rx from a given IOL
+	//J Cat Refr Surg Jan 1988 p. 24
+	//revised 7/16/00
+
+	var Rag; 
+	var AG;  
+	var Alm;  
+	var NcTerm;  
+	var Na;  
+	var V;
+	var ACD;
+	var R;
+	var top;
+	var bottom;
+		
+	//need to average Ks AFTER conversion of each to Radius of cuvature!!
+	var R1 = 337.5 / K1;
+	var R2 = 337.5 / K2;
+	var R = (R1 + R2) / 2;
+	var K = 337.5 / R;	 	
+
+	Alm = 0.2 + AL;
+	NcTerm = (4 / 3) - 1;
+	Na = 1.336;
+	V = 12;
+	R = 337.5 / K;
+
+	if(R < 7) Rag = 7;
+	else Rag = R;
+
+	if((12.5 * AL / 23.45) > 13.5) AG = 13.5;
+	else AG = (12.5 * AL / 23.45);
+
+	//calculates ACD value
+	ACD = 0.56 + Rag - (Math.sqrt(Rag * Rag - (AG * AG / 4)));
+
+	top = 1000 * Na * (Na * R - NcTerm * Alm) - I * (Alm - ACD - SF) * (Na * R - NcTerm * (ACD + SF));
+	bottom = Na * (V * (Na * R - NcTerm * Alm) + Alm * R) - 0.001 * I * (Alm - ACD - SF) * (V * (Na * R - NcTerm * (ACD + SF)) + (ACD + SF) * R);
+
+	return (top / bottom);
+	}
+	
+function MyOverNote(){
+	//alert("this is a mouseover");
+	return true;
+	}	
+	
+function CalcMyAge(){
+	var day;
+	var month;
+	var year;
+	var Bdate;
+	var Today = new Date();  //today's date
+	var WholeAge; //age in decimal form
+	
+	day = document.FrmPtDemographics.DOB_Day.value;
+	month = document.FrmPtDemographics.DOB_Month.value;
+	year = document.FrmPtDemographics.DOB_Year.value;
+	
+	Bdate = new Date();
+	
+	Bdate.setDate(day);
+	Bdate.setMonth(month-1);
+	Bdate.setFullYear(year);
+	
+	var CurMonth = Today.getMonth() + 1;  //current month number
+	var BMonth = Bdate.getMonth() + 1; //birthday month number
+	
+	var DiffMonths = Today.getMonth()- Bdate.getMonth()	
+	var DiffYears = Today.getFullYear() - Bdate.getFullYear();
+	
+	var CurDayOfMonth = Today.getDate();
+	var BDayOfMonth = Bdate.getDate();
+	
+	if(CurMonth < BMonth){  //birthday is coming, so subtract one year from difference
+		DiffYears--;
+		DiffMonths += 12;	//add 12 to negative number	
+		}
+	
+	if(CurMonth == BMonth){  //birthday is in current month
+		if(CurDayOfMonth < BDayOfMonth){   //birthday is coming up in current month
+			DiffYears--;	//subtract one year from difference
+			DiffMonths = 11;  //set difference to 11 months
+			}
+		}	
+	
+	WholeAge = DiffYears + DiffMonths/12;
+	
+	
+	document.FrmPtDemographics.Age.value = WholeAge.toFixed(2);
+
+	//return WholeAge;
+	
+	//alert("Age is " + DiffYears + " and " + DiffMonths + " months");	
+	//alert("Date is " + month + "," + day + "," + year);	
+	
+	}	
+	
+</script>
+
+<script type="text/javascript">
+   
+   function ReportError(ident){
+   	   var MyElement = document.getElementById(ident);
+	   with(MyElement){	   
+	          firstChild.nodeValue = "<giá trị ngoài khoảng giới hạn>";       
+       		  style.fontFamily = "monospace";
+       		  style.color = "gray";
+       		  style.visibility = "visible";
+       		  }	   		
+   }
+   
+   function DrawScale(mean, stdev, dots, ident, ptVal){
+         
+ 	   var DotMark = ".";
+       var MinVal = Math.round(mean - 3*stdev - 1);
+       var MaxVal = Math.round(mean + 3*stdev + 1);
+       
+       if(ptVal >= MaxVal || ptVal <= MinVal || !parseFloat(ptVal)){
+       		ReportError(ident);
+       		return;
+       		}
+       
+       var RangeVal = (MaxVal - MinVal);
+       
+       var strScale = "";
+
+	   //create array of periods	   
+       var myStr = new Array(dots);	   		
+       for(var i = 0; i < dots; i++){
+               myStr[i] = DotMark;
+               }
+               
+	   //build array of stan dev values, then scale to dots length  
+	   var myBraces = new Array(7);
+	   var bracLen = myBraces.length;	   
+
+	   for(var k = 0; k < bracLen; k++){
+	   		   var theVal = (mean - 3*stdev) + stdev*(k);
+	           myBraces[k] = Math.round((theVal - MinVal)*(dots/RangeVal));
+       }
+       
+       //convert patient value to scaled value for marking 
+       var ptMarkVal = Math.round((ptVal - MinVal)*(dots/RangeVal));
+       //alert(RangeVal + "," + MinVal + "," + dots + "," + ptVal + " to " + ptMarkVal);
+       
+       //write array values to debug
+	  var kLen = myBraces.length;	   
+	   //for(var z = 0; z < kLen; z++){
+	   	   //document.write(myBraces[z] + "<br>");
+	   	   //}
+
+       //alert(kLen);
+       //draw braces for the scale of dots
+             
+       var MyLen = myStr.length;
+       var Lbr = "]";
+       var Rbr = "[";
+       var Nbr = DotMark;
+       //var Mid = "|";
+       var Mark = ""; //initialize 
+       var PtValMark = "X";      
+
+       		for(var a = 0; a < kLen; a++){
+       		   if(a < 3) Mark = Rbr;       		   		
+       		   else if(a > 3) Mark = Lbr;
+       		   else Mark = Nbr;
+       		   	
+		       myStr[myBraces[a]] = Mark;
+		       }      
+       
+       myStr[ptMarkVal] = PtValMark;  //mark the measured value with an "x"
+       
+       //write array of periods and x's       
+        for(var j = 0; j < MyLen; j++){
+               strScale += myStr[j];
+                 }  
+
+	   //establish the style
+	   var MyElement = document.getElementById(ident);
+	   with(MyElement){	   
+	          firstChild.nodeValue = strScale;       
+       		  style.fontFamily = "monospace";
+       		  style.color = "gray";
+       		  style.visibility = "visible";
+       		  }	   		  
+   }
+   
+   function ClearScale(ident){  //clear the scale
+   
+      document.getElementById(ident).style.visibility = "hidden";
+   }
+   
+   function DrawAllScales(valAL, valK, valACD){
+   
+   		DrawScale(23.54, 1.19, 21, 'ALscale', valAL);
+   		DrawScale(43.98, 1.57, 21, 'Kscale', valK);
+   		DrawScale(3.04, 0.4, 21, 'ACDscale', valACD);
+  }
+  
+   function HideAllScales(){
+   
+ 		document.getElementById('ALscale').style.visibility = "hidden";
+ 		document.getElementById('ACDscale').style.visibility = "hidden";
+ 		document.getElementById('Kscale').style.visibility = "hidden";
+		document.getElementById('CylAmount').style.visibility = "hidden";
+		SetFocus("idAL");
+  }
+  
+  function WriteToTable(row, col, mytext, color){
+
+	mybody = document.getElementsByTagName("body")[0]; //html body in document
+	mytable = mybody.getElementsByTagName("table")[0]; //first table in document
+	mytablebody = mytable.getElementsByTagName("tbody")[0];  //first table body
+	myrow = mytablebody.getElementsByTagName("tr")[row]; //passed row value
+	mycell = myrow.getElementsByTagName("td")[col]; //passed col value
+	
+	with(mycell){
+		firstChild.nodeValue = mytext;
+		style.fontWeight = 'normal';
+		style.color = color;
+		}
+}
+
+
+</script>
+<!--This style is for positioning the IOL table; initial invisibility   -->
+
+</head>
+
+<body>
+
+<form name="FrmPtDemographics" action=""> 
+
+  	<label class="myformat"> Tên bệnh nhân: 	
+	
+  		<input type="text" name="PtName" id="idPtName" size="20">	
+		
+	</label>
+  	
+  	<label class="myformat"> &nbsp;&nbsp;&nbsp;&nbsp;  Mã bệnh nhân: 	
+
+ 		<input type="text" name="PtID" id="idPtID" size="18">		
+			
+    </label>
+	
+  	<br>  
+	<br> 	
+	
+	<select size="1" name="ChooseEye" onchange="WriteWhichEye()">
+    		
+    		<option value="ODorOS">MẮT</option>
+			
+    		<option value="OD_EYE"> MẮT PHẢI </option>
+    		<option value="OS_EYE"> MẮT TRÁI </option> 		 			
+    	    
+    	</select>	
+
+		
+	
+	<input type="reset" name="ResetPtDemographics" value="NHẬP LẠI" size="8" onclick="ClearWhichEye()">	
+
+	<span id="WhichEye"> &nbsp; </span>  		
+    
+    </form>
+
+<hr align="left" width="40%" style="color: gray">
+	
+<form name="FrmPtData" action="">  	
+  	
+  	<label class="myformat"> Chiều dài trục nhãn cầu (AL): 
+
+  		<input type="text" name="AL" id="idAL" size="4">
+		
+  	</label>
+	
+  		<span id="ALscale"> &nbsp;&nbsp; </span>
+  		  	
+  	<br>
+	<br>
+  	
+  	<label class="myformat"> Độ sâu tiền phòng (ACD): 
+  		<input type="text" name="ACD" id="idACD" size="4">
+  	</label>
+	
+  		<span id="ACDscale"> &nbsp;&nbsp; </span>  		
+  		
+  	<br>  
+  	<br>
+  	<label class="myformat"> Khúc xạ giác mạc </label>  	  		
+  	<br>
+  	<br>
+  	<label class="myformat"> K1: 
+  		<input type="text" name="K1" id="idK1" size="3" value="">
+  	</label>
+	
+  	<label class="myformat"> @
+	
+  		<input type="text" name="A1" id="idA1" size="2" value="">   	
+  	</label>
+	
+	&nbsp;&nbsp;&nbsp;&nbsp; 
+	<label class="myformat"> K2:	
+		<input type="text" name="K2" id="idK2" size="3" value="">
+	</label>
+	
+    <label class="myformat"> @  	  	  	
+  		<input type="text" name="A2" id="idA2" size="2" value=""> 
+  	</label>
+	
+  		<span id="Kscale"> &nbsp;&nbsp; </span>	
+	<br>
+	<br>	
+		<span id="CylAmount"> &nbsp;&nbsp; </span>			
+  	<br>
+	<br>	
+	
+  	<label class="myformat"> TargRx: &nbsp; 
+  		<input type="text" name="TargRx" id="idTargRx" size="8" value="0" onfocus="SelectAll(&quot;idTargRx&quot;)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	</label>
+	
+	<input type="reset" name="ResetPtData" value="NHẬP LẠI" size="8" onclick="HideAllScales();">
+		  			
+  	<br>
+  	<br>
+
+</form>
+
+<hr style="color:gray" align="left" width="40%">
+
+<form name="FrmIOLData" action=""> 
+ 
+		<input type="text" name="IOLblank" id="idIOLblank" size="25" value=""> 
+			
+			<br>
+			
+    	<select size="1" name="IOLPick" onchange="FillConstants()">
+    		
+    		<option value="Pick IOL Model">Chọn một mẫu thể thủy tinh</option>
+    		<option value="Bausch li61AO SofPort">Bausch li61AO SofPort</option>
+			<option value="Alcon SN60AT or SA60AT">Alcon SN60AT or SA60AT</option>
+    		<option value="Alcon SA60T3/4/5 Toric">Alcon SA60T3/4/5 Toric</option>
+			<option value="Alcon SN6AT3/4/5 Asph Toric">Alcon SN6AT3/4/5 Asph Toric</option>
+			<option value="Staar AA4203TF/L Toric">Staar AA4203TF/L Toric</option>
+    		<option value="Alcon ReStor SN6AD1 3-add">Alcon ReStor SN6AD1 3-add</option>
+			<option value="AMO ZMA00 Tecnis Multifocal">AMO Tecnis Multifocal</option>
+    		<option value="AMO NXG1 ReZoom">AMO ReZoom</option> 
+    		<option value="Bausch CrystalensHD">Bausch CrystalensHD</option> 			 
+			<option value="BauschL P366uv PMMA sutured">Bausch P366uv PMMA suture</option>	
+			<option value="Bausch S/L122UV AntChamb">S/L122UV AntChamb</option>	
+			<option value="Bausch Akreos AO">Bausch Akreos AO</option>			
+			<option value="AMO Technis Z9002">**AMO Technis Z9002**</option>	
+			<option value="Alcon SN60WF">Alcon SN60WF (V.A. 1 pc)</option>	
+			<option value="Alcon MA50BM">Alcon MA50BM (V.A. 3 pc)</option>	
+			<option value="Alcon MTA3/4/5UO">Alcon MTA3/4/5UO (V.A. AC IOL)</option>
+			<option value="AMO ZMB00 multifocal">AMO ZMB00 multifocal</option>	
+
+			<option value="Micropure 123">Micropure 123</option>
+			<option value="HOYA PY60AD">HOYA PY60AD</option>
+			<option value="HOYA PC60AD">HOYA PC60AD</option>
+			<option value="HOYA PY60R">HOYA PY60R</option>
+			<option value="HOYA PC-60R">HOYA PC-60R</option>
+			<option value="HOYA NY-60">HOYA NY-60</option>
+			<option value="HOYA 250; 251; 254; 255; 351; 150; 151">HOYA 250; 251; 254; 255; 351; 150; 151</option>
+			<option value="HOYA Y-60H">HOYA Y-60H</option>
+			<option value="HOYA YA-60BBR">HOYA YA-60BBR</option>
+			<option value="HOYA YA-60BB">HOYA YA-60BB</option>
+			<option value="HOYA VA-60BB">HOYA VA-60BB</option>
+			<option value="HOYA YA-65BB">HOYA YA-65BB</option>
+			<option value="HOYA VA-65BB">HOYA VA-65BB</option>
+			
+
+			<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option> 
+    	    
+    	</select>
+		
+	&nbsp;&nbsp;
+		
+	<select size="1" name="NearRound" onchange="">    		
+    		<option value="HalfDiop">Bước nhảy O.50D</option>			
+    		<option value="QuartDiop">Bước nhảy O.25D</option>				
+    	    
+    	</select>
+
+	&nbsp;&nbsp;
+	
+
+		
+<br>
+<br>    	
+   	 	
+	<label class="myformat"> A-Const: 
+	
+		<input type="text" name="Aconst" id="idAconst" size="6" value=""> 
+	</label>
+	
+		<span id="SRKTresult">&nbsp;</span>
+		
+	<br>
+	
+		<label class="myformat3" onclick="CalcMySF()"> 
+			 SF:		
+		<input type="text" name="SF" id="idSF" size="6" value="">	
+	</label>
+	
+	<span id="Hollresult">&nbsp;</span>
+
+	<br>	
+	<label class="myformat3" onclick="CalcMypACD()"> 
+		pACD:		
+			
+	<input type="text" name="pACD" id="idpACD" size="6" value="">	
+	</label>
+	
+	<span id="Hoffresult">&nbsp;</span>
+
+	<br>
+	
+	<label class="myformat3" onclick="CalcMyHag_a0()"> 
+		a0:		
+	
+		<input type="text" name="Hag_a0" id="idHag_a0" size="4" value="">			
+	</label>		
+	<span id="Haigisresult">&nbsp;</span>				
+			
+	<br>
+	
+	<label class="myformat"> a1: 			
+		<input type="text" name="Hag_a1" id="idHag_a1" size="4" value="">	
+	</label>			
+	<br>				
+			
+	
+	<label class="myformat"> a2:		
+		<input type="text" name="Hag_a2" id="idHag_a2" size="4" value="">
+	</label>		
+	<br>
+	<br>	
+  	
+	<input type="button" value="TÍNH CÔNG SUẤT IOL" onclick="MainCalc()">  
+		
+		&nbsp;&nbsp;&nbsp;
+		
+	<input type="reset" name="ResetIOLData" value="NHẬP LẠI" size="8" onclick="ClearEmmCalcs();">	
+
+	<br>	
+	<br>
+		
+	<textarea name="txtIOLtips" id="idIOLtips" class="txtAreaStyle" rows="4" cols="45">Hướng dẫn...
+	</textarea>	
+	
+		
+	</form>
+	<hr style="color:gray" align="left" width="40%">
+	
+	<button style="width:500; height:100" type="button" name="PrintMe" onclick="window.print()">		
+		IN KẾT QUẢ
+	</button>
+		
+	<br>
+	<br> 
+		
+		
+<table class="nailPos" width="40%" cellspacing="1" cellpadding="2" border="1" id="id_IOLTable" bgcolor="white" style="font-weight: normal; 
+		 font-family: arial; 
+		 text-align: center;
+		 color: black;">
+	
+	<colgroup><col width="20%">		
+	<col width="20%">	
+	<col width="20%">	
+	<col width="20%">	
+	<col width="20%">	
+	
+	</colgroup><tbody>
+	<tr>
+		<td>IOL Power</td>
+		<td>SRK/T</td>		
+		<td>Holl</td>
+		<td>Hoff</td>
+		<td>Haigis</td>
+	</tr>
+
+	<tr> 
+		<td> &nbsp; </td> 
+		<td> (Factor)</td>
+		<td> (Factor)</td>
+		<td> (Factor)</td>
+		<td> (Factor)</td>
+	</tr>
+
+	
+	<tr> 
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+	</tr>
+	
+	
+	<tr> 
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+	</tr>
+
+	<tr> 
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+	</tr>
+
+	<tr> 
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>	
+	</tr>
+
+	<tr> 
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+	</tr>
+
+	<tr> 
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>	
+	</tr>
+
+	<tr>  
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>	
+	</tr>
+	</tbody>
+</table>
+
+<div> 
+<img id="id_Image" src="iol_cals.jpg" style="visibility: hidden;" alt="Chọn công thức tính IOL" class="imgcenter">
+</div>
+<div><h5>Việt hóa và bổ sung bởi Dr Thịnh CH27 HMU</h5></div>
+</body></html>
