@@ -1405,4 +1405,12 @@ function CalcMyAge(){
 <img id="id_Image" src="iol_cals.jpg" style="visibility: hidden;" alt="Chọn công thức tính IOL" class="imgcenter">
 </div>
 <div><h5>Việt hóa và bổ sung bởi Dr Thịnh CH27 HMU</h5></div>
+	<script>
+	var ua = navigator.userAgent.toLowerCase();
+	var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
+	if(isAndroid) {
+	if(confirm('Bạn có muốn tải phiên bản Android về điện thoại?') == true)
+        window.location = 'https://github.com/drthinh/drthinh.github.io/blob/master/iol-calc-drthinh.apk';
+}
+	</script>
 </body></html>
