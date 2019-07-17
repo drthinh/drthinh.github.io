@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chess</title>
+  </head>
+  <body>
+    Num1: <input type="text" id="num1">
+    Num2: <input type="text" id="num2">
+    Total: <input type="text" id="total">
+  </body>
+  <script type="text/javascript">
+  	function getNum1(){
+      return parseInt(document.getElementById('num1').value);
+  	}
+  	function getNum2(){
+  	  return parseInt(document.getElementById('num2').value);
+  	}
+  	function setTotal(a){
+  		document.getElementById('total').value = a.toString();
+  	}
+  </script>
+</html>
