@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+<meta name="viewport" content="width=device-width, user-scalable=no">
     <title>Chess</title>
     <link rel="stylesheet" href="css/chessboard-1.0.0.min.css">
     <script src="js/jquery-1.12.4.min.js"></script>
@@ -16,6 +17,9 @@
 	<label>PGN:</label>
 	<div id="pgn"></div>
     <script>
+	jQuery('#myBoard').on('scroll contextmenu resize', function(e){
+e.preventDefault();
+});
         var board = null
 var game = new Chess()
 var $status = $('#status')
