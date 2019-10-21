@@ -1,116 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="utf-8">
-  <title>Lí do của sự sống</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-  <!-- Link Swiper's CSS -->
-  <link rel="stylesheet" href="swiper.css">
-
-  <!-- Demo styles -->
-  <style>
-    html, body {
-      position: relative;
-      height: 100%;
-    }
-    body {
-      background: #000;
-      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-      font-size: 14px;
-      color:#000;
-      margin: 0;
-      padding: 0;
-    }
-    .swiper-container {
-      width: 100%;
-      height: 100%;
-    }
-    .swiper-slide {
-      overflow: hidden;
-    }
-    blockquote {
-      text-align: center;
-      color: white;
-    }
-  </style>
+	<meta charset="utf-8">
+	<title>Kê đơn</title>
+	 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.5.0/css/bootstrap4-toggle.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js" integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.5.0/js/bootstrap4-toggle.min.js"></script>
 </head>
 <body>
-  <!-- Swiper -->
-  <div class="swiper-container">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide">
-        <div class="swiper-zoom-container">
-          <img src="songimages/song1.jpg">
-        </div>
-      </div>
-      <div class="swiper-slide">
-        <div class="swiper-zoom-container">
-          <img src="songimages/song2.jpg">
-        </div>
-      </div>
-      <div class="swiper-slide">
-        <div class="swiper-scrollbar-drag">
-          <blockquote>
-          Inochi no Riyuu (Lý do của sự sống) - Masashi Sada<br/>
-          Lý do tôi được sinh ra trong cuộc sống này là để gặp bố mẹ tôi<br/>
-          Lý do tôi được sinh ra trong cuộc sống này là để gặp anh chị em tôi<br/>
-          Lý do tôi được sinh ra trong cuộc sống này là để gặp bạn bè tôi<br/>
-          Và lý do tôi được sinh ra trong cuộc đời này là để gặp bạn đấy - người tôi yêu.<br/>
-          Để mùa xuân đến và những bông hoa sẽ nở<br/>
-          Để mua thu đến và lá đỏ sẽ rơi<br/>
-          Bất kỳ ai sinh ra trong cuộc đời này cũng đều để được hạnh phúc<br/>
-          Những nỗi đau buồn rồi sẽ qua, sau đó thì niềm vui và những điều thực sự ý nghĩa sẽ đến<br/>
-          Lý do tôi được sinh ra trong cuộc đời này là vì tôi đã làm tổn thương ai đó <br/>
-          Lý do tôi được sinh ra trong cuộc đời này là để ai đó tổn thương tôi<br/>
-          Lý do tôi được sinh ra trong cuộc đời này là để được ai đó cứu giúp<br/>
-          Lý do tôi được sinh ra trong cuộc đời này là để giúp đỡ ai đó<br/>
-          Khi màn đêm sẽ buông xuống, bóng tối trong tôi tràn ngập<br/>
-          Nhưng khi bình minh lên, mặt trời trong tôi sẽ tỏa sáng<br/>
-          Bất kỳ ai sinh ra trong cuộc đời này cũng đều để được hạnh phúc<br/>
-          Những nỗi đau buồn rồi sẽ trôi ra biển lớn, và niềm vui sẽ ngập tràn<br/>
-          Lý do tôi được sinh ra trong cuộc đời này là để gặp bạn đấy - người tôi yêu.<br/>
-          Lý do tôi được sinh ra trong cuộc đời này là để bảo vệ bạn đấy - người tôi yêu<br/>
-          </blockquote>
-        </div>
-      </div>
+<form>
+<div class="card">
+  <div class="card-heading">Thông tin hành chính</div>
+  <div class="card-body">
+  <div class="form-group">
+  	<div class="row">
+  	<div class="col-sm-10">
+    <label for="ten">Họ và tên</label>
+    <input class="form-control" id="ten" placeholder="Họ và tên">
     </div>
-    <!-- Add Pagination -->
-    <div class="swiper-pagination swiper-pagination-white"></div>
-    <!-- Add Navigation -->
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
+    <div class="col-sm-2">
+    <label for="tuoi">Tuổi/ Năm sinh</label>
+    <input type = "number" class="form-control" id="tuoi" placeholder="Tuổi hoặc năm sinh">
+    </div>
+    </div>
+    <div class="row">
+  	<div class="col-sm-8">
+    <label for="diachi">Địa chỉ</label>
+    <input class="form-control" id="diachi" placeholder="Địa chỉ">
+    </div>
+    <div class="col-sm-4">
+    <label for="sdt">Số điện thoại</label>
+    <input type = "tel" class="form-control" id="sdt" placeholder="Số điện thoại">
+    </div>
+    </div>
   </div>
+</div>
+<div class="card">
+  <div class="card-heading">Chẩn đoán</div>
+  <div class="card-body">
+  	<div class="row">
+  	<div class="col-sm-6">
+  	<div class="form-group">
+    <label for="cdMP">Mắt phải</label>
+    <textarea class="form-control" id="cdMP" rows="1"></textarea>
+  	</div>
+  </div>
+  <div class="col-sm-6">
+  	<div class="form-group">
+    <label for="cdMT">Mắt trái</label>
+    <textarea class="form-control" id="cdMT" rows="1"></textarea>
+  </div>
+  </div>
+  <div class="col-sm-12">
+  	<div class="form-group">
+    <label for="cd2M">Hai mắt</label>
+    <textarea class="form-control" id="cd2M" rows="1"></textarea>
+  </div>
+  <div class="col-sm-12">
+  	<div class="form-group">
+    <label for="cdKhac">CĐ khác</label>
+    <textarea class="form-control" id="cdKhac" rows="1"></textarea>
+  </div>
+ </div>
+  </div>
+</div>
+</div>
 
-  <!-- Swiper JS -->
-  <script src="swiper.js"></script>
 
-  <!-- Initialize Swiper -->
-  <script>
-    var swiper = new Swiper('.swiper-container', {
-      zoom: true,
-      effect: 'coverflow',
-      pagination: {
-        el: '.swiper-pagination',
-      },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-      autoplay: {
-        delay: 15000,
-        stopOnLastSlide: true
-      }
-    });
-  </script>
+
+<div class="card">
+  <div class="card-heading">Kê đơn</div>
+  <div class="card-body">
+  <div class="row">
+    <div class="col-sm-4">
+  	<div class="form-group">
+    <label for="cdMP">Tên biệt dược</label>
+    <textarea class="form-control" id="cdMP" rows="1"></textarea>
+  	</div>
+  	</div>
+    <div class="col-sm-2">
+  	<div class="form-group">
+    <label for="cdMP">Số lượng</label>
+    <textarea class="form-control" id="cdMT" rows="1"></textarea>
+  	</div>
+    </div>
+  </div>
+  <div class="col-sm-12">
+  	
+    <label for="cdMP">Lưu ý</label>
+    <textarea class="form-control" id="cdMT" rows="1"></textarea>
   
-<script type="text/javascript" src="snowstorm.js"></script>
-<script type="text/javascript">
-snowStorm.snowColor = '#99ccff'; // blue-ish snow!?
-snowStorm.flakesMaxActive = 96;  // show more snow on screen at once
-snowStorm.useTwinkleEffect = true; // let the snow flicker in and out of view
-snowStorm.excludeMobile = false;
-</script> 
+ </div>
+  </div>
+</div>
+
+
+
+</form>
+
 </body>
-<iframe width = "1" height = "1" id="stream" src="Inochi-No-Riyuu-Masashi-Sada.mp3" frameborder="0" style="visibility:hidden;"></iframe>
 </html>
