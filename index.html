@@ -6,17 +6,29 @@
 	<title>Kê đơn</title>
 	 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.5.0/css/bootstrap4-toggle.min.css" rel="stylesheet">
+    <style type="text/css">
+    	.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+
+  > .col,
+  > [class*="col-"] {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+    </style>
     <script src="https://code.jquery.com/jquery-2.2.1.min.js" integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.5.0/js/bootstrap4-toggle.min.js"></script>
 </head>
 <body>
-<form>
+
 <div class="card">
-  <div class="card-heading">Thông tin hành chính</div>
-  <div class="card-body">
-  <div class="form-group">
+ <div class="card-heading">Thông tin hành chính</div>
+ <div class="card-body">
+  	
   	<div class="row">
   	<div class="col-sm-10">
     <span class="badge badge-primary">Họ và tên</span>
@@ -27,6 +39,7 @@
     <input type = "number" class="form-control" id="tuoi" placeholder="Tuổi hoặc năm sinh">
     </div>
     </div>
+
     <div class="row">
   	<div class="col-sm-8">
     <span class="badge badge-primary">Địa chỉ</span>
@@ -37,8 +50,10 @@
     <input type = "tel" class="form-control" id="sdt" placeholder="Số điện thoại">
     </div>
     </div>
-  </div>
+
 </div>
+</div>
+
 <div class="card">
   <div class="card-heading">Chẩn đoán</div>
   <div class="card-body">
@@ -63,37 +78,79 @@
 </div>
 </div>
 
-
-
 <div class="card">
   <div class="card-heading">Kê đơn</div>
   <div class="card-body">
-  <div class="row">
-    <div class="col-sm-4">
-  	<div class="form-group">
-    <label for="cdMP">Tên biệt dược</label>
+  
+  <div class="row no-gutters">
+    <div class="col-8">
+    <span class="badge badge-primary">Tên biệt dược</span>
     <textarea class="form-control" id="cdMP" rows="1"></textarea>
   	</div>
-  	</div>
-    <div class="col-sm-2">
-  	<div class="form-group">
-    <label for="cdMP">Số lượng</label>
+    <div class="col-2">
+    <span class="badge badge-primary">Số lượng</span>
     <textarea class="form-control" id="cdMT" rows="1"></textarea>
-  	</div>
+    <div>đơn vị</div>
+    </div>
+    <div class="col-2">
+    <span class="badge badge-primary">Trong kho</span>
+    <textarea class="form-control" id="cdMT" rows="1"></textarea>
+    <div>đơn vị</div>
     </div>
   </div>
-  <div class="col-sm-12">
-  	
-    <label for="cdMP">Lưu ý</label>
+  <div class="row no-gutters">
+    <div class="col-2">
+    <span class="badge badge-primary">Cách dùng</span>
+   	<select class="form-control">
+   		<option>Tra</option>
+   		<option>Bôi</option>
+   		<option>Uống</option>
+   	</select>
+    </div>
+    <div class="col-3">
+    <span class="badge badge-primary">Số lần dùng</span>
     <textarea class="form-control" id="cdMT" rows="1"></textarea>
+    </div>
+    <div class="col-3">
+    <span class="badge badge-primary">Mỗi lần</span>
+    <textarea class="form-control" id="cdMT" rows="1"></textarea>
+    </div>
+    <div class="col-2">
+    <span class="badge badge-primary">Vị trí</span>
+    <select class="form-control">
+   		<option>MP</option>
+   		<option>MT</option>
+   		<option>2M</option>
+   		<option>vùng da tổn thương</option>
+   	</select>
+    </div>
+   	<div class="col-2">
+    <span class="badge badge-primary">Thời điểm</span>
+    <textarea class="form-control" id="cdMT" rows="1"></textarea>
+    </div>
+    </div>
+
+    <div class="row no-gutters">
+    <div class="col-6">
+    <span class="badge badge-primary">Lưu ý</span>
+    <textarea class="form-control" id="cdMT" rows="1"></textarea>
+    </div>
+    <div class="col-2">
+    <span class="badge badge-primary">Kết thúc khám</span>
+    <textarea class="form-control" id="cdMT" rows="1"></textarea>
+    </div>
+    </div> 
+
+   
+    </div>
+  </div>
   
  </div>
-  </div>
-</div>
 
-
-
-</form>
 
 </body>
+<script type="text/javascript">
+	
+</script>
+
 </html>
