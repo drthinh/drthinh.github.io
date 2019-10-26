@@ -202,21 +202,28 @@ input {
     <div class="col-2">
     <span class="badge badge-primary">Số lượng</span>
     <input type = "number" class="form-control" id="soluong" placeholder="">
-    <div id = "donvi">đơn vị</div>
+    <select id = "donvi">
+	<option>lọ</option>
+	<option>tuýp</option>
+	<option>viên</option>
+	<option>hộp</option>
+	<option>tép</option>
+	<option></option>
+	</select>
     </div>
     <div class="col-2">
     <span class="badge badge-primary">Trong kho</span>
     <textarea class="form-control" id="tonkho" rows="1" readonly></textarea>
-    <div id = "donvi2">đơn vị</div>
+    <div id = "donvi2"></div>
     </div>
   </div>
   <div class="row no-gutters">
     <div class="col-2">
     <span class="badge badge-primary">Cách dùng</span>
    	<select class="form-control" id = "cachdung">
-   		<option>Tra</option>
-   		<option>Bôi</option>
-   		<option>Uống</option>
+   		<option value = "tra">Tra</option>
+   		<option value = "bôi">Bôi</option>
+   		<option value = "uống">Uống</option>
    		<option></option>
    	</select>
     </div>
@@ -279,7 +286,7 @@ input {
   <div id = "indon" >
   <div class="row no-gutters">
   
-   <div class = "col-2">
+   <div class = "col-4">
     Hướng giải quyết: 
    </div>
    
@@ -292,7 +299,7 @@ input {
 	</select>
    </div>
    
-   <div class = "col-2">
+   <div class = "col-4">
 	<input type = "text" class = "form-control" id = "thoigian"> 
    </div>
    
@@ -416,12 +423,12 @@ input {
     <ol id = "don_donthuoc">
 	</ol>
 	
-	<p id = "ghichu">xxx</p>
+	<p id = "ghichu" style =  "font-size: 11px; font-weight:bold;"></p>
 	<p style="text-align: right;">Hà Nội, <span id = "ngaykham"></span>&nbsp;&nbsp;&nbsp;</p>
 	<p style="text-align: right;">Bác sỹ khám bệnh&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 	<br/>
 	<p style="text-align: right;">Ths.BS Ngô Thị Hồng Thắm <br/>Sđt: 0983112382</p>
-	<p style="text-align: left; font-size: 11px; font-weight: bold;">Khám bệnh từ 6h -9h<br/>Các ngày trong tuần</p>
+	<p style="text-align: left; font-size: 11px; font-weight: bold;">Khám bệnh từ 5h - 9h tối<br/>Các ngày trong tuần</p>
   </section>
 <div style = "text-align: center;"><button onclick = "DongDonThuoc()">Đóng</button></div>
 </div>
@@ -471,28 +478,42 @@ var maQR = new QRCode("qrcode", {
             ;
         });
     };
-}
-   
+}   
+
     $("#btnThem").click(function(){
+	    var donvithuoc = "";
+		if (($("#donvi option:selected").html() == "lọ")||($("#donvi option:selected").html() == "tép"))
+			donvithuoc = "giọt";
+		if ($("#donvi option:selected").html() == "tuýp")
+			donvithuoc = "lớp dài 1 cm";
+		if (($("#donvi option:selected").html() == "viên" )||($("#donvi option:selected").html() == "hộp" )){
+			donvithuoc = "viên";
+			$("#cachdung").val("uống");
+			}
     	var strThem = TaoDongThuoc(
     			$("#tenthuoc").val(),
     			$("#soluong").val(),
-    			$("#donvi").html(),
+    			$("#donvi option:selected").html(),
     			$("#cachdung option:selected").html(),
     			$("#vitri option:selected").html(),
     			$("#solandung").val(),
     			$("#moilandung").val(),
-    			$("#donvi2").text(),
+    			donvithuoc,
     			$("#thoidiem option:selected").html(),
     			$("#luuy").val()
-    		)
+    		);
     	$("#donthuoc").append("<li class = 'clickMe'>"+strThem+" </li>");
     	$(".clickMe").click(function(){
-    	$(this).text($(this).text() + "<br/>clicked")
-    	console.log($(this).html())
-    	console.log($(this).text())
+    	//$(this).text($(this).text() + "<br/>clicked")
+    	//console.log($(this).html())
+    	//console.log($(this).text())
+		
     });
     })
+	
+	$("#donvi").change(function(){
+		$("#donvi2").html($("#donvi option:selected").html());
+		});
 
 	function TaoDongThuoc(
 		tenthuoc, 
@@ -734,7 +755,7 @@ function InDonThuoc(){
   $("#ngaykham").html(ngaygio);
   $("#don_donthuoc").html($("#donthuoc").html());
   
-  var huonggq = $("#luachonkt option:selected").html() + " " + $("#thoigian").val()+ $("#donvithoigian option:selected").html() 
+  var huonggq = "Ghi chú: " + $("#luachonkt option:selected").html() + " " + $("#thoigian").val()+ $("#donvithoigian option:selected").html() 
                 + "<br>Khám lại theo hẹn hoặc ngay khi có dấu hiệu bất thường!";
   $("#ghichu").html(huonggq);
  
