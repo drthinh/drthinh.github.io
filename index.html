@@ -17,11 +17,29 @@
     padding-left: 0;
   }
 }
+* {
+      font-family: "Times New Roman", Times, sans-serif;
+    }
+input {
+    text-transform: capitalize;
+}
+.autocomplete-suggestions {
+    text-align: left; cursor: default; border: 1px solid #ccc; border-top: 0; background: #fff; box-shadow: -1px 1px 3px rgba(0,0,0,.1);
+
+    /* core styles should not be changed */
+    position: absolute; display: none; z-index: 9999; max-height: 254px; overflow: hidden; overflow-y: auto; box-sizing: border-box;
+}
+.autocomplete-suggestion { position: relative; padding: 0 .6em; line-height: 23px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 1.02em; color: #333; }
+.autocomplete-suggestion b { font-weight: normal; color: #1f8dd6; }
+.autocomplete-suggestion.selected { background: #f0f0f0; }
+
     </style>
     <script src="https://code.jquery.com/jquery-2.2.1.min.js" integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.5.0/js/bootstrap4-toggle.min.js"></script>
+	<script src="auto.js"></script>
+	<script src="qr.js"></script>
 </head>
 <body>
 
@@ -29,23 +47,31 @@
  <div class="card-heading">Thông tin hành chính</div>
  <div class="card-body">
   	
-  	<div class="row">
-  	<div class="col-sm-10">
+  	<div class="row no-gutters">
+  	<div class="col-8">
     <span class="badge badge-primary">Họ và tên</span>
     <input class="form-control" id="ten" placeholder="Họ và tên">
     </div>
-    <div class="col-sm-2">
+    <div class="col-2">
     <span class="badge badge-primary">Tuổi/ Năm sinh</span>
     <input type = "number" class="form-control" id="tuoi" placeholder="Tuổi hoặc năm sinh">
     </div>
+	<div class="col-2">
+    <span class="badge badge-primary">Giới</span>
+   	<select class="form-control" id = "gioi">
+   		<option>Nam</option>
+   		<option>Nữ</option>
+		<option>Khác</option>
+   	</select>
+    </div>
     </div>
 
-    <div class="row">
-  	<div class="col-sm-8">
+    <div class="row no-gutters">
+  	<div class="col-8">
     <span class="badge badge-primary">Địa chỉ</span>
     <input class="form-control" id="diachi" placeholder="Địa chỉ">
     </div>
-    <div class="col-sm-4">
+    <div class="col-4">
     <span class="badge badge-primary">Số điện thoại</span>
     <input type = "tel" class="form-control" id="sdt" placeholder="Số điện thoại">
     </div>
@@ -53,6 +79,92 @@
 
 </div>
 </div>
+
+<div class="card">
+ <div class="card-heading">Khám chức năng</div>
+ <div class="card-body">
+  	<div class="row no-gutters">
+  	<div class="col-6">
+    <span class="badge badge-primary">TL MP</span>
+    <input class="form-control" id="tlkkmp" placeholder="TL không kính MP">
+    </div>
+    <div class="col-6">
+    <span class="badge badge-primary">TL MT</span>
+    <input class="form-control" id="tlkkmt" placeholder="TL không kính MT">
+    </div>
+    </div>
+	<div class="row no-gutters">
+  	<div class="col-6">
+    <span class="badge badge-primary">Kính lỗ MP</span>
+    <input class="form-control" id="tlklmp" placeholder="TL kính lỗ MP">
+    </div>
+    <div class="col-6">
+    <span class="badge badge-primary">Kính lỗ MT</span>
+    <input class="form-control" id="tlklmt" placeholder="TL kính lỗ MT">
+    </div>
+    </div>
+	<div class="row no-gutters">
+  	<div class="col-6">
+    <span class="badge badge-primary">Kính cũ MP</span>
+    <input class="form-control" id="tlkcmp" placeholder="TL kính cũ MP">
+    </div>
+    <div class="col-6">
+    <span class="badge badge-primary">Kính cũ MT</span>
+    <input class="form-control" id="tlkcmt" placeholder="TL kính cũ MT">
+    </div>
+    </div>
+	<div class="row no-gutters">
+  	<div class="col-6">
+    <span class="badge badge-primary">Nhãn áp MP</span>
+    <input class="form-control" id="namp" placeholder="Nhãn áp MP">
+    </div>
+    <div class="col-6">
+    <span class="badge badge-primary">Nhãn áp MT</span>
+    <input class="form-control" id="namt" placeholder="Nhãn áp MT">
+    </div>
+    </div>
+	
+	<div class="row no-gutters">
+  	<div class="col-3">
+    <span class="badge badge-primary">Kính cầu MP</span>
+    <input class="form-control" id="kcmp" placeholder="Số cầu">
+    </div>
+    <div class="col-3">
+    <span class="badge badge-primary">Kính trụ MP</span>
+    <input class="form-control" id="ktmp" placeholder="Số trụ">
+    </div>
+	<div class="col-3">
+    <span class="badge badge-primary">Trục</span>
+    <input class="form-control" id="trucmp" placeholder="Trục">
+    </div>
+	<div class="col-3">
+    <span class="badge badge-primary">TL Kính mới</span>
+    <input class="form-control" id="tlkmmp" placeholder="TL kính mới">
+    </div>
+    </div>
+	
+	<div class="row no-gutters">
+  	<div class="col-3">
+    <span class="badge badge-primary">Kính cầu MT</span>
+    <input class="form-control" id="kcmt" placeholder="Số cầu">
+    </div>
+    <div class="col-3">
+    <span class="badge badge-primary">Kính trụ MT</span>
+    <input class="form-control" id="ktmt" placeholder="Số trụ">
+    </div>
+	<div class="col-3">
+    <span class="badge badge-primary">Trục</span>
+    <input class="form-control" id="trucmt" placeholder="Trục">
+    </div>
+	<div class="col-3">
+    <span class="badge badge-primary">TL Kính mới</span>
+    <input class="form-control" id="tlkmmt" placeholder="TL kính mới">
+    </div>
+    </div>
+
+</div>
+</div>
+
 
 <div class="card">
   <div class="card-heading">Chẩn đoán</div>
@@ -164,10 +276,159 @@
    
     </div>
   </div>
-  <div id = "indon">
-  	<button id = "indon">In đơn thuốc</button>
+  <div id = "indon" >
+  <div class="row no-gutters">
+  
+   <div class = "col-2">
+    Hướng giải quyết: 
+   </div>
+   
+   <div class = "col-2">
+	<select class = "form-control" id = "luachonkt">
+	<option>Kê đơn về</option>
+	<option>Hẹn khám lại</option>
+	<option>Nhập viện</option>
+	<option></option>
+	</select>
+   </div>
+   
+   <div class = "col-2">
+	<input type = "text" class = "form-control" id = "thoigian"> 
+   </div>
+   
+   <div class = "col-2">
+	<select class = "form-control" id = "donvithoigian">
+	<option></option>
+	<option>ngày</option>
+	<option>tuần</option>
+	<option>tháng</option>
+	<option>quý</option>
+	<option>ngay!</option>
+	</select>
+   </div>
+	
   </div>
   
+  	<button id = "indonthuoc" onclick="InDonThuoc()">In đơn thuốc</button>
+	<button id = "indonkinh" onclick="InDonKinh()">In đơn kính</button>
+	<button id = "indonkinh" onclick="KetThucKham()">Kết thúc khám</button>
+  </div>
+
+<div>
+  
+  <style>
+  @page{margin:0}body{margin:0}.sheet{margin:0;overflow:hidden;position:relative;box-sizing:border-box;page-break-after:always}body.A3 .sheet{width:297mm;height:419mm}body.A3.landscape .sheet{width:420mm;height:296mm}body.A4 .sheet{width:210mm;height:296mm}body.A4.landscape .sheet{width:297mm;height:209mm}body.A5 .sheet{width:148mm;height:209mm}body.A5.landscape .sheet{width:210mm;height:147mm}body.letter .sheet{width:216mm;height:279mm}body.letter.landscape .sheet{width:280mm;height:215mm}body.legal .sheet{width:216mm;height:356mm}body.legal.landscape .sheet{width:357mm;height:215mm}.sheet.padding-10mm{padding:10mm}.sheet.padding-15mm{padding:15mm}.sheet.padding-20mm{padding:20mm}.sheet.padding-25mm{padding:25mm}@media screen{body{background:#e0e0e0}.sheet{background:#fff;box-shadow:0 .5mm 2mm rgba(0,0,0,.3);margin:5mm auto}}@media print{body.A3.landscape{width:420mm}body.A3,body.A4.landscape{width:297mm}body.A4,body.A5.landscape{width:210mm}body.A5{width:148mm}body.legal,body.letter{width:216mm}body.letter.landscape{width:280mm}body.legal.landscape{width:357mm}}
+  </style>
+
+  <!-- Set page size here: A5, A4 or A3 -->
+  <!-- Set also "landscape" if you need -->
+  <style>@page { size: A5 }</style>
+
+<!-- Set "A5", "A4" or "A3" for class name -->
+<!-- Set also "landscape" if you need -->
+<div class="collapse" id = "maudon">
+<div class="A5">
+  <section class="sheet padding-10mm">
+    <div id="qrcode" style = "position: absolute;top: 15px;right: 45px; "></div>
+    <table style="border-collapse: collapse; border: none;">
+        <tr style="border: none; padding: 0px;">
+        	<td style="border: none; text-align: center; font-size: 13px;">
+        		<b>PHÒNG KHÁM MẮT</b>
+        	</td>
+          
+            <td style="border: none;">
+            	
+            </td>
+            <td style="border: none;">
+            	QR code: 
+        	</td>
+            <td style="border: none;"> 
+            </td>
+        </tr>
+        <tr style="border: none; padding: 0px;">
+        	<td style="border: none; text-align: center; font-size: 13px;"> 
+        	 <b>TÚ MINH</b><br/>
+			 <span style="font-size: 11px;">Đ/c:24 BTS-KĐT Văn Quán<br/>Hà Đông-Hà Nội</span>
+        	</td>
+           
+            <td style="border: none;">
+            	&nbsp;&nbsp;&nbsp;
+            </td>
+            <td style="border: none;">	
+            	Mã KB: 
+        	</td>
+            <td style="border: none;">
+            	 <span id = "maKB"></span>
+            </td>
+        </tr>
+    </table>    
+    <!-- Write HTML just like a web page -->
+    <h4 align="center"><b>ĐƠN THUỐC</b></h4>
+    <p  style="line-height:1.6">Họ và tên: <span id = "don_ten"></span> &nbsp;&nbsp; Tuổi: <span id = "don_tuoi"></span> &nbsp;&nbsp;Giới: <span id = "don_gioi"></span><br/>
+    Địa chỉ: <span id = "don_diachi"></span> <br/>
+    Số điện thoại: <span id = "don_sdt"></span></p>
+    <table>
+        <tr>
+        	<td>
+        		<b>TL:</b>
+        	</td>
+            <td style="border-right: 1px solid;">
+            	 MP: <span id = "don_tlkkmp"></span>     	 
+            </td>
+            <td>
+            	<b>KL:</b>
+            </td>
+			<td style="border-right: 1px solid;">
+            	 MP: <span id = "don_tlklmp"></span>     	 
+            </td>
+            <td>
+            	<b>NA:</b>
+        	</td>
+            <td>
+            	 MP: <span id = "don_namp"></span>		 
+            </td>
+        </tr>
+        <tr>
+        	<td>  		
+        	</td>
+            <td style="border-right: 1px solid;">
+            	 MT: <span id = "don_tlkkmt"></span>
+            </td>
+			<td>
+			</td>
+            <td style="border-right: 1px solid;">
+            	MT: <span id = "don_tlklmt"></span>
+            </td>
+            <td>
+				(mmHg)
+        	</td>
+            <td>
+            	 MT: <span id = "don_namt"></span>
+            </td>
+        </tr>
+    </table>    
+
+    <p id = "don_chandoan"></p>
+	
+	<div id = "don_donkinh">
+	</div>
+	
+    <ol id = "don_donthuoc">
+	</ol>
+	
+	<p id = "ghichu">xxx</p>
+	<p style="text-align: right;">Hà Nội, <span id = "ngaykham"></span>&nbsp;&nbsp;&nbsp;</p>
+	<p style="text-align: right;">Bác sỹ khám bệnh&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+	<br/>
+	<p style="text-align: right;">Ths.BS Ngô Thị Hồng Thắm <br/>Sđt: 0983112382</p>
+	<p style="text-align: left; font-size: 11px; font-weight: bold;">Khám bệnh từ 6h -9h<br/>Các ngày trong tuần</p>
+  </section>
+<div style = "text-align: center;"><button onclick = "DongDonThuoc()">Đóng</button></div>
+</div>
+</div>
+</div>
+ 
+ 
 
 
  </div>
@@ -176,6 +437,30 @@
 </body>
 <script type="text/javascript">
 	var DONTHUOC = [], DONTHUOC2 = [];
+var TENBENH = [
+"H00.0-Lẹo và viêm sâu khác của mi mắt","H00.1-Chắp","H01.0-Viêm bờ mi","H01.1-Bệnh da mi không nhiễm trùng","H01.8-Viêm mi mắt đặc hiệu","H01.9-Viêm Mi Mắt Không Xác Định","H02.0-Quặm và lông xiêu của mi mắt","H02.1-Lật mi","H02.2-Hở mi","H02.3-Sa da mi","H02.4-Sụp mi","H02.5-Bệnh khác ảnh hưởng đến chức năng của mi mắt","H02.6-U vàng ở mi mắt","H02.7-Bệnh thoái hoá khác của mi mắt và vùng quanh mắt","H02.8-Bệnh xác định khác của mi mắt","H02.9-Bệnh mi mắt không xác định","H03.0-Nhiễm ký sinh trùng ở mi mắt trong các bệnh phân loại nơi khác","H04.0-Viêm tuyến lệ","H04.1-Bệnh khác của tuyến lệ","H04.2-Chảy nước mắt","H04.3-Viêm lệ đạo cấp tính và không xác định","H04.4-Viêm lệ đạo mãn tính","H04.5-Tắc và bán tắc lệ đạo","H04.6-Rò lệ đạo","H04.8-Bệnh khác của lệ bộ","H05.0-Viêm hốc mắt cấp tính","H05.1-Viêm tổ chức hốc mắt mãn tính","H05.2-Các bệnh gây lồi mắt","H05.3-Biến dạng của hốc mắt","H05.4-Lõm mắt","H05.5-Dị vật hậu nhãn cầu","H05.8-Bệnh khác của hốc mắt","H05.9-Bệnh hốc mắt, không xác định","H06.0-Bệnh của lệ bộ trong các bệnh phân loại nơi khác","H06.1-Nhiễm ký sinh trùng của hốc mắt trong các bệnh phân loại nơi khác","H06.2-Lồi mắt do tuyến giáp","H06.3-Bệnh khác của hốc mắt trong các bệnh phân loại nơi khác","H10.0-Viêm kết mạc nhầy mủ","H10.1-Viêm kết mạc dị ứng cấp","H10.2-Viêm kết mạc cấp khác","H10.4-Viêm kết mạc mạn","H10.5-Viêm kết mạc, mi mắt","H10.8-Viêm kết mạc khác","H11.0-Mộng thịt","H11.2-Sẹo kết mạc","H11.3-Xuất huyết kết mạc","H11.4-Nang các bệnh mạch máu kết mạc khác","H13.0-Nhiễm giun chỉ ở kết mạc (B74.+)","H13.1-Viêm kết mạc trong các bệnh nhiễm trùng và ký sinh trùng phân loại nơi khác","H13.2-Viêm kết mạc trong bệnh khác, phân loại nơi khác","H13.8-Bệnh khác của kết giác mạc trong các bệnh phân loại nơi khác","H15.0-Viêm củng mạc","H15.1-Viêm thượng củng mạc","H15.8-Bệnh khác của củng mạc: giãn lồi củng mạc","H15.9-Bệnh củng mạc không xác định","H16.0-Loét giác mạc","H16.1-Viêm giác mạc nông khác không viêm kết mạc","H16.2-Viêm kết giác mạc","H16.3-Viêm giác mạc sâu và viêm giác mạc kẽ","H16.8-Viêm giác mạc khác","H17.0-Sẹo dính giác mạc","H17.1-Đục giác mạc trung tâm khác","H17-Sẹo và đục giác mạc","H18.0-Nhiễm sắc tố và lắng đọng ở giác mạc","H18.1-Bệnh giác mạc bọng","H18.2-Phù giác mạc khác","H18.3-Biến đổi ở các lớp giác mạc","H18.4-Thoái hoá giác mạc","H18.5-Loạn dưỡng giác mạc di truyền","H18.6-Giác mạc hình chóp","H18.7-Biến dạng giác mạc khác","H18.8-Bệnh giác mạc xác định khác","H18.9-Bệnh giác mạc không xác định","H19.0-Viêm củng mạc và thượng củng mạc trong các bệnh phân loại nơi khác","H19.1-Viêm giác mạc và viêm kết mạc do virus Herpes","H19.2-Viêm giác mạc và viêm kết mạc trong bệnh nhiễm trùng và nhiễm ký sinh khác phân loại nơi khác","H19.3-Viêm giác mạc và viêm kết giác mạc trong bệnh khác, phân loại nơi khác","H19.8-Bệnh khác của củng mạc và giác mạc trong bệnh phân loại nơi khác","H20.0-Viêm mống mắt thể mi cấp và bán cấp","H20.1-Viêm mống mắt thể mi mạn","H20.2-Viêm mống mắt thể mi do thể thuỷ tinh","H20.8-Viêm mống mắt thể mi khác","H21.1-Bệnh mạch máu khác của mống mắt và thể mi","H21.2-Thoái hoá mống mắt và thể mi","H21.3-Nang mống mắt, thể mi và tiền phòng","H16-Viêm giác mạc","H21.8-Bệnh xác định khác của mống mắt và thể mi","H21.9-Bệnh của mống mắt và thể mi, không xác định","H22.0-Viêm mống mắt thể mi trong các bệnh nhiễm trùng và ký sinh trùng phân loại nơi khác","H22.1-Viêm mống mắt thể mi trong các bệnh khác, phân loại nơi khác","H22.8-Bệnh khác của mống mắt và thể mi trong các bệnh phân loại nơi khác","H25.0-Đục Thể Thủy Tinh Bắt Đầu Ở Người Già","H25.1-Đục Thể Thủy Tinh Vùng Nhân Ở Người Già","H25.2-Đục Thể Thủy Tinh Hình Thái Morgagni","H26.1-Đục Thể Thủy Tinh Do Chấn Thương","H26.2-Đục Thể Thủy Tinh Biến Chứng","H26.3-Đục Thể Thủy Tinh Do Thuốc","H26.4-Đục Bao Sau Mổ Đục Thể Thuỷ Tinh Ngoài Bao","H26.8-Đục Thể Thủy Tinh Xác Định Khác","H27.0-Không có thể thuỷ tinh","H27.1-Lệch thể thuỷ tinh","H27.8-Bệnh thể thuỷ tinh xác định khác","H27.9-Bệnh thể thuỷ tinh không xác định","H28.0-Đục Thể Thủy Tinh Do Đái Tháo Đường","H28.1-Đục Thể Thủy Tinh Trong Các Bệnh Nội Tiết, Dinh Dưỡng Và Chuyển Hoá Khác","H28.8-Bệnh khác của thể thuỷ tinh trong các bệnh phân loại nơi khác","H30-Viêm hắc võng mạc","H30.2-Viêm thể mi sau","H30.9-Viêm hắc võng mạc không xác định","H31.0-Sẹo hắc võng mạc","H31.1-Thoái hoá hăc mạc","H31.2-Loạn dưỡng hắc mạc di truyền","H31.3-Xuất huyết và rách hắc mạc","H31.4-Bong hắc mạc","H33.0-Bong võng mạc có vết rách","H33.1-Tách lớp võng mạc và nang võng mạc","H33.3-Vết rách võng mạc không có bong","H33.5-Bong và rách võng mạc khác","H34.0-Tắc động mạch võng mạc thoáng qua","H34.1-Tắc động mạch trung tâm võng mạc","H34.2-Tắc động mạch võng mạc khác","H34.8-Các tắc mạnh võng mạc khác","H35.1-Bệnh lý võng mạc của trẻ để non","H35.2-Bệnh lý võng mạc tăng sinh khác","H35.5-Loạn dưỡng võng mạc di truyền","H35.6-Xuất huyết võng mạc","H35.7-Tách lớp võng mạc","H35.8-Bệnh võng mạc xác định khác","H35.7.1-Bệnh hắc võng mạc trung tâm thanh dịch","H36.8-Bệnh võng mạc khác trong các bệnh phân loại nơi khác","H40.0-Nghi ngờ glôcôm","H40.1-Glôcôm góc mở nguyên phát","H40.2-Glôcôm góc đóng nguyên phát","H40.3-Glôcôm thứ phát do chấn thương mắt","H40.4-Glôcôm thứ phát do viêm mắt","H40.5-Glôcôm thứ phát do bệnh mắt khác","H40.6-Glôcôm thứ phát do thuốc","H42.0-Glôcôm trong bệnh nội tiết, dinh dưỡng và chuyển hoá","H43.0-Phòi dịch kính","H43.1-Xuất huyết dịch kính","H43.2-Cặn lắng tinh thể trong dịch kính","H43.3-Vẩn đục dịch kính khác","H43.8-Bệnh khác của dịch kính","H44.0-Viêm mủ nội nhãn","H44.1-Viêm nội nhãn khác","H44.2-Cận thị thoái hoá","H44.3-Bệnh thoái hoá khác của nhãn cầu","H44.4-Hạ nhãn áp","H44.5-Các bệnh thoái hoá của nhãn cầu","H44.5.2-Teo nhãn cầu","H44.8-Các bệnh khác của nhãn cầu","H44.8.2-Lệch nhãn cầu","H45.0-Xuất huyết dịch kính trong các bệnh phân loại nơi khác","H45.1-Viêm nội nhãn trong các bệnh phân loại nơi khác","H45.8-Các bệnh khác của dịch kính và nhãn cầu trong các bệnh phân loại nơi khác","H47.0-Bệnh thần kinh thị, không phân loại nơi khác","H47.3-Bệnh khác của đĩa thị","H48.8-Bệnh khác của thần kinh thị và đường dẫn truyền thị giác trong các bệnh phân loại nơi khác","H49.3-Liệt vận nhãn (ngoài) toàn bộ","H49.8-Liệt vận nhãn khác","H50.0-Lác trong (Lác hội tụ đồng hành)","H50.1-Lác ngoài (Lác phân kỳ đồng hành)","H50.2-Lác đứng","H50.4-Lác khác và lác không xác định","H50.5-Lác ẩn","H50.8-Lác xác định khác","H51.0-Liệt phối hợp hướng nhìn","H51.1-Thiểu năng hay gia tăng quy tụ","H51.2-Liệt vận nhãn gian","H51.8-Các rối loạn vận nhãn hai mắt xác định khác","H52.0-Viễn thị","H52.1-Cận thị","H52.2-Loạn thị","H52.3-Khúc xạ hai mắt không đều và hình võng mạc hai mắt không đều","H52.4-Lão thị","H52.5-Rối loạn điều tiết","H52.6-Rối loạn khúc xạ khác","H53.1-Rối loạn thị giác chủ quan","H53.3-Rối loạn thị giác hai mắt khác","H53.4-Tổn hại thị trường","H53.5-Tổn hại sắc giác","H53.6-Quáng gà","H53.8-Rối loạn thị giác khác","H54.2-Khiếm thị hai mắt","H54.3-Mất thị lực không đo được, hai mắt","H54.4-Mù một mắt","H54.5-Khiếm thị một mắt","H54.6-Mất thị lực không đo được, một mắt","H57.0-Bất thường chức năng đồng tử","H57.1-Nhức mắt","H57.9-Các bệnh của mắt và phần phụ, không xác định","H58.0-Bất thường chức năng đồng tử trong các bệnh phân loại nơi khác","H58.1-Rối loạn thị giác trong các bệnh phân loại nơi khác","H58.8-Bệnh của mắt và phần phụ xác định khác trong các bệnh phân loại nơi khác","H59.0-Bệnh giác mạc bọng sau phẫu thuật thể thủy tinh","H59.8-Bệnh khác của mắt và phần phụ sau phẫu thuật","H59.9-Bệnh mắt và phần phụ sau phẫu thuật, không xác định","S05.1-Chấn thương đụng dập nhãn cầu và tổ chức hốc mắt","S05.8-Tổn Thương Khác Của Mắt Và Ổ Mắt Do Chấn Thương","T26.0-Bỏng tại mi mắt và vùng quanh nhãn cầu","T26.3-Bỏng tại phần khác của mắt và phần phụ của mắt","T26.4-Bỏng tại mắt và phần phụ của mắt, phần chưa xác định","T26.5-Ăn mòn tại mi mắt và vùng quanh nhãn cầu","T26.7-Ăn mòn với hậu quả gây vỡ và phá huỷ nhãn cầu","T26.8-Ăn mòn tại phần khác của mắt và phần phụ của mắt","T26.9-Ăn mòn tại mắt và phần phụ mắt, phần chưa xác định","Z52.5-Hiến giác mạc","H42-Glôcôm trong các bệnh phân loại nơi khác","H35.3.4-Lỗ hoàng điểm","Q87.0.1-Đa Dị Tật Hoặc Dị Dạng Bẩm Sinh Của Mặt Và Mắt (quái Thai 1 Hốc Mắt)","Q15.0.1-Glôcôm bẩm sinh, dị tật lồi mắt trâu, giác mạc to bẩm sinh","H30.9.2-Viêm màng bồ đào toàn bộ","H16.1.6-Viêm giác mạc chấm nông","H10-Viêm kết mạc","H40.5.2-Glôcôm tân mạch","T90.4-Di chứng tổn thương ở mắt và hố mắt","T15.8-Dị vật trong điểm lệ","T15.0-Dị vật giác mạc","S04.0-Tổn Thương Dây Thần Kinh Thị Giác Và Đường Đi Do Chấn Thương","S02.3-Vỡ xương sàn ổ mắt","S00.2-Tổn thương nông khác của mi mắt và vùng quanh ổ mắt","S00.1-Đụng dập mi mắt và vùng quanh ổ mắt","Q15.9-Bẩm sinh mắt không đặc hiệu","Q15.8-Các dị tật bẩm sinh mắt đặc hiệu khác","Q15.0-Glôcôm (tăng nhãn áp) bẩm sinh","Q14.9-Dị tật bẩm sinh không đặc hiệu ở phần sau của mắt","Q14.8-Các dị tật bẩm sinh khác ở phần sau của mắt","Q14.3-Dị tật bẩm sinh màng mạch","Q14.1-Dị tật bẩm sinh võng mạc","Q13.9-Dị tật bẩm sinh phần trước không đặc hiệu","Q13.8-Các dị tật bẩm sinh khác ở phần trước của nhãn cầu","Q13.5-Củng mạc xanh","Q13.4-Các dị tật bẩm sinh khác của giác mạc","Q13.3-Đục giác mạc bẩm sinh","Q12.0-Đục thể thủy tinh bẩm sinh","H13.3-Pempigus ở mắt","E50.6-Khô giác mạc có sẹo do thiếu vitamin A","E50.4-Nhuyễn giác mạc do thiếu vitamin A","E50.3-Loét và khô giác mạc do thiếu vitamin A","E50.2-Khô giác mạc do thiếu vitamin A","E50.1-Vết Bitot và khô kết mạc do thiếu vitamin A","E50.0-Khô kết mạc do thiếu vitamin A","D03.1-U hắc tố tại chỗ của mi mắt, bao gồm góc mắt","H10.1.1-Viêm kết mạc mùa xuân","B94.0-Di chứng bệnh mắt hột","B69.1-Nhiễm ấu trùng sán ở mắt","B30.9-Viêm kết mạc do virus, không xác định","B30.3-Viêm kết mạc gây dịch xuất huyết cấp (do virus đường ruột) (H13.1*)","A21.1-Bệnh tularaemia hạch ở mắt","A54.3-Nhiễm lậu cầu ở mắt","A71.0-Giai đoạn đầu của mắt hột","A71.9-Mắt hột, không xác định","A71.1-Giai đoạn hoạt động của mắt hột","B02.3-Bệnh mắt do Zona","H16.0.6-Loét giác mạc Moren","H44.1.1-Viêm nội nhãn do ký sinh trùng","A18.5-Lao ở mắt","A54.3.1-Viêm kết mạc do lậu cầu","A54.3.2-Viêm mống mắt thể mi do lậu cầu","A71-Mắt hột","A71.1.1-Viêm kết mạc có hột","A71.1.2-Viêm kết mạc dạng nang","A74.0-Viêm kết mạc do chlamydia (H13.1*)","B02.3.1-Viêm Mi Mắt Do Zona","B02.3.2-Viêm kết mạc do Zona","B02.3.3-Viêm giác mạc do Zona","B02.3.4-Viêm mống mắt thể mi do Zona","B02.3.5-Viêm kết giác mạc do Zona","B30-Viêm kết mạc do virus (loại trừ Herpes, Zonna)","B30.0-Viêm kết giác mạc do adenovirus, viêm kết giác mạc gây dịch","B30.1-Viêm kết giác mạc cấp dạng nang do adenovirus, viêm kết mạc bể bơi","B30.2-Viêm kết mạc-họng hạch","B58.0-Bệnh lý mắt do Toxoplasma","B87.2-Bệnh dòi ở mắt (Ocular myiasis)","C41.0-Ung thư xương hốc mắt","C43.1-U hắc tố ác tính của mi","C44.1-Ung thư da mi","C69-Ung Thư Của Mắt Và Phần Phụ","C69.0-Ung thư kết mạc","C69.1-Ung Thư Giác Mạc","C69.2-Ung Thư Võng Mạc","C69.3-Ung Thư Hắc Mạc","C69.4-Ung Thư Thể Mi, Nhãn Cầu","C69.5-Ung Thư Tuyến Lệ Và Ống Lệ","C69.6-Ung Thư Hốc Mắt (loại Trừ ung thư Xương)","C69.6.1-Ung Thư Mô Liên Kết Của Hốc Mắt","C69.6.2-Ung Thư Cơ Ngoại Nhãn Cầu","C69.6.3-Ung Thư Thần Kinh Ngoại Biên Của Hốc Mắt","C69.6.4-Ung Thư Tổ Chức Hậu Nhãn Cầu","C69.8-Ung Thư Lan Rộng Của Mắt Và Phần Phụ","C69.9-Ung Thư Mắt Không Xác Định","D23.1-U lành da mi mắt","D31-U lành của mắt và phần phụ","D31.0-U lành kết mạc","D31.1-U lành giác mạc","D31.2-U lành võng mạc","D31.3-U Lành Hắc Mạc","D31.4-U lành thể mi","D31.5-U lành tuyến và ống lệ","D31.6-U lành hốc mắt không xác định","D31.9-U lành của nhãn cầu, không xác định","E50-Thiếu Vitamin A","E50.5-Quáng gà do thiếu Vitamin A","E50.7-Biểu hiện khác ở mắt do thiếu vitamin A, bệnh khô mắt","H00-Lẹo và chắp","H00.0.1-Áp xe của mi mắt","H00.0.2-Nhọt của mi mắt","H00.0.3-Lẹo mi mắt","H01-Viêm khác của mi mắt","H02.5.1-Dính mi mắt","H02.5.2-Hẹp khe mi","H02.5.3-Co rút mi","H02.7.1-Rụng lông mi của mi mắt","H02.7.2-Rám da","H02.7.3-Bạch biến","H02.8.1-Bệnh rậm lông mi","H02.8.2-Dị vật mi mắt","H03.0.1-Viêm da mi do Demodex","H03.0.2-Nhiễm Leishmania ở mi mắt","H03.0.3-Nhiễm giun ở mi mắt","H03.0.4-Rận mi (nhiễm chấy rận ở mi mắt)","H03.1-Các bệnh nhiễm trùng khác liên quan đến mi mắt trong các bệnh phân loại nơi khác","H03.1.1-Viêm mi do Virus Herpes","H03.1.2-Viêm mi do Zona","H03.1.3-Viêm mi do lao, phong","H03.1.4-U mềm lây mi mắt","H04.0.1-Tuyến lệ phì đại mãn tính","H04.1.1-Túi nước tuyến lệ","H04.1.2-Hội chứng khô mắt","H04.1.3-Nang tuyến lệ","H04.1.4-Teo tuyến lệ","H04.3.1-Viêm túi lệ cấp, bán cấp","H04.3.2-Viêm lệ quản cấp, bán cấp","H04.3.3-Viêm quanh túi lệ cấp, bán cấp","H04.4.1-Viêm túi lệ mãn tính","H04.4.2-Viêm lệ quản mãn tính","H04.4.3-U nhầy lệ mạn tính","H04.5.1-Sỏi lệ đạo","H04.5.2-Lật điểm lệ","H04.5.3-Hẹp lệ bộ ở lệ quản, lệ quản chung","H04.5.4-Hẹp lệ bộ ở túi lệ","H04.9-Bệnh của lệ bộ, không xác định","H05.0.1-Áp xe hốc mắt","H05.0.2-Viêm tổ chức hốc mắt","H05.0.3-Viêm tủy xương hốc mắt","H05.0.4-Viêm màng xương hốc mắt","H05.0.5-Viêm bao gân của hốc mắt","H05.1.1-U hạt của hốc mắt","H05.2.1-Lệch nhãn cầu","H05.2.2-Tụ máu của hốc mắt (Xuất huyết của hốc mắt)","H05.2.3-Phù hốc mắt","H05.3.1-Teo hốc mắt","H05.3.2-Cạn cùng đồ","H05.8.1-Nang hốc mắt","H10.3-Viêm kết mạc cấp, không xác định","H10.9-Viêm kết mạc, không xác định","H11.1-Cặn lắng và thoái hoá kết mạc, sạn vôi","H11.2.1-Dính mi cầu","H11.3.1-Xuất huyết dưới kết mạc","H11.4.1-Phình mạch kết mạc","H11.4.2-Xung huyết kết mạc","H11.4.3-Phù kết mạc","H11.8-Bệnh xác định khác của kết mạc","H11.8.1-Mộng thịt giả","H11.9-Bệnh của kết mạc, không xác định","H13.1.1-Viêm kết mạc do Acanthamoeba","H13.1.2-Viêm kết mạc cấp do Adennoviruts","H13.1.3-Viêm kết mạc do Chlamydial","H13.1.4-Viêm kết mạc lậu hầu","H13.1.5-Viêm kết mạc xuất huyết","H13.1.6-Viêm kết mạc não mô cầu","H13.1.7-Viêm kết mạc do bệnh zona","H13.1.8-Viêm kết mạc do bạch hầu","H15-Bệnh của củng mạc","H16.0.1-Loét giác mạc trung tâm","H16.0.2-Loét giác mạc rìa","H16.0.3-Loét giác mạc thủng","H16.0.4-Loét giác mạc dạng vòng","H16.0.5-Loét giác mạc có mủ tiền phòng","H16.1.1-Viêm giác mạc dạng quầng","H16.1.2-Viêm giác mạc dạng sợi","H16.1.3-Viêm giác mạc dạng đồng tiền","H16.1.4-Viêm giác mạc dạng sao","H16.1.5-Viêm giác mạc dạng khía","H16.1.7-Viêm giác mạc do ánh sáng","H16.2.1-Viêm kết giác mạc do tiếp xúc","H16.2.2-Viêm kết giác mạc thần kinh dinh dưỡng","H16.2.3-Viêm kết giác mạc bọng","H16.2.4-Viêm giác mạc nông kèm theo viêm kết mạc","H16.2.5-Viêm kết giác mạc dạng nốt","H16.4-Tân mạch giác mạc","H16.4.1-Mạch máu rỗng giác mạc","H16.4.2-Màng máu giác mạc","H16.9-Viêm giác mạc không xác định","H17.8-Sẹo và đục giác mạc khác","H17.9-Sẹo và đục giác mạc, không xác định","H18.0.1-Giác mạc ngấm máu","H18.0.2-Vòng Kayser - Fleischer","H18.0.3-Hình thoi Krukenberg","H18.0.4-Đường Staehli","H18.3.1-Nếp gấp giác mạc","H18.3.2-Rách màng Descemet","H18.4.1-Vòng thoái hóa giác mạc tuổi già","H18.4.2-Bệnh giác mạc giải băng","H18.5.1-Loạn dưỡng giác mạc biểu mô","H18.5.2-Loạn dưỡng giác mạc dạng hạt","H18.5.3-Loạn dưỡng giác mạc dạng lưới","H18.5.4-Loạn dưỡng giác mạc dạng vết","H18.7.1-Giãn lồi giác mạc","H18.7.2-Phồng màng Descemet","H18.8.1-Mất cảm giác của giác mạc","H18.8.2-Giảm cảm giác của giác mạc","H18.8.3-Tróc biểu mô tái phát của giác mạc","H19.0.1-Viêm thượng củng mạc do giang mai","H19.0.2-Viêm thượng củng mạc do lao","H19.0.3-Viêm thượng củng mạc do zona","H19.1.1-Viêm giác mạc hình đĩa","H19.2.1-Viêm kết giác mạc dịch tễ","H19.2.2-Viêm Kết Mạc Và Giác Mạc Trong Nhiễm Acanthamoeba","H19.2.3-Viêm Kết Mạc Và Giác Mạc Trong Sởi","H19.2.4-Viêm Kết Mạc Và Giác Mạc Trong Giang Mai","H19.2.5-Viêm Kết Mạc Và Giác Mạc Trong Lao","H19.2.6-Viêm Kết Mạc Và Giác Mạc Trong Zona","H19.3.1-Viêm kết giác mạc khô","H19.8.1-Giác mạc hình chóp trong hội chứng Down","H20.0.1-Viêm màng bồ đào trước bán cấp","H20.0.2-Viêm màng bồ đào trước cấp","H20.0.3-Viêm màng bồ đào trước tái phát","H20.0.4-Viêm thế mi cấp","H20.0.5-Viêm thể mi tái phát","H20.0.6-Viêm thể mi bán cấp","H20.0.7-Viêm mống mắt cấp","H20.0.8-Viêm mống mắt tái phát","H20.0.9-Viêm mống mắt bán cấp","H20.9-Viêm mống mắt thể mi, không xác định","H21.0-Xuất huyết tiền phòng (không do chấn thương)","H21.1.1-Tân mạch mống mắt và thể mi","H21.1.2-Mống mắt đỏ","H21.2.1-Thoái hóa mống mắt","H21.2.2-Thoái hóa bờ đồng tử","H21.2.3-Mống mắt tách lớp","H21.2.4-Teo mống mắt","H21.2.5-Nang mống mắt gây co đồng tử","H21.2.6-Mống mắt thấu quang","H21.3.1-Nang mống mắt thể mi hoặc tiền phòng xuất tiết","H21.3.2-Nang mống mắt thể mi hoặc tiền phòng do vùi tế bào","H21.3.3-Nang mống mắt thể mi hoặc tiền phòng do ký sinh trùng","H21.4-Màng đồng từ","H21.4.1-Phồng mống mắt","H21.4.2-Đồng tử nghẽn","H21.4.3-Đồng tử dính bít","H21.5-Dính và đứt khác của mống mắt và thể mi (dính góc, lùi góc TP - đứt, tách chân mống mắt,...)","H21.5.1-Dính góc tiền phòng","H21.5.2-Tách chân mống mắt","H21.5.3-Lùi góc tiền phòng","H21.5.4-Dính mống mắt trước","H21.5.5-Dính mống mắt sau","H25-Đục Thể Thủy Tinh Người Già","H22.0.1-Viêm mống mắt thể mi trong nhiễm lậu cầu","H22.0.2-Viêm mống mắt thể mi trong nhiễm viruts Herpes","H22.0.3-Viêm mống mắt thể mi trong giang mai","H22.0.4-Viêm mống mắt thể mi trong lao","H22.0.5-Viêm Mống Mắt Thể Mi Bệnh Zona","H22.1.1-Viêm mống mắt thể mi trong viêm cứng cột sống","H22.1.2-Viêm mống mắt thể mi trong bệnh Sarcoid","H25.0.1-Đục Thể Thủy Tinh Người Già Lớp Vỏ Chu Vi","H25.0.2-Đục Thể Thủy Tinh Người Già Vùng Vỏ (cotical)","H25.0.3-Đục Thể Thủy Tinh Người Già Dạng Chấm","H25.0.4-Đục Thể Thủy Tinh Dưới Bao","H25.0.5-Đục Thể Thủy Tinh Dưới Bao Dạng Khe Nước (water Clefts)","H25.1.1-Đục Thể Thủy Tinh Nâu","H25.1.2-Đục Thể Thủy Tinh Xơ Cứng Nhân","H25.2.1-Đục Thể Thủy Tinh Tuổi Già Quá Chín","H25.8-Đục Thể Thủy Tinh Thể Người Già Khác","H25.9-Đục Thể Thủy Tinh Người Già Không Xác Định","H26-Đục thể thủy tinh khác","H26.0-Đục Thể Thủy Tinh Trẻ Em, Người Trẻ Và Trước Tuổi Già ( Loại Trừ Đục Thể Thủy Tinh Bẩm Sinh )","H26.2.1-Đục Thể Thủy Tinh Trong Viêm Mống Mắt Thể Mi Mạn","H26.2.2-Đục Thể Thủy Tinh Thứ Phát Sau Các Bệnh Của Mắt","H26.2.3-Vết đục thể thủy tinh do Glôcôm","H26.4.1-Đục Thể Thủy Tinh Thứ Phát","H26.4.2-Vòng Soemmering","H26.9-Đục Thể Thủy Tinh Không Xác Định Khác","H28.1.1-Đục Thể Thủy Tinh Trong Suy Cận Giáp","H28.2.1-Đục Thể Thủy Tinh Trong Tăng Trương Lực Cơ","H30.0-Viêm hắc võng mạc khu trú","H30.0.1-Viêm hắc mạc khu trú","H30.0.2-Viêm võng mạc khu trú","H30.0.3-Viêm võng hắc mạc khu trú","H30.1-Viêm hắc võng mạc lan tỏa","H30.1.1-Viêm hắc mạc lan tỏa","H30.1.2-Viêm võng mạc lan tỏa","H30.2.1-Viêm Pars plana","H30.8-Viêm hắc võng mạc khác","H30.8.1-Viêm màng bồ đào Vogt Koyanagi Harada","H31-Bệnh khác của hắc mạc","H31.0.1-Sẹo hoàng điểm, hậu cực sau viêm nhiễm, sau chấn thương","H31.0.2-Bệnh võng mạc do quan sát nhật thực","H31.1.1-Teo hắc mạc","H31.1.2-Xơ hóa hắc mạc","H31.2.2-Loạn dưỡng hắc mạc hình quầng trung tâm","H31.2.3-Loạn dưỡng hắc mạc trung tâm","H31.2.4-Teo hắc mạc hình xoắn di truyền","H31.3.1-Xuất huyết hắc mạc không xác định nguyên nhân","H31.3.2-Xuất huyết tống khứ","H31.8-Bệnh hắc mạc xác định khác","H31.9-Bệnh hắc mạc không xác định","H32-Bệnh hắc võng mạc trong các bệnh phân loại nơi khác","H32.0-Viêm hắc võng mạc trong bệnh nhiễm trùng và ký sinh","H32.0.1-Viêm hắc võng mạc do giang mai, muộn","H32.0.2-Viêm hắc võng mạc do Toxoplasma","H32.0.3-Viêm hắc võng mạc do lao","H32.8-Bệnh hắc võng mạc có nguyên nhân khác trong các bệnh phân loại nơi khác","H33-Bong và rách võng mạc","H33.1.1-Nang ora serata","H33.1.2-Nang ký sinh trùng của võng mạc","H33.1.3-Giả nang ở võng mạc","H33.2-Bong võng mạc xuất tiết (nội khoa)","H33.3.1-Vết rách hình móng ngựa","H33.3.2-Vết rách hình tròn","H33.3.3-Vết rách có nắp","H33.4-Bong võng mạc do co kéo","H33.4.1-Bệnh dịch kính võng mạc tăng sinh kèm theo bong võng mạc","H34-Tắc động mạch võng mạc","H34.2.1-Tắc động mạch võng mạc thuộc võng mạc ( nhánh; một phần )","H34.2.2-Tắc động mạch võng mạc khác do cục nghẽn nhỏ","H34.2.3-Tắc động mạch võng mạc có mảng nghẽn mạch ( mảng Hollenhost)","H34.8.1-Tắc tĩnh mạch võng mạc trung tâm","H34.8.4-Tắc nhánh tĩnh mạch võng mạc","H34.9-Tắc mạch võng mạc, không xác định","H35.0-Bệnh lý võng mạc sơ phát không tăng sinh và biến đổi mạch máu võng mạc","H35.0.1-Biến đổi hình dạng mạch máu võng mạc vi phình mạch (Phình vi mạch VM)","H35.0.2-Biến đổi hình dạng mạch máu võng mạc tân mạch (Tân mạch VM)","H35.0.3-Viêm Quanh Thành Mạch Võng Mạc","H35.0.4-Dãn tĩnh mạch võng mạc","H35.0.5-Lồng bao mạch võng mạc","H35.0.6-Viêm Mạch Máu Võng Mạc","H35.0.7-Viêm Võng Mạc Sơ Phát Kxđ","H35.0.8-Viêm Võng Mạc Xuất Tiết","H35.0.9-Bệnh lý võng mạc do cao huyết áp","H35.0.10-Bệnh Coats","H35.1.1-Xơ sản sau thể thủy tinh","H35.2.1-Bệnh lý dịch kính võng mạc tăng sinh không bong võng mạc","H35.3-Thoái hoá hoàng điểm và hậu cực","H35.3.1-Giả vân mạch võng mạc","H35.3.2-Nang của hoàng điểm","H35.3.3-Drusen của hoàng điểm","H35.3.5-Nếp gấp hoàng điểm (Màng trước võng mạc)","H35.3.6-Thoái hóa Kuhnt-Junius","H35.3.7-Thoái hóa hoàng điểm tuổi già (teo, xuất tiết)","H35.3.8-Bệnh lý hoàng điểm do nhiễm độc","H35.4-Thoái hoá võng mạc chu biên","H35.4.1-Thoái hóa võng mạc dạng mạng","H35.4.2-Thoái hóa võng mạc dạng vi nang","H35.4.3-Thoái hóa võng mạc dạng rào","H35.4.4-Thoái hóa võng mạc dạng lưới","H35.4.5-Thoái hóa võng mạc dạng đá lát","H35.5.1-Loạn dưỡng võng mạc chấm trắng (dạng lòng đỏ trứng )","H35.5.2-Thoái hóa sắc tố võng mạc (Loạn dưỡng võng mạc sắc tố)","H35.5.3-Thoái Hóa Hoàng Điểm Dạng Noãn Hoàng (bệnh Best)","H35.5.4-Loạn dưỡng biểu mô sắc tố võng mạc","H35.5.5-Loạn dưỡng dịch kính võng mạc","H35.5.6-Viêm Võng Mạc Sắc Tố","H35.7.2-Bong biểu mô sắc tố võng mạc","H35.9-Bệnh võng mạc không xác định","H36-Bệnh võng mạc trong các bệnh phân loại nơi khác","H36.0-Bệnh võng mạc do đái tháo đường (Bệnh võng mạc tiểu đường)","H36.8.1-Bệnh lý võng mạc do xơ vữa động mạch","H36.8.2-Bệnh võng mạc tăng sinh do hồng cầu liềm","H36.8.3-Loạn dưỡng võng mạc trong các bệnh tích tụ Lipid","H40.0.1-Tăng nhãn áp","H40.1.1-Glôcôm góc mở nguyên phát có giả bong bao T3","H40.1.2-Glôcôm mạn tính đơn thuần","H40.1.3-Glôcôm nhãn áp thấp","H40.1.4-Glôcôm sắc tố","H40.2.1-Glôcôm góc đóng cấp","H40.2.2-Glôcôm góc đóng mạn","H40.4.1-Glôcôm thể mi","H40.4.2-Glôcôm do viêm màng bồ đào","H40.5.1-Glôcôm do bệnh lý thể thủy tinh","H40.8-Glôcôm khác, các hình thái glôcôm đặc biệt","H40.9-Glôcôm, chưa xếp loại","H42.0.1-Glôcôm trong thoái hoá dạng tinh bột","H42.0.2-Glôcôm trong hội chứng Lower","H42.8-Glôcôm trong các bệnh phân loại nơi khác, glôcôm trong bệnh do giun Onchocerca","H43.3.1-Màng và dải sợi trong dịch kính","H43.8.1-Thoái hóa dịch kính","H43.8.2-Bong dịch kính","H43.9-Bệnh dịch kính, không xác định","H44.0.1-Viêm toàn nhãn","H44.0.2-Viêm Nội Nhãn Nội Sinh","H44.1.2-Nhãn viêm giao cảm","H44.3.1-Nhiễm đồng gây thoái hóa nhãn cầu","H44.3.2-Nhiễm sắt gây thoái hóa nhãn cầu","H44.5.1-Glôcôm tuyệt đối","H44.5.3-Tụt nhãn cầu","H44.6-Dị vật nội nhãn, có từ tính (cũ)","H44.6.1-Dị vật tiền phòng (có từ tính) (cũ)","H44.6.2-Dị vật thể mi (có từ tính) (cũ)","H44.6.3-Dị vật mống mắt (có từ tính) (cũ)","H44.6.4-Dị vật có từ tính trong thể thủy tinh (cũ)","H44.6.5-Dị vật có từ tính thành sau nhãn cầu (cũ)","H44.6.6-Dị vật có từ tính trong dịch kính (cũ)","H44.7-Dị vật nội nhãn, không từ tính (cũ)","H44.7.1-Dị vật không từ tính trong tiền phòng (cũ)","H44.7.2-Dị vật không từ tính trong thể mi (cũ)","H44.7.3-Dị vật không từ tính trong mống mắt (cũ)","H44.7.4-Dị vật không từ tính trong thể thủy tinh (cũ)","H44.7.5-Dị vật không từ tính thành sau nhãn cầu (cũ)","H44.7.6-Dị vật không từ tính trong dịch kính (cũ)","H44.8.1-Xuất Huyết Nội Nhãn","H44.9-Bệnh nhãn cầu, không xác định","H45.1.1-Viêm nội nhãn trong bệnh do ấu trùng sán dây","H45.1.2-Viêm nội nhãn trong bệnh do giun Onchecerca","H45.1.3-Viêm nội nhãn trong bệnh do giun Toxocara","H46-Viêm thị thần kinh","H46.1-Viêm thị thần kinh không do thiếu máu","H46.2-Viêm đĩa thị (gai thị)","H46.3-Viêm thị thần kinh hậu nhãn cầu","H47.0.1-Chèn ép thị thần kinh","H47.0.2-Xuất huyết trong bao thị thần kinh","H47.0.3-Bệnh lý thị thần kinh do thiếu máu cục bộ","H47.1-Phù gai, không xác định","H47.2-Teo thị thần kinh","H47.2.1-Bạc màu đĩa thị vùng thái dương","H47.3.1-Drusen đĩa thị","H47.3.2-Giả phù gai","H47.4-Tổn thương giao thoa thị giác","H47.5-Tổn thương đường thị giác","H47.5.1-Tổn thương dải thị giác, thể gối ngoài và tia thị giác","H47.6-Tổn thương vỏ não thị giác","H47.7-Tổn thương thị giác, không xác định","H48.0-Teo thị thần kinh trong các bệnh phân loại nơi khác","H48.0.1-Teo thị thần kinh trong giang mai muộn","H48.1-Viêm thị thần kinh hậu nhãn cầu trong các bệnh phân loại nơi khác","H48.1.1-Viêm thị thần kinh hậu nhãn cầu trong giang mai muộn","H48.1.2-Viêm thị thần kinh hậu nhãn cầu trong nhiễm não mô cầu","H48.1.3-Viêm thị thần kinh hậu nhãn cầu trong xơ cứng rải rác","H49.0-Liệt dây thần kinh số III","H49.1-Liệt dây thần kinh số IV","H49.2-Liệt dây thần kinh số VI","H49.4-Liệt vận nhãn (ngoài) tiến triển","H49.9-Liệt vận nhãn không xác định","H50.0.1-Lác trong","H50.1.1-Lác ngoài","H50.3-Lác luân hồi","H50.4.1-Lác xoáy","H50.4.2-Lác trên","H50.4.3-Lác dưới","H50.5.1-Lác luân phiên","H50.5.2-Lác trong ẩn","H50.5.3-Lác ngoài ẩn","H50.6-Lác cơ học","H50.6.1-Hội chứng bao cơ Brown","H50.6.2-Lác do dính","H50.6.3-Hạn chế hoạt động cơ do chấn thương","H50.8.1-Hội chứng Duane","H50.9-Lác, không xác định","H51.9-Rối loạn vận nhãn hai mắt, không xác định","H52.5.1-Liệt vận nhãn nội tại hoàn toàn","H52.5.2-Co quắp điều tiết","H52.7-Rối loạn khúc xạ, không xác định","H53.0-Nhược thị do không nhìn","H53.0.1-Nhược thị do lệch khúc xạ","H53.0.2-Nhược thị do che mắt","H53.0.3-Nhược thị do lác","H53.1.1-Mỏi mắt","H53.1.2-Mù ban ngày","H53.1.4-Sợ ánh sáng","H53.1.5-Ám điểm nhấp nháy","H53.1.6-Giảm thị lực đột ngột","H53.1.7-Biến dạng hình mi","H53.1.8-Quầng mầu sắc","H53.2-Song thị","H53.3.1-Tương ứng võng mạc bất thường","H53.3.2-Hợp thị không có phù thị","H53.3.3-Ức chế thị giác hai mắt","H53.3.4-Đồng thị không có hợp thị","H53.4.1-Điểm mù rộng ra","H53.4.2-Hẹp toàn bộ thị trường","H53.4.3-Bán manh dị danh (đồng danh)","H53.4.4-Ám điểm góc tư","H53.4.5-Ám điểm hình cung","H53.4.6-Ám điểm Bjerrum","H53.4.7-Ám điểm trung tâm","H53.4.8-Ám điểm hình vòng","H53.5.1-Mù màu toàn bộ","H53.5.2-Mù màu mắc phải","H53.5.3-Mù màu","H53.5.4-Nhìn kém màu xanh","H53.5.5-Mù màu xanh","H53.5.6-Nhìn kém màu đỏ","H53.5.7-Mù màu đỏ","H53.5.8-Nhìn kém ba màu","H53.9-Rối loạn thị giác, không xác định","H54.0-Mù hai mắt","H54.1-Mù một mắt, khiếm thị mắt kia","H54.7-Mất thị lực, không xác định","H55-Rung giật nhãn cầu và rối loạn vận nhãn khác","H55.1-Rung giật nhãn cầu bẩm sinh","H55.2-Rung giật nhãn cầu không nhìn","H55.3-Rung giật nhãn cầu phân ly hai mắt","H55.4-Rung giật nhãn cầu tiềm tàng","H57.8-Các bệnh xác định khác của mắt và phần phụ","H58.0.1-Đồng tử Argyll Robertson do bệnh giang mai","H58.8.1-Bệnh mắt do giang mai","H59.8.1-Sẹo hắc võng mạc sau mổ bong võng mạc","Q14.0-Dị tật bẩm sinh dịch kính","Q14.0.1-Đục dịch kính bẩm sinh","Q14.2-Dị tật bẩm sinh đĩa thị giác, khuyết đĩa thị giác","S04.0.1-Tổn Thương Giao Thoa Thị Giác","S04.0.2-Tổn Thương Dây Thần Kinh Số II (chấn Thương)","S04.0.3-Tổn Thương Vỏ Não Thị Giác (chấn Thương)","S04.1-Tổn thương dây thần kinh số III","S04.2-Tổn thương dây thần kinh số IV","S04.3-Tổn thương dây thần kinh kinh số V","S04.4-Tổn thương dây thần kinh số VI","S04.5-Tổn thương dây thần kinh thính giác số VII","S05-Chấn thương mắt và ổ mắt","S05.0-Chấn thương rách lớp giác mạc, rách kết mạc","S05.2-Chấn thương vỡ nhãn cầu phòi kẹt, mất tổ chức nội nhãn","S05.3-Chấn thương vỡ nhãn cầu không phòi kẹt tổ chức nội nhãn, rách giác mạc tự liền","S05.4-Chấn thương hốc mắt có hay không có dị vật","S05.5-Vết Thương Xuyên Nhãn Cầu Có Dị Vật Nội Nhãn","S05.6-Vết Thương Xuyên Nhãn Cầu Không Có Dị Vật Nội Nhãn","S05.7-Chấn thương đã bỏ nhãn cầu, đã múc nội nhãn","S05.8.1-Chấn thương rách mi đứt lệ quản","T15.1-Dị vật kết mạc","T26.1-Bỏng kết mạc, giác mạc độ I, II","T26.2-Bỏng kết giác mạc độ III, IV","T26.6-Ăn mòn tại giác mạc và túi kết mạc","T85-Biến chứng của thiết bị nhân tạo, cấy ghép (Thải loại ghép)","T85.2-Biến chứng cơ học của IOL","T85.3-Thải Ghép Giác Mạc","Z96.1-Đã đặt IOL","Z97.0-Mắt giả, tồn tại mắt nhân tạo","Z01.1-Bình thường (Kiểm tra mắt và thị lực)","Q10.0-Sụp mi bẩm sinh","S05.0.1-Chấn thương rách lớp giác mạc","S05.8.3-Chấn thương đứt lệ quản","S05.8.2-Chấn thương rách mi","S05.0.2-Chấn thương rách kết mạc","S05.1.2-Chấn thương xuất huyết tiền phòng","S05.1.1-Chấn thương đụng dập nhãn cầu","H19.1.2-Viêm giác mạc hình cành cây","G24.5-Co thắt mi (Blepharospasm)","C49.0-Ung Thư Mô Liên Kết, Mô Mềm Của Mi","H26.0.2-Đục Thể Thủy Tinh Bệnh Lý Trước Tuổi Già ( Loại Trừ Đục Thể Thủy Tinh Bẩm Sinh )","H26.0.1-Đục Thể Thủy Tinh Trẻ Em ( Loại Trừ Đục Thể Thủy Tinh Bẩm Sinh )","H30.9.1-Viêm màng bồ đào sau","C72.3-Ung thư thị thần kinh","H02.5.4-Sẹo mi","S05.0.3-Chấn thương xước giác mạc","Q10.2-Quặm bẩm sinh","Z94.7-Đã Ghép Giác Mạc","H40-Glôcôm","S05.1.4-Chấn thương đụng dập tổ chức hốc mắt (tụ máu mi, tụ máu hốc mắt...)","T15.0.1-Dị vật giác mạc nông","T15.0.2-Dị vật giác mạc sâu","Q10.2.0-Quặm mi","C69.5.0-U Tuyến Lệ","A18.5.1-Lao kết mạc","A18.5.2-Lao giác mạc","A18.5.3-Lao thượng củng mạc","A18.5.4-Viêm Màng Bồ Đào Do Lao","C44.1.1-Ung Thư Biểu Mô Đáy","C44.1.2-Ung Thư Biểu Mô Vảy","C69.0.1-Ung Thư Biểu Mô Tế Bào Vảy","C69.0.2-U Hắc Tố Ác Tính","C69.5.1-Ung Thư Tuyến Lệ","C69.5.2-Ung Thư Túi Lệ","C69.5.3-Ung Thư Ống Lệ Mũi","D31.1.1-U Bì Kết Giác Mạc","D31.1.2-U Bì Mỡ Kết Giác Mạc","D31.6.1-U Lành Mô Liên Kết Hốc Mặt","D31.6.2-U Lành Cơ Ngoại Nhãn Cầu","D31.6.3-U Lành Thần Kinh Ngoại Biên Hốc Mắt","D31.6.4-U Lành Tổ Chức Hậu Nhãn Cầu","H01.1.1-Viêm Da Mi Dị Ứng","H01.1.2-Viêm Da Mi Tiếp Xúc","H01.1.3-Chàm da mi","H04.5.5-Xơ Chít Điểm Lệ","H10.4.1-Viêm Kết Mạc Dị Ứng","H11.1.1-Sạn vôi kết mạc","H11.1.2-Nhiễm sắc tố kết mạc (Nốt ruồi kết mạc)","H11.1.3-Nhiễm bạc kết mạc","H13.1.9-Viêm Kết Mạc do Herpes","H18.5.5-Loạn dưỡng giác mạc Fuchs","H25.1.3-Đục Thể Thủy Tinh Hoàn Toàn (đục Chín)","H35.5.7-Bệnh Stargardt","H40.0.2-Nghi ngờ glôcôm góc mở","H40.0.3-Nghi ngờ glôcôm góc đóng","H44.0.3-Viêm Nội Nhãn Ngoại Sinh Sau Chấn Thương","H44.0.4-Viêm Nội Nhãn Ngoại Sinh Sau Phẫu Thuật","H59.8.2-Xẹp Tiền Phòng Sau Mổ Glôcôm","H59.8.3-Bong hắc mạc","H59.8.5-Sẹo bọng quá phát","H59.8.6-Rò sẹo bọng","H59.8.7-Nhiễm trùng sẹo bọng","Q10.3-Các dị tật mi mắt bẩm sinh","Q10.3.1-Không có mi mắt","Q10.3.2-Hẹp khe mi bẩm sinh","Q10.3.3-Khuyết mi mắt bẩm sinh","Q10.3.4-Dị tật bẩm sinh không xác định khác ở mi mắt","Q10.4-Không có điểm lệ","Q10.5-Hẹp, chít hẹp ống dẫn lệ bẩm sinh","Q10.6-Các dị tật bẩm sinh khác của ống dẫn lệ","Q10.7-Dị tật bẩm sinh hốc mắt","Q11.0-Nhãn cầu dạng túi","Q11.1-Các dị tật không có mắt khác","Q11.2-Dị tật mắt bé","Q11.2.1-Tật Mắt Ẩn","Q11.3-Dị tật mắt to","Q12.1-Lệch thể thủy tinh bẩm sinh","Q12.2-Khuyết thể thủy tinh","Q12.3-Thiếu Thể Thủy Tinh Bẩm Sinh","Q12.4-Thể Thủy Tinh Hình Cầu","Q12.8-Các dị tật bẩm sinh khác của thể thủy tinh","Q13.0-Tật khuyết mống mắt","Q13.2-Các dị tật bẩm sinh khác của mống mắt (Đồng tử lạc chỗ...)","H27.2-Sót chất nhân sau phẫu thuật thể thủy tinh","H27.3-Đã Mổ Lấy Thể Thủy Tinh (trong Bao, Ngoài Bao)","H27.4-Rơi mảnh nhân vào dịch kính trong phẫu thuật phaco","H36.1-Bệnh võng mạc do thai nghén","H36.2-Bệnh võng mạc do cao huyết áp","H36.3-Bệnh võng mạc do thận","H44.0.5-Áp xe dịch kính","H53.1.3-Quáng gà","H59.8.4-Glôcôm ác tính","Q13.1-Tật Không Có Mống Mắt","Q10.1-Lật mi bẩm sinh","Q11.2.2-Dị tật mắt nhỏ (Loạn sản, thiểu sản…)"
+];
+var THILUC = [
+"DNT 1m","DNT 2m","DNT 3m","DNT 4m","DNT 5m","1/10","2/10","3/10","4/10","5/10","6/10","7/10","8/10","9/10","10/10","11/10","12/10","ST-","ST+","BBT 0.1m","BBT 0.2m","BBT 0.3m","DNT 0.1m","DNT 0.2m","DNT 0.3m","DNT 0.4m","DNT 0.5m","DNT 0.6m","DNT 0.7m","DNT 0.8m","DNT 0.9m","Tăng ít","Không phối hợp","Phối hợp kém","Không thử","","0.15","Không tăng","ST±","Kính đọc sách","Sáng hơn","DNT 4.5m","DNT 3.5m","DNT 2.5m","DNT 1.5m","0","0.13","0.16","0.25","15/10","20/200","20/160","20/125","20/100","20/80","20/60","20/50","20/40","20/30","20/25","20/20","20/16","20/12.5","20/10","20/70","20/400"
+];
+var NHANAP = [
+ "10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","sờ tay căng căng","mềm","Không Thử","54","51","52","53","55","1","2","3","4","5","6","7","8","9","56","57","58","59","60"
+];
+var KINHCAU = [
+"-25.00","-24.75","-24.50","-24.25","-24.00","-23.75","-23.50","-23.25","-23.00","-22.75","-22.50","-22.25","-22.00","-21.75","-21.50","-21.25","-21.00","-20.75","-20.50","-20.25","-20.00","-19.75","-19.50","-19.25","-19.00","-18.75","-18.50","-18.25","-18.00","-17.75","-17.50","-17.25","-17.00","-16.75","-16.50","-16.25","-16.00","-15.75","-15.50","-15.25","-15.00","-14.75","-14.50","-14.25","-14.00","-13.75","-13.50","-13.25","-13.00","-12.75","-12.50","-12.25","-12.00","-11.75","-11.50","-11.25","-11.00","-10.75","-10.50","-10.25","-10.00","-9.75","-9.50","-9.25","-9.00","-8.75","-8.50","-8.25","-8.00","-7.75","-7.50","-7.25","-7.00","-6.75","-6.50","-6.25","-6.00","-5.75","-5.50","-5.25","-5.00","-4.75","-4.50","-4.25","-4.00","-3.75","-3.50","-3.25","-3.00","-2.75","-2.50","-2.25","-2.00","-1.75","-1.50","-1.25","-1.00","-0.75","-0.50","-0.25","0","+0.25","+0.50","+0.75","+1.00","+1.25","+1.50","+1.75","+2.00","+2.25","+2.50","+2.75","+3.00","+3.25","+3.50","+3.75","+4.00","+4.25","+4.50","+4.75","+5.00","+5.25","+5.50","+5.75","+6.00","+6.25","+6.50","+6.75","+7.00","+7.25","+7.50","+7.75","+8.00","+8.25","+8.50","+8.75","+9.00","+9.25","+9.50","+9.75","+10.00","+10.25","+10.50","+10.75","+11.00","+11.25","+11.50","+11.75","+12.00","+12.25","+12.50","+12.75","+13.00","+13.25","+13.50","+13.75","+14.00","+14.25","+14.50","+14.75","+15.00","+15.25","+15.50","+15.75","+16.00","+16.25","+16.50","+16.75","+17.00","+17.25","+17.50","+17.75","+18.00","+18.25","+18.50","+18.75","+19.00","+19.25","+19.50","+19.75","+20.00","+20.25","+20.50","+20.75","+21.00","+21.25","+21.50","+21.75","+22.00","+22.25","+22.50","+22.75","+23.00","+23.25","+23.50","+23.75","+24.00","+24.25","+24.50","+24.75","+25.00","Không tăng","Plano"
+];
+var KINHLOAN = [
+"-10.00","-9.75","-9.50","-9.25","-9.00","-8.75","-8.50","-8.25","-8.00","-7.75","-7.50","-7.25","-7.00","-6.75","-6.50","-6.25","-6.00","-5.75","-5.50","-5.25","-5.00","-4.75","-4.50","-4.25","-4.00","-3.75","-3.50","-3.25","-3.00","-2.75","-2.50","-2.25","-2.00","-1.75","-1.50","-1.25","-1.00","-0.75","-0.50","-0.25","0","+0.25","+0.50","+0.75","+1.00","+1.25","+1.50","+1.75","+2.00","+2.25","+2.50","+2.75","+3.00","+3.25","+3.50","+3.75","+4.00","+4.25","+4.50","+4.75","+5.00","+5.25","+5.50","+5.75","+6.00","+6.25","+6.50","+6.75","+7.00","+7.25","+7.50","+7.75","+8.00","+8.25","+8.50","+8.75","+9.00","+9.25","+9.50","+9.75","+10.00","Plano","-25.00","-24.75","-24.50","-24.25","-24.00","-23.75","-23.50","-23.25","-23.00","-22.75","-22.50","-22.25","-22.00","-21.75","-21.50","-21.25","-21.00","-20.75","-20.50","-20.25","-20.00","-19.75","-19.50","-19.25","-19.00","-18.75","-18.50","-18.25","-18.00","-17.75","-17.50","-17.25","-17.00","-16.75","-16.50","-16.25","-16.00","-15.75","-15.50","-15.25","-15.00","-14.75","-14.50","-14.25","-14.00","-13.75","-13.50","-13.25","-13.00","-12.75","-12.50","-12.25","-12.00","-11.75","-11.50","-11.25","-11.00","-10.75","-10.50","-10.25"
+];
+
+var maQR = new QRCode("qrcode", {
+    text: "123456",
+    width: 50,
+    height: 50,
+    colorDark : "#000000",
+    colorLight : "#ffffff",
+    correctLevel : QRCode.CorrectLevel.H
+  });
 	if (!String.prototype.format) {
     String.prototype.format = function () {
         var args = arguments;
@@ -251,134 +536,309 @@
 	return s;
 	}
 
-templete = `
-<div>
-  
-  <style>
-  @page{margin:0}body{margin:0}.sheet{margin:0;overflow:hidden;position:relative;box-sizing:border-box;page-break-after:always}body.A3 .sheet{width:297mm;height:419mm}body.A3.landscape .sheet{width:420mm;height:296mm}body.A4 .sheet{width:210mm;height:296mm}body.A4.landscape .sheet{width:297mm;height:209mm}body.A5 .sheet{width:148mm;height:209mm}body.A5.landscape .sheet{width:210mm;height:147mm}body.letter .sheet{width:216mm;height:279mm}body.letter.landscape .sheet{width:280mm;height:215mm}body.legal .sheet{width:216mm;height:356mm}body.legal.landscape .sheet{width:357mm;height:215mm}.sheet.padding-10mm{padding:10mm}.sheet.padding-15mm{padding:15mm}.sheet.padding-20mm{padding:20mm}.sheet.padding-25mm{padding:25mm}@media screen{body{background:#e0e0e0}.sheet{background:#fff;box-shadow:0 .5mm 2mm rgba(0,0,0,.3);margin:5mm auto}}@media print{body.A3.landscape{width:420mm}body.A3,body.A4.landscape{width:297mm}body.A4,body.A5.landscape{width:210mm}body.A5{width:148mm}body.legal,body.letter{width:216mm}body.letter.landscape{width:280mm}body.legal.landscape{width:357mm}}
-  </style>
-
-  <!-- Set page size here: A5, A4 or A3 -->
-  <!-- Set also "landscape" if you need -->
-  <style>@page { size: A5 }</style>
-  <script>
-  var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this.parsedData=[];for(var b=[],d=0,e=this.data.length;e>d;d++){var f=this.data.charCodeAt(d);f>65536?(b[0]=240|(1835008&f)>>>18,b[1]=128|(258048&f)>>>12,b[2]=128|(4032&f)>>>6,b[3]=128|63&f):f>2048?(b[0]=224|(61440&f)>>>12,b[1]=128|(4032&f)>>>6,b[2]=128|63&f):f>128?(b[0]=192|(1984&f)>>>6,b[1]=128|63&f):b[0]=f,this.parsedData=this.parsedData.concat(b)}this.parsedData.length!=this.data.length&&(this.parsedData.unshift(191),this.parsedData.unshift(187),this.parsedData.unshift(239))}function b(a,b){this.typeNumber=a,this.errorCorrectLevel=b,this.modules=null,this.moduleCount=0,this.dataCache=null,this.dataList=[]}function i(a,b){if(void 0==a.length)throw new Error(a.length+"/"+b);for(var c=0;c<a.length&&0==a[c];)c++;this.num=new Array(a.length-c+b);for(var d=0;d<a.length-c;d++)this.num[d]=a[d+c]}function j(a,b){this.totalCount=a,this.dataCount=b}function k(){this.buffer=[],this.length=0}function m(){return"undefined"!=typeof CanvasRenderingContext2D}function n(){var a=!1,b=navigator.userAgent;return/android/i.test(b)&&(a=!0,aMat=b.toString().match(/android ([0-9]\.[0-9])/i),aMat&&aMat[1]&&(a=parseFloat(aMat[1]))),a}function r(a,b){for(var c=1,e=s(a),f=0,g=l.length;g>=f;f++){var h=0;switch(b){case d.L:h=l[f][0];break;case d.M:h=l[f][1];break;case d.Q:h=l[f][2];break;case d.H:h=l[f][3]}if(h>=e)break;c++}if(c>l.length)throw new Error("Too long data");return c}function s(a){var b=encodeURI(a).toString().replace(/\%[0-9a-fA-F]{2}/g,"a");return b.length+(b.length!=a?3:0)}a.prototype={getLength:function(){return this.parsedData.length},write:function(a){for(var b=0,c=this.parsedData.length;c>b;b++)a.put(this.parsedData[b],8)}},b.prototype={addData:function(b){var c=new a(b);this.dataList.push(c),this.dataCache=null},isDark:function(a,b){if(0>a||this.moduleCount<=a||0>b||this.moduleCount<=b)throw new Error(a+","+b);return this.modules[a][b]},getModuleCount:function(){return this.moduleCount},make:function(){this.makeImpl(!1,this.getBestMaskPattern())},makeImpl:function(a,c){this.moduleCount=4*this.typeNumber+17,this.modules=new Array(this.moduleCount);for(var d=0;d<this.moduleCount;d++){this.modules[d]=new Array(this.moduleCount);for(var e=0;e<this.moduleCount;e++)this.modules[d][e]=null}this.setupPositionProbePattern(0,0),this.setupPositionProbePattern(this.moduleCount-7,0),this.setupPositionProbePattern(0,this.moduleCount-7),this.setupPositionAdjustPattern(),this.setupTimingPattern(),this.setupTypeInfo(a,c),this.typeNumber>=7&&this.setupTypeNumber(a),null==this.dataCache&&(this.dataCache=b.createData(this.typeNumber,this.errorCorrectLevel,this.dataList)),this.mapData(this.dataCache,c)},setupPositionProbePattern:function(a,b){for(var c=-1;7>=c;c++)if(!(-1>=a+c||this.moduleCount<=a+c))for(var d=-1;7>=d;d++)-1>=b+d||this.moduleCount<=b+d||(this.modules[a+c][b+d]=c>=0&&6>=c&&(0==d||6==d)||d>=0&&6>=d&&(0==c||6==c)||c>=2&&4>=c&&d>=2&&4>=d?!0:!1)},getBestMaskPattern:function(){for(var a=0,b=0,c=0;8>c;c++){this.makeImpl(!0,c);var d=f.getLostPoint(this);(0==c||a>d)&&(a=d,b=c)}return b},createMovieClip:function(a,b,c){var d=a.createEmptyMovieClip(b,c),e=1;this.make();for(var f=0;f<this.modules.length;f++)for(var g=f*e,h=0;h<this.modules[f].length;h++){var i=h*e,j=this.modules[f][h];j&&(d.beginFill(0,100),d.moveTo(i,g),d.lineTo(i+e,g),d.lineTo(i+e,g+e),d.lineTo(i,g+e),d.endFill())}return d},setupTimingPattern:function(){for(var a=8;a<this.moduleCount-8;a++)null==this.modules[a][6]&&(this.modules[a][6]=0==a%2);for(var b=8;b<this.moduleCount-8;b++)null==this.modules[6][b]&&(this.modules[6][b]=0==b%2)},setupPositionAdjustPattern:function(){for(var a=f.getPatternPosition(this.typeNumber),b=0;b<a.length;b++)for(var c=0;c<a.length;c++){var d=a[b],e=a[c];if(null==this.modules[d][e])for(var g=-2;2>=g;g++)for(var h=-2;2>=h;h++)this.modules[d+g][e+h]=-2==g||2==g||-2==h||2==h||0==g&&0==h?!0:!1}},setupTypeNumber:function(a){for(var b=f.getBCHTypeNumber(this.typeNumber),c=0;18>c;c++){var d=!a&&1==(1&b>>c);this.modules[Math.floor(c/3)][c%3+this.moduleCount-8-3]=d}for(var c=0;18>c;c++){var d=!a&&1==(1&b>>c);this.modules[c%3+this.moduleCount-8-3][Math.floor(c/3)]=d}},setupTypeInfo:function(a,b){for(var c=this.errorCorrectLevel<<3|b,d=f.getBCHTypeInfo(c),e=0;15>e;e++){var g=!a&&1==(1&d>>e);6>e?this.modules[e][8]=g:8>e?this.modules[e+1][8]=g:this.modules[this.moduleCount-15+e][8]=g}for(var e=0;15>e;e++){var g=!a&&1==(1&d>>e);8>e?this.modules[8][this.moduleCount-e-1]=g:9>e?this.modules[8][15-e-1+1]=g:this.modules[8][15-e-1]=g}this.modules[this.moduleCount-8][8]=!a},mapData:function(a,b){for(var c=-1,d=this.moduleCount-1,e=7,g=0,h=this.moduleCount-1;h>0;h-=2)for(6==h&&h--;;){for(var i=0;2>i;i++)if(null==this.modules[d][h-i]){var j=!1;g<a.length&&(j=1==(1&a[g]>>>e));var k=f.getMask(b,d,h-i);k&&(j=!j),this.modules[d][h-i]=j,e--,-1==e&&(g++,e=7)}if(d+=c,0>d||this.moduleCount<=d){d-=c,c=-c;break}}}},b.PAD0=236,b.PAD1=17,b.createData=function(a,c,d){for(var e=j.getRSBlocks(a,c),g=new k,h=0;h<d.length;h++){var i=d[h];g.put(i.mode,4),g.put(i.getLength(),f.getLengthInBits(i.mode,a)),i.write(g)}for(var l=0,h=0;h<e.length;h++)l+=e[h].dataCount;if(g.getLengthInBits()>8*l)throw new Error("code length overflow. ("+g.getLengthInBits()+">"+8*l+")");for(g.getLengthInBits()+4<=8*l&&g.put(0,4);0!=g.getLengthInBits()%8;)g.putBit(!1);for(;;){if(g.getLengthInBits()>=8*l)break;if(g.put(b.PAD0,8),g.getLengthInBits()>=8*l)break;g.put(b.PAD1,8)}return b.createBytes(g,e)},b.createBytes=function(a,b){for(var c=0,d=0,e=0,g=new Array(b.length),h=new Array(b.length),j=0;j<b.length;j++){var k=b[j].dataCount,l=b[j].totalCount-k;d=Math.max(d,k),e=Math.max(e,l),g[j]=new Array(k);for(var m=0;m<g[j].length;m++)g[j][m]=255&a.buffer[m+c];c+=k;var n=f.getErrorCorrectPolynomial(l),o=new i(g[j],n.getLength()-1),p=o.mod(n);h[j]=new Array(n.getLength()-1);for(var m=0;m<h[j].length;m++){var q=m+p.getLength()-h[j].length;h[j][m]=q>=0?p.get(q):0}}for(var r=0,m=0;m<b.length;m++)r+=b[m].totalCount;for(var s=new Array(r),t=0,m=0;d>m;m++)for(var j=0;j<b.length;j++)m<g[j].length&&(s[t++]=g[j][m]);for(var m=0;e>m;m++)for(var j=0;j<b.length;j++)m<h[j].length&&(s[t++]=h[j][m]);return s};for(var c={MODE_NUMBER:1,MODE_ALPHA_NUM:2,MODE_8BIT_BYTE:4,MODE_KANJI:8},d={L:1,M:0,Q:3,H:2},e={PATTERN000:0,PATTERN001:1,PATTERN010:2,PATTERN011:3,PATTERN100:4,PATTERN101:5,PATTERN110:6,PATTERN111:7},f={PATTERN_POSITION_TABLE:[[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50],[6,30,54],[6,32,58],[6,34,62],[6,26,46,66],[6,26,48,70],[6,26,50,74],[6,30,54,78],[6,30,56,82],[6,30,58,86],[6,34,62,90],[6,28,50,72,94],[6,26,50,74,98],[6,30,54,78,102],[6,28,54,80,106],[6,32,58,84,110],[6,30,58,86,114],[6,34,62,90,118],[6,26,50,74,98,122],[6,30,54,78,102,126],[6,26,52,78,104,130],[6,30,56,82,108,134],[6,34,60,86,112,138],[6,30,58,86,114,142],[6,34,62,90,118,146],[6,30,54,78,102,126,150],[6,24,50,76,102,128,154],[6,28,54,80,106,132,158],[6,32,58,84,110,136,162],[6,26,54,82,110,138,166],[6,30,58,86,114,142,170]],G15:1335,G18:7973,G15_MASK:21522,getBCHTypeInfo:function(a){for(var b=a<<10;f.getBCHDigit(b)-f.getBCHDigit(f.G15)>=0;)b^=f.G15<<f.getBCHDigit(b)-f.getBCHDigit(f.G15);return(a<<10|b)^f.G15_MASK},getBCHTypeNumber:function(a){for(var b=a<<12;f.getBCHDigit(b)-f.getBCHDigit(f.G18)>=0;)b^=f.G18<<f.getBCHDigit(b)-f.getBCHDigit(f.G18);return a<<12|b},getBCHDigit:function(a){for(var b=0;0!=a;)b++,a>>>=1;return b},getPatternPosition:function(a){return f.PATTERN_POSITION_TABLE[a-1]},getMask:function(a,b,c){switch(a){case e.PATTERN000:return 0==(b+c)%2;case e.PATTERN001:return 0==b%2;case e.PATTERN010:return 0==c%3;case e.PATTERN011:return 0==(b+c)%3;case e.PATTERN100:return 0==(Math.floor(b/2)+Math.floor(c/3))%2;case e.PATTERN101:return 0==b*c%2+b*c%3;case e.PATTERN110:return 0==(b*c%2+b*c%3)%2;case e.PATTERN111:return 0==(b*c%3+(b+c)%2)%2;default:throw new Error("bad maskPattern:"+a)}},getErrorCorrectPolynomial:function(a){for(var b=new i([1],0),c=0;a>c;c++)b=b.multiply(new i([1,g.gexp(c)],0));return b},getLengthInBits:function(a,b){if(b>=1&&10>b)switch(a){case c.MODE_NUMBER:return 10;case c.MODE_ALPHA_NUM:return 9;case c.MODE_8BIT_BYTE:return 8;case c.MODE_KANJI:return 8;default:throw new Error("mode:"+a)}else if(27>b)switch(a){case c.MODE_NUMBER:return 12;case c.MODE_ALPHA_NUM:return 11;case c.MODE_8BIT_BYTE:return 16;case c.MODE_KANJI:return 10;default:throw new Error("mode:"+a)}else{if(!(41>b))throw new Error("type:"+b);switch(a){case c.MODE_NUMBER:return 14;case c.MODE_ALPHA_NUM:return 13;case c.MODE_8BIT_BYTE:return 16;case c.MODE_KANJI:return 12;default:throw new Error("mode:"+a)}}},getLostPoint:function(a){for(var b=a.getModuleCount(),c=0,d=0;b>d;d++)for(var e=0;b>e;e++){for(var f=0,g=a.isDark(d,e),h=-1;1>=h;h++)if(!(0>d+h||d+h>=b))for(var i=-1;1>=i;i++)0>e+i||e+i>=b||(0!=h||0!=i)&&g==a.isDark(d+h,e+i)&&f++;f>5&&(c+=3+f-5)}for(var d=0;b-1>d;d++)for(var e=0;b-1>e;e++){var j=0;a.isDark(d,e)&&j++,a.isDark(d+1,e)&&j++,a.isDark(d,e+1)&&j++,a.isDark(d+1,e+1)&&j++,(0==j||4==j)&&(c+=3)}for(var d=0;b>d;d++)for(var e=0;b-6>e;e++)a.isDark(d,e)&&!a.isDark(d,e+1)&&a.isDark(d,e+2)&&a.isDark(d,e+3)&&a.isDark(d,e+4)&&!a.isDark(d,e+5)&&a.isDark(d,e+6)&&(c+=40);for(var e=0;b>e;e++)for(var d=0;b-6>d;d++)a.isDark(d,e)&&!a.isDark(d+1,e)&&a.isDark(d+2,e)&&a.isDark(d+3,e)&&a.isDark(d+4,e)&&!a.isDark(d+5,e)&&a.isDark(d+6,e)&&(c+=40);for(var k=0,e=0;b>e;e++)for(var d=0;b>d;d++)a.isDark(d,e)&&k++;var l=Math.abs(100*k/b/b-50)/5;return c+=10*l}},g={glog:function(a){if(1>a)throw new Error("glog("+a+")");return g.LOG_TABLE[a]},gexp:function(a){for(;0>a;)a+=255;for(;a>=256;)a-=255;return g.EXP_TABLE[a]},EXP_TABLE:new Array(256),LOG_TABLE:new Array(256)},h=0;8>h;h++)g.EXP_TABLE[h]=1<<h;for(var h=8;256>h;h++)g.EXP_TABLE[h]=g.EXP_TABLE[h-4]^g.EXP_TABLE[h-5]^g.EXP_TABLE[h-6]^g.EXP_TABLE[h-8];for(var h=0;255>h;h++)g.LOG_TABLE[g.EXP_TABLE[h]]=h;i.prototype={get:function(a){return this.num[a]},getLength:function(){return this.num.length},multiply:function(a){for(var b=new Array(this.getLength()+a.getLength()-1),c=0;c<this.getLength();c++)for(var d=0;d<a.getLength();d++)b[c+d]^=g.gexp(g.glog(this.get(c))+g.glog(a.get(d)));return new i(b,0)},mod:function(a){if(this.getLength()-a.getLength()<0)return this;for(var b=g.glog(this.get(0))-g.glog(a.get(0)),c=new Array(this.getLength()),d=0;d<this.getLength();d++)c[d]=this.get(d);for(var d=0;d<a.getLength();d++)c[d]^=g.gexp(g.glog(a.get(d))+b);return new i(c,0).mod(a)}},j.RS_BLOCK_TABLE=[[1,26,19],[1,26,16],[1,26,13],[1,26,9],[1,44,34],[1,44,28],[1,44,22],[1,44,16],[1,70,55],[1,70,44],[2,35,17],[2,35,13],[1,100,80],[2,50,32],[2,50,24],[4,25,9],[1,134,108],[2,67,43],[2,33,15,2,34,16],[2,33,11,2,34,12],[2,86,68],[4,43,27],[4,43,19],[4,43,15],[2,98,78],[4,49,31],[2,32,14,4,33,15],[4,39,13,1,40,14],[2,121,97],[2,60,38,2,61,39],[4,40,18,2,41,19],[4,40,14,2,41,15],[2,146,116],[3,58,36,2,59,37],[4,36,16,4,37,17],[4,36,12,4,37,13],[2,86,68,2,87,69],[4,69,43,1,70,44],[6,43,19,2,44,20],[6,43,15,2,44,16],[4,101,81],[1,80,50,4,81,51],[4,50,22,4,51,23],[3,36,12,8,37,13],[2,116,92,2,117,93],[6,58,36,2,59,37],[4,46,20,6,47,21],[7,42,14,4,43,15],[4,133,107],[8,59,37,1,60,38],[8,44,20,4,45,21],[12,33,11,4,34,12],[3,145,115,1,146,116],[4,64,40,5,65,41],[11,36,16,5,37,17],[11,36,12,5,37,13],[5,109,87,1,110,88],[5,65,41,5,66,42],[5,54,24,7,55,25],[11,36,12],[5,122,98,1,123,99],[7,73,45,3,74,46],[15,43,19,2,44,20],[3,45,15,13,46,16],[1,135,107,5,136,108],[10,74,46,1,75,47],[1,50,22,15,51,23],[2,42,14,17,43,15],[5,150,120,1,151,121],[9,69,43,4,70,44],[17,50,22,1,51,23],[2,42,14,19,43,15],[3,141,113,4,142,114],[3,70,44,11,71,45],[17,47,21,4,48,22],[9,39,13,16,40,14],[3,135,107,5,136,108],[3,67,41,13,68,42],[15,54,24,5,55,25],[15,43,15,10,44,16],[4,144,116,4,145,117],[17,68,42],[17,50,22,6,51,23],[19,46,16,6,47,17],[2,139,111,7,140,112],[17,74,46],[7,54,24,16,55,25],[34,37,13],[4,151,121,5,152,122],[4,75,47,14,76,48],[11,54,24,14,55,25],[16,45,15,14,46,16],[6,147,117,4,148,118],[6,73,45,14,74,46],[11,54,24,16,55,25],[30,46,16,2,47,17],[8,132,106,4,133,107],[8,75,47,13,76,48],[7,54,24,22,55,25],[22,45,15,13,46,16],[10,142,114,2,143,115],[19,74,46,4,75,47],[28,50,22,6,51,23],[33,46,16,4,47,17],[8,152,122,4,153,123],[22,73,45,3,74,46],[8,53,23,26,54,24],[12,45,15,28,46,16],[3,147,117,10,148,118],[3,73,45,23,74,46],[4,54,24,31,55,25],[11,45,15,31,46,16],[7,146,116,7,147,117],[21,73,45,7,74,46],[1,53,23,37,54,24],[19,45,15,26,46,16],[5,145,115,10,146,116],[19,75,47,10,76,48],[15,54,24,25,55,25],[23,45,15,25,46,16],[13,145,115,3,146,116],[2,74,46,29,75,47],[42,54,24,1,55,25],[23,45,15,28,46,16],[17,145,115],[10,74,46,23,75,47],[10,54,24,35,55,25],[19,45,15,35,46,16],[17,145,115,1,146,116],[14,74,46,21,75,47],[29,54,24,19,55,25],[11,45,15,46,46,16],[13,145,115,6,146,116],[14,74,46,23,75,47],[44,54,24,7,55,25],[59,46,16,1,47,17],[12,151,121,7,152,122],[12,75,47,26,76,48],[39,54,24,14,55,25],[22,45,15,41,46,16],[6,151,121,14,152,122],[6,75,47,34,76,48],[46,54,24,10,55,25],[2,45,15,64,46,16],[17,152,122,4,153,123],[29,74,46,14,75,47],[49,54,24,10,55,25],[24,45,15,46,46,16],[4,152,122,18,153,123],[13,74,46,32,75,47],[48,54,24,14,55,25],[42,45,15,32,46,16],[20,147,117,4,148,118],[40,75,47,7,76,48],[43,54,24,22,55,25],[10,45,15,67,46,16],[19,148,118,6,149,119],[18,75,47,31,76,48],[34,54,24,34,55,25],[20,45,15,61,46,16]],j.getRSBlocks=function(a,b){var c=j.getRsBlockTable(a,b);if(void 0==c)throw new Error("bad rs block @ typeNumber:"+a+"/errorCorrectLevel:"+b);for(var d=c.length/3,e=[],f=0;d>f;f++)for(var g=c[3*f+0],h=c[3*f+1],i=c[3*f+2],k=0;g>k;k++)e.push(new j(h,i));return e},j.getRsBlockTable=function(a,b){switch(b){case d.L:return j.RS_BLOCK_TABLE[4*(a-1)+0];case d.M:return j.RS_BLOCK_TABLE[4*(a-1)+1];case d.Q:return j.RS_BLOCK_TABLE[4*(a-1)+2];case d.H:return j.RS_BLOCK_TABLE[4*(a-1)+3];default:return void 0}},k.prototype={get:function(a){var b=Math.floor(a/8);return 1==(1&this.buffer[b]>>>7-a%8)},put:function(a,b){for(var c=0;b>c;c++)this.putBit(1==(1&a>>>b-c-1))},getLengthInBits:function(){return this.length},putBit:function(a){var b=Math.floor(this.length/8);this.buffer.length<=b&&this.buffer.push(0),a&&(this.buffer[b]|=128>>>this.length%8),this.length++}};var l=[[17,14,11,7],[32,26,20,14],[53,42,32,24],[78,62,46,34],[106,84,60,44],[134,106,74,58],[154,122,86,64],[192,152,108,84],[230,180,130,98],[271,213,151,119],[321,251,177,137],[367,287,203,155],[425,331,241,177],[458,362,258,194],[520,412,292,220],[586,450,322,250],[644,504,364,280],[718,560,394,310],[792,624,442,338],[858,666,482,382],[929,711,509,403],[1003,779,565,439],[1091,857,611,461],[1171,911,661,511],[1273,997,715,535],[1367,1059,751,593],[1465,1125,805,625],[1528,1190,868,658],[1628,1264,908,698],[1732,1370,982,742],[1840,1452,1030,790],[1952,1538,1112,842],[2068,1628,1168,898],[2188,1722,1228,958],[2303,1809,1283,983],[2431,1911,1351,1051],[2563,1989,1423,1093],[2699,2099,1499,1139],[2809,2213,1579,1219],[2953,2331,1663,1273]],o=function(){var a=function(a,b){this._el=a,this._htOption=b};return a.prototype.draw=function(a){function g(a,b){var c=document.createElementNS("http://www.w3.org/2000/svg",a);for(var d in b)b.hasOwnProperty(d)&&c.setAttribute(d,b[d]);return c}var b=this._htOption,c=this._el,d=a.getModuleCount();Math.floor(b.width/d),Math.floor(b.height/d),this.clear();var h=g("svg",{viewBox:"0 0 "+String(d)+" "+String(d),width:"100%",height:"100%",fill:b.colorLight});h.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns:xlink","http://www.w3.org/1999/xlink"),c.appendChild(h),h.appendChild(g("rect",{fill:b.colorDark,width:"1",height:"1",id:"template"}));for(var i=0;d>i;i++)for(var j=0;d>j;j++)if(a.isDark(i,j)){var k=g("use",{x:String(i),y:String(j)});k.setAttributeNS("http://www.w3.org/1999/xlink","href","#template"),h.appendChild(k)}},a.prototype.clear=function(){for(;this._el.hasChildNodes();)this._el.removeChild(this._el.lastChild)},a}(),p="svg"===document.documentElement.tagName.toLowerCase(),q=p?o:m()?function(){function a(){this._elImage.src=this._elCanvas.toDataURL("image/png"),this._elImage.style.display="block",this._elCanvas.style.display="none"}function d(a,b){var c=this;if(c._fFail=b,c._fSuccess=a,null===c._bSupportDataURI){var d=document.createElement("img"),e=function(){c._bSupportDataURI=!1,c._fFail&&_fFail.call(c)},f=function(){c._bSupportDataURI=!0,c._fSuccess&&c._fSuccess.call(c)};return d.onabort=e,d.onerror=e,d.onload=f,d.src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==",void 0}c._bSupportDataURI===!0&&c._fSuccess?c._fSuccess.call(c):c._bSupportDataURI===!1&&c._fFail&&c._fFail.call(c)}if(this._android&&this._android<=2.1){var b=1/window.devicePixelRatio,c=CanvasRenderingContext2D.prototype.drawImage;CanvasRenderingContext2D.prototype.drawImage=function(a,d,e,f,g,h,i,j){if("nodeName"in a&&/img/i.test(a.nodeName))for(var l=arguments.length-1;l>=1;l--)arguments[l]=arguments[l]*b;else"undefined"==typeof j&&(arguments[1]*=b,arguments[2]*=b,arguments[3]*=b,arguments[4]*=b);c.apply(this,arguments)}}var e=function(a,b){this._bIsPainted=!1,this._android=n(),this._htOption=b,this._elCanvas=document.createElement("canvas"),this._elCanvas.width=b.width,this._elCanvas.height=b.height,a.appendChild(this._elCanvas),this._el=a,this._oContext=this._elCanvas.getContext("2d"),this._bIsPainted=!1,this._elImage=document.createElement("img"),this._elImage.style.display="none",this._el.appendChild(this._elImage),this._bSupportDataURI=null};return e.prototype.draw=function(a){var b=this._elImage,c=this._oContext,d=this._htOption,e=a.getModuleCount(),f=d.width/e,g=d.height/e,h=Math.round(f),i=Math.round(g);b.style.display="none",this.clear();for(var j=0;e>j;j++)for(var k=0;e>k;k++){var l=a.isDark(j,k),m=k*f,n=j*g;c.strokeStyle=l?d.colorDark:d.colorLight,c.lineWidth=1,c.fillStyle=l?d.colorDark:d.colorLight,c.fillRect(m,n,f,g),c.strokeRect(Math.floor(m)+.5,Math.floor(n)+.5,h,i),c.strokeRect(Math.ceil(m)-.5,Math.ceil(n)-.5,h,i)}this._bIsPainted=!0},e.prototype.makeImage=function(){this._bIsPainted&&d.call(this,a)},e.prototype.isPainted=function(){return this._bIsPainted},e.prototype.clear=function(){this._oContext.clearRect(0,0,this._elCanvas.width,this._elCanvas.height),this._bIsPainted=!1},e.prototype.round=function(a){return a?Math.floor(1e3*a)/1e3:a},e}():function(){var a=function(a,b){this._el=a,this._htOption=b};return a.prototype.draw=function(a){for(var b=this._htOption,c=this._el,d=a.getModuleCount(),e=Math.floor(b.width/d),f=Math.floor(b.height/d),g=['<table style="border:0;border-collapse:collapse;">'],h=0;d>h;h++){g.push("<tr>");for(var i=0;d>i;i++)g.push('<td style="border:0;border-collapse:collapse;padding:0;margin:0;width:'+e+"px;height:"+f+"px;background-color:"+(a.isDark(h,i)?b.colorDark:b.colorLight)+';"></td>');g.push("</tr>")}g.push("</table>"),c.innerHTML=g.join("");var j=c.childNodes[0],k=(b.width-j.offsetWidth)/2,l=(b.height-j.offsetHeight)/2;k>0&&l>0&&(j.style.margin=l+"px "+k+"px")},a.prototype.clear=function(){this._el.innerHTML=""},a}();QRCode=function(a,b){if(this._htOption={width:256,height:256,typeNumber:4,colorDark:"#000000",colorLight:"#ffffff",correctLevel:d.H},"string"==typeof b&&(b={text:b}),b)for(var c in b)this._htOption[c]=b[c];"string"==typeof a&&(a=document.getElementById(a)),this._android=n(),this._el=a,this._oQRCode=null,this._oDrawing=new q(this._el,this._htOption),this._htOption.text&&this.makeCode(this._htOption.text)},QRCode.prototype.makeCode=function(a){this._oQRCode=new b(r(a,this._htOption.correctLevel),this._htOption.correctLevel),this._oQRCode.addData(a),this._oQRCode.make(),this._el.title=a,this._oDrawing.draw(this._oQRCode),this.makeImage()},QRCode.prototype.makeImage=function(){"function"==typeof this._oDrawing.makeImage&&(!this._android||this._android>=3)&&this._oDrawing.makeImage()},QRCode.prototype.clear=function(){this._oDrawing.clear()},QRCode.CorrectLevel=d}();
-  </script>
-</head>
-
-<!-- Set "A5", "A4" or "A3" for class name -->
-<!-- Set also "landscape" if you need -->
-<div class="A5">
-
-  <!-- Each sheet element should have the class "sheet" -->
-  <!-- "padding-**mm" is optional: you can set 10, 15, 20 or 25 -->
- 
-  <section class="sheet padding-10mm">
-    
-    <table style="border-collapse: collapse; border: none;">
-        <tr style="border: none;">
-        	<td style="border: none;">
-        		PHÒNG KHÁM MẮT
-        	</td>
-            <td style="border: none;">
-            	  
-            </td>
-            <td style="border: none;">
-            	
-            </td>
-            <td style="border: none;">
-            	QR code: 
-        	</td>
-            <td style="border: none; align-content: center;">
-            	 <div id="qrcode"></div>	 
-            </td>
-        </tr>
-            <tr style="border: none;">
-        	<td style="border: none; text-align: center;"> 
-        	 BS THẮM 		
-        	</td>
-            <td style="border: none;">
-            	
-            </td>
-            <td style="border: none;">
-            	&nbsp;&nbsp;&nbsp;
-            </td>
-            <td style="border: none;">	
-            	Mã BN: 
-        	</td>
-            <td style="border: none;">
-            	 20191710001
-            </td>
-        </tr>
-    </table>    
-    <!-- Write HTML just like a web page -->
-    <h4 align="center">ĐƠN THUỐC</h4>
-    <p  style="line-height:1.6">Họ và tên: <span>Ngô</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tuổi: 38<br/>
-    Địa chỉ: Đống Đa - Hà Nội <br/>
-    Số điện thoại: 0978678345</p>
-    <table style="border-collapse: collapse; border: none;">
-        <tr style="border: none;">
-        	<td style="border: none;">
-        		Thị lực:
-        	</td>
-            <td style="border: none;">
-            	 MP: 20/20     	 
-            </td>
-            <td style="border: none;">
-            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </td>
-            <td style="border: none;">
-            	Nhãn áp: 
-        	</td>
-            <td style="border: none;">
-            	 MP: 18mmHg		 
-            </td>
-        </tr>
-            <tr style="border: none;">
-        	<td style="border: none;">  		
-        	</td>
-            <td style="border: none;">
-            	 MT: 20/20
-            </td>
-            <td style="border: none;">
-            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </td>
-            <td style="border: none;">	
-        	</td>
-            <td style="border: none;">
-            	 MT: 16mmHg
-            </td>
-        </tr>
-    </table>    
-
-    <p>Chẩn đoán: 2M: Viêm màng bồ đào</p>
-    <ol>
-  		<li>Paracetamol 150mg x 20 viên<br/>Uống 2 lần/ ngày</li>
- 		  <li>Paracetamol 150mg x 20 viên</li>
-  		<li>Paracetamol 150mg x 20 viên</li>
-  		<li>Paracetamol 150mg x 20 viên<br/>Uống 2 lần/ ngày</li>
-	  </ol>
-	<p>Ghi chú: Khám lại sau 05 ngày</p>
-	<p style="text-align: right;">Hà Nội, ngày 21/7/2019&nbsp;&nbsp;&nbsp;</p>
-	<p style="text-align: right;">Bác sỹ khám bệnh&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-	<br/><br/><br/>
-	<p style="text-align: right;">Ths.BS Ngô Thị Hồng Thắm</p>
-  </section>
-
- <script type="text/javascript">
-	new QRCode("qrcode", {
-    text: "123456",
-    width: 50,
-    height: 50,
-    colorDark : "#000000",
-    colorLight : "#ffffff",
-    correctLevel : QRCode.CorrectLevel.H
+function toTitleCase( str ) 
+{
+   return str.split(/\s+/).map( s => s.charAt( 0 ).toUpperCase() + s.substring(1).toLowerCase() ).join( " " );
+}
+// Viết hoa chữ cái đầu tiên mỗi chữ
+$('input').on('keyup', function(event) {
+    var $t = $(this);
+    $t.val( toTitleCase( $t.val() ) );
 });
- </script>
-</div>
-</div>
-`;
+	
+$("#ten").change(function(){
+$("#don_ten").html($("#ten").val());
+});
+$("#tuoi").change(function(){
+$("#don_tuoi").html($("#tuoi").val());
+});
+$("#diachi").change(function(){
+$("#don_diachi").html($("#diachi").val());
+});
+$("#sdt").change(function(){
+$("#don_sdt").html($("#sdt").val());
+});
+$("#gioi").change(function(){
+$("#don_gioi").html($("#gioi option:selected").html());
+});
+$("#cdMP").change(function(){
+ChanDoan()
+});
+$("#cdMT").change(function(){
+ChanDoan()
+});
+$("#cd2M").change(function(){
+ChanDoan()
+});
+$("#cdKhac").change(function(){
+ChanDoan()
+});
+
+
+$("#cdMP" ).autocomplete({
+      lookup: TENBENH,
+      onSelect: function (suggest) {
+        var choosen = suggest.value;
+        $("#cdMP").val(choosen);
+		ChanDoan();
+      }
+    });
+$("#cdMT" ).autocomplete({
+      lookup: TENBENH,
+      onSelect: function (suggest) {
+        var choosen = suggest.value;
+        $("#cdMT").val(choosen);
+		ChanDoan();
+      }
+    });
+$("#cd2M" ).autocomplete({
+      lookup: TENBENH,
+      onSelect: function (suggest) {
+        var choosen = suggest.value;
+        $("#cd2M").val(choosen);
+		ChanDoan();
+      }
+    });
+function ChanDoan(){
+var cdmp = "MP: "+$("#cdMP").val();
+var cdmt = "MT: "+$("#cdMT").val();
+var cd2m = "2M: "+$("#cd2M").val();
+var cdkhac = $("#cdKhac").val();
+
+if (cdmp != "") cdmp = cdmp+"\\ ";
+if (cdmt != "") cdmt = cdmt+"\\ ";
+if (cd2m != "") cd2m = cd2m+"\\ ";
+if (cd2m == "") cd2m = "";
+
+var r = "Chẩn đoán: " + cdmp + cdmt + cd2m + cdkhac;
+$("#don_chandoan").html(r);
+return r;
+}
+
+$("#tlkkmp" ).autocomplete({
+      lookup: THILUC,
+      onSelect: function (suggest) {
+        var choosen = suggest.value;
+        $("#tlkkmp").val(choosen);
+      }
+    });
+$("#tlkkmt" ).autocomplete({
+      lookup: THILUC,
+      onSelect: function (suggest) {
+        var choosen = suggest.value;
+        $("#tlkkmt").val(choosen);
+      }
+    });
+$("#tlklmp" ).autocomplete({
+      lookup: THILUC,
+      onSelect: function (suggest) {
+        var choosen = suggest.value;
+        $("#tlklmp").val(choosen);
+      }
+    });
+$("#tlklmt" ).autocomplete({
+      lookup: THILUC,
+      onSelect: function (suggest) {
+        var choosen = suggest.value;
+        $("#tlklmt").val(choosen);
+      }
+    });
+
+$("#tlkcmp" ).autocomplete({
+      lookup: THILUC,
+      onSelect: function (suggest) {
+        var choosen = suggest.value;
+        $("#tlkcmp").val(choosen);
+      }
+    });
+
+$("#tlkcmt" ).autocomplete({
+      lookup: THILUC,
+      onSelect: function (suggest) {
+        var choosen = suggest.value;
+        $("#tlkcmt").val(choosen);
+      }
+    });
+
+$("#tlkmmp" ).autocomplete({
+      lookup: THILUC,
+      onSelect: function (suggest) {
+        var choosen = suggest.value;
+        $("#tlkmmp").val(choosen);
+      }
+    });
+
+$("#tlkmmt" ).autocomplete({
+      lookup: THILUC,
+      onSelect: function (suggest) {
+        var choosen = suggest.value;
+        $("#tlkmmt").val(choosen);
+      }
+    });
+
+$("#kcmp" ).autocomplete({
+      lookup: KINHCAU,
+      onSelect: function (suggest) {
+        var choosen = suggest.value;
+        $("#kcmp").val(choosen);
+      }
+    });
+
+$("#kcmt" ).autocomplete({
+      lookup: KINHCAU,
+      onSelect: function (suggest) {
+        var choosen = suggest.value;
+        $("#kcmt").val(choosen);
+      }
+    });
+
+
+$("#ktmp" ).autocomplete({
+      lookup: KINHLOAN,
+      onSelect: function (suggest) {
+        var choosen = suggest.value;
+        $("#ktmp").val(choosen);
+      }
+    });
+
+$("#ktmt" ).autocomplete({
+      lookup: KINHLOAN,
+      onSelect: function (suggest) {
+        var choosen = suggest.value;
+        $("#ktmt").val(choosen);
+      }
+    });
+
+
+
+$("#namp" ).autocomplete({
+      lookup: NHANAP,
+      onSelect: function (suggest) {
+        var choosen = suggest.value;
+        $("#namp").val(choosen);
+      }
+    });
+$("#namt" ).autocomplete({
+      lookup: NHANAP,
+      onSelect: function (suggest) {
+        var choosen = suggest.value;
+        $("#namt").val(choosen);
+      }
+    });
+
+
+function InDonThuoc(){
+  var z = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
+  var t = new Date(z);
+  var ngaygio =  "".concat(t.getHours(),":",t.getMinutes()," , ngày ",t.getDate(),"/",t.getMonth(),"/",t.getFullYear());
+  $("#ngaykham").html(ngaygio);
+  $("#don_donthuoc").html($("#donthuoc").html());
+  
+  var huonggq = $("#luachonkt option:selected").html() + " " + $("#thoigian").val()+ $("#donvithoigian option:selected").html() 
+                + "<br>Khám lại theo hẹn hoặc ngay khi có dấu hiệu bất thường!";
+  $("#ghichu").html(huonggq);
+ 
+  $("#don_tlkkmp").html($("#tlkkmp").val());
+  $("#don_tlkkmt").html($("#tlkkmt").val());
+  $("#don_tlklmp").html($("#tlklmp").val());
+  $("#don_tlklmt").html($("#tlklmt").val());
+  $("#don_tlkcmp").html($("#tlkcmp").val());
+  $("#don_tlkcmt").html($("#tlkcmt").val());
+  $("#don_namp").html($("#namp").val());
+  $("#don_namt").html($("#namt").val());
+  $("#maudon").collapse('show');
+}
+
+function DongDonThuoc(){
+  $("#maudon").collapse('hide');
+  $("#don_donkinh").html("");
+}
+
+function InDonKinh(){
+var kcmp = $("#kcmp").val();
+var ktmp = $("#ktmp").val();
+var trucmp = $("#trucmp").val();
+
+var kcmt = $("#kcmt").val();
+var ktmt = $("#ktmt").val();
+var trucmt = $("#trucmt").val();
+
+var donkinh = 
+`<table border="1px" style = "text-align:center">
+<tr>
+ <td>
+ <b>Mắt</b>
+ </td>
+ <td>
+ <b>Số kính cầu (Diop)</b>
+ </td>
+ <td>
+ <b>Số kính trụ (PD)</b>
+ </td>
+ <td>
+ <b>Trục loạn(&#176;)</b>
+ </td>
+</tr>
+<tr>
+ <td>
+ <b>Mắt phải</b>
+ </td>
+ <td>
+   ${kcmp}
+ </td>
+ <td>
+   ${ktmp}
+ </td>
+ <td>
+   ${trucmp}
+ </td>
+</tr>
+<tr>
+ <td>
+ <b>Mắt trái</b>
+ </td>
+ <td>
+   ${kcmt}
+ </td>
+ <td>
+   ${ktmt}
+ </td>
+ <td>
+   ${trucmt}
+ </td>
+</tr>
+</table>`;
+$("#don_donkinh").html(donkinh);
+InDonThuoc();
+}
+
+function DongDonKinh(){
+}
+
+
+function KetThucKham(){
+var txt;
+var r = confirm("Kết thúc khám cho BN này?");
+if (r == true) {
+  $("#ten").val("");
+  $("#tuoi").val("");
+  $("#diachi").val("");
+  $("#sdt").val("");
+  $("#cdMP").val("");$("#cdMT").val("");$("#cd2M").val("");$("#cdKhac").val("");
+  $("#tlkkmp").val("");$("#tlkkmt").val("");$("#tlklmp").val("");$("#tlklmt").val("");
+  $("#kcmp").val("");$("#ktmp").val("");$("#trucmp").val("");
+  $("#kcmt").val("");$("#ktmt").val("");$("#trucmt").val("");
+  $("#donthuoc").html("");
+  
+} else {
+  return false;
+}
+}
+
 
 </script>
 
+
+
 </html>
+
