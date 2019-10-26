@@ -318,7 +318,8 @@ input {
   
   	<button id = "indonthuoc" onclick="InDonThuoc()">In đơn thuốc</button>
 	<button id = "indonkinh" onclick="InDonKinh()">In đơn kính</button>
-	<button id = "indonkinh" onclick="KetThucKham()">Kết thúc khám</button>
+	<button id = "btnKetthuckham" onclick="KetThucKham()">Kết thúc khám</button>
+	<button id = "btnThanhtoan" onclick="InThanhToan()">In thanh toán</button>
   </div>
 
 <div>
@@ -433,12 +434,20 @@ input {
 <div style = "text-align: center;"><button onclick = "DongDonThuoc()">Đóng</button></div>
 </div>
 </div>
+
+
+
 </div>
  
- 
 
 
- </div>
+
+	<div id = "thanhtoan" class = "collapse"></div>
+		
+	</div>
+	
+
+
 
 
 </body>
@@ -759,14 +768,14 @@ $("#namt" ).autocomplete({
 function InDonThuoc(){
   var z = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
   var t = new Date(z);
-  var ngaygio =  "".concat(t.getHours(),":",t.getMinutes()," , ngày ",t.getDate(),"/",t.getMonth(),"/",t.getFullYear());
+  var ngaygio =  "".concat(t.getHours(),":",t.getMinutes()," ngày ",t.getDate(),"/",t.getMonth(),"/",t.getFullYear());
   $("#ngaykham").html(ngaygio);
   $("#don_donthuoc").html($("#donthuoc").html());
   
   var huonggq = "Ghi chú: " + $("#luachonkt option:selected").html() + " " + $("#thoigian").val()+ $("#donvithoigian option:selected").html() 
                 + "<br>Khám lại theo hẹn hoặc ngay khi có dấu hiệu bất thường!";
   $("#ghichu").html(huonggq);
- 
+  $("#don_gioi").html($("#gioi option:selected").html());
   $("#don_tlkkmp").html($("#tlkkmp").val());
   $("#don_tlkkmt").html($("#tlkkmt").val());
   $("#don_tlklmp").html($("#tlklmp").val());
@@ -858,6 +867,8 @@ if (r == true) {
   $("#kcmp").val("");$("#ktmp").val("");$("#trucmp").val("");
   $("#kcmt").val("");$("#ktmt").val("");$("#trucmt").val("");
   $("#donthuoc").html("");
+  DONTHUOC = [];
+  DONTHUOC2 = [];
   DongDonThuoc();
   
 } else {
@@ -865,6 +876,55 @@ if (r == true) {
 }
 }
 
+function PhanTich(s){
+var t = s.split(" ");
+var t1 = t[0];
+var t2 = t[2];
+return [t1, t2];
+}
+
+function InThanhToan(){
+var thanhtoan = "<table border = '1px'><tr><td style ='col-6'>Tên thuốc/vật tư</td><td style ='col-2'>Số lượng</td><td style ='col-2'>Giá 1 đv</td><td style ='col-4'>Giá thành</td></tr>";
+
+$.each( $(".clickMe"), function( key, value ) {
+ if(this.innerText != ""){
+    var t = this.innerText.split(" ");
+	var t1 = t[0];
+	var t2 = t[2];
+	var tmp = `<tr><td><input type = "text" class = "form-control" value = "${t1}"></td><td><input type = "text" class = "form-control" value = "${t2}"></td><td><input type = "text" class = "form-control"></td><td><input type = "text" class = "form-control"></td></tr>`;
+	thanhtoan += tmp;
+   }
+});
+
+var tmp = `
+<tr><td><input type = "text" class = "form-control"></td><td><input type = "text" class = "form-control"></td><td><input type = "text" class = "form-control"></td><td><input type = "text" class = "form-control"></td></tr>
+<tr><td><input type = "text" class = "form-control"></td><td><input type = "text" class = "form-control"></td><td><input type = "text" class = "form-control"></td><td><input type = "text" class = "form-control"></td></tr>
+<tr><td><input type = "text" class = "form-control"></td><td><input type = "text" class = "form-control"></td><td><input type = "text" class = "form-control"></td><td><input type = "text" class = "form-control"></td></tr>
+<tr><td><input type = "text" class = "form-control"></td><td><input type = "text" class = "form-control"></td><td><input type = "text" class = "form-control"></td><td><input type = "text" class = "form-control"></td></tr>
+<tr><td><input type = "text" class = "form-control"></td><td><input type = "text" class = "form-control"></td><td><input type = "text" class = "form-control"></td><td><input type = "text" class = "form-control"></td></tr>
+<tr><td>Tổng</td><td><input type = "text" class = "form-control" id = "tongsoluongvattu"></td><td></td><td><input type = "text" class = "form-control"></td></tr>
+</table>
+<button onclick = "TinhToanChiPhi()">Tính</button>
+<button onclick = "DongThanhToan()">Đóng</button>
+`;
+
+thanhtoan += tmp;
+
+console.log(thanhtoan);
+$("#thanhtoan").html(thanhtoan);
+$("#thanhtoan").collapse('show');
+
+}
+
+function TinhToanChiPhi(){
+/*
+$.each( $("#thanhtoan form-control"), function( key, value ) {
+ if(this.innerText != ""){
+    
+   }
+});
+*/
+}
 
 </script>
 
