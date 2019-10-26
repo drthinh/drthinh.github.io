@@ -503,13 +503,21 @@ var maQR = new QRCode("qrcode", {
     			$("#luuy").val()
     		);
     	$("#donthuoc").append("<li class = 'clickMe'>"+strThem+" </li>");
-    	$(".clickMe").click(function(){
-    	//$(this).text($(this).text() + "<br/>clicked")
-    	//console.log($(this).html())
-    	//console.log($(this).text())
 		
-    });
     })
+  
+    $("#donthuoc").on("click",".clickMe",function(e){
+    	//$(this).text($(this).text() + "<br/>clicked")
+		e.preventDefault();
+    	console.log($(this).html())
+    	//console.log($(this).text())
+		var r = confirm("Bạn có muốn xóa thuốc này không?");
+		if(r == true)
+		 this.remove();
+        });	 
+
+
+        
 	
 	$("#donvi").change(function(){
 		$("#donvi2").html($("#donvi option:selected").html());
@@ -850,6 +858,7 @@ if (r == true) {
   $("#kcmp").val("");$("#ktmp").val("");$("#trucmp").val("");
   $("#kcmt").val("");$("#ktmt").val("");$("#trucmt").val("");
   $("#donthuoc").html("");
+  DongDonThuoc();
   
 } else {
   return false;
