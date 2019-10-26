@@ -884,7 +884,7 @@ return [t1, t2];
 }
 
 function InThanhToan(){
-var thanhtoan = "<table border = '1px'><tr><td style ='col-6'>Tên thuốc/vật tư</td><td style ='col-2'>Số lượng</td><td style ='col-2'>Giá 1 đv</td><td style ='col-4'>Giá thành</td></tr>";
+var thanhtoan = "<table border = '1px' id ='bangthanhtoan'><tr><td style ='col-6'>Tên thuốc/vật tư</td><td style ='col-2'>Số lượng</td><td style ='col-2'>Giá 1 đv</td><td style ='col-4'>Giá thành</td></tr>";
 
 $.each( $(".clickMe"), function( key, value ) {
  if(this.innerText != ""){
@@ -924,10 +924,24 @@ $.each( $("#thanhtoan form-control"), function( key, value ) {
    }
 });
 */
+var tmp = $("#bangthanhtoan tr");
+var t = tmp.length();
+var last = tmp[t-1];
+var sosp = 0;
+var sotien = 0;
+$("#bangthanhtoan tr").each(function(){
+var ssp = parseFloat($(this).find("td:eq(2)"));
+var khoantien = ssp * parseFloat($(this).find("td:eq(1)"))
+$(this).find("td:eq(3)").val(khoantien.toString());
+sosp += ssp;
+sotien += khoantien;	
+});
+	
+last.find("td:eq(3)").val(sotien.toString());
+last.find("td:eq(1)").val(sosp.toString());	
 }
 
 </script>
-
 
 
 </html>
