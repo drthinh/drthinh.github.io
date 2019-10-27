@@ -23,6 +23,10 @@
 input {
     text-transform: capitalize;
 }
+ol {
+  margin: 15px; 
+  padding:0
+}
 .autocomplete-suggestions {
     text-align: left; cursor: default; border: 1px solid #ccc; border-top: 0; background: #fff; box-shadow: -1px 1px 3px rgba(0,0,0,.1);
 
@@ -42,7 +46,6 @@ input {
 	<script src="qr.js"></script>
 </head>
 <body>
-
 <div class="card">
  <div class="card-heading">Thông tin hành chính</div>
  <div class="card-body">
@@ -50,15 +53,15 @@ input {
   	<div class="row no-gutters">
   	<div class="col-8">
     <span class="badge badge-primary">Họ và tên</span>
-    <input class="form-control" id="ten" placeholder="Họ và tên">
+    <input class="form-control" id="ten" placeholder="Họ và tên" required>
     </div>
     <div class="col-2">
     <span class="badge badge-primary">Tuổi/ Năm sinh</span>
-    <input type = "number" class="form-control" id="tuoi" placeholder="Tuổi hoặc năm sinh">
+    <input type = "number" class="form-control" id="tuoi" placeholder="Tuổi hoặc năm sinh" required>
     </div>
 	<div class="col-2">
     <span class="badge badge-primary">Giới</span>
-   	<select class="form-control" id = "gioi">
+   	<select class="form-control" id = "gioi" required>
    		<option>Nam</option>
    		<option>Nữ</option>
 		<option>Khác</option>
@@ -69,7 +72,7 @@ input {
     <div class="row no-gutters">
   	<div class="col-8">
     <span class="badge badge-primary">Địa chỉ</span>
-    <input class="form-control" id="diachi" placeholder="Địa chỉ">
+    <input class="form-control" id="diachi" placeholder="Địa chỉ" required>
     </div>
     <div class="col-4">
     <span class="badge badge-primary">Số điện thoại</span>
@@ -86,11 +89,11 @@ input {
   	<div class="row no-gutters">
   	<div class="col-6">
     <span class="badge badge-primary">TL MP</span>
-    <input class="form-control" id="tlkkmp" placeholder="TL không kính MP">
+    <input class="form-control" id="tlkkmp" placeholder="TL không kính MP" required>
     </div>
     <div class="col-6">
     <span class="badge badge-primary">TL MT</span>
-    <input class="form-control" id="tlkkmt" placeholder="TL không kính MT">
+    <input class="form-control" id="tlkkmt" placeholder="TL không kính MT" required>
     </div>
     </div>
 	<div class="row no-gutters">
@@ -126,15 +129,15 @@ input {
 	
 	<div class="row no-gutters">
   	<div class="col-3">
-    <span class="badge badge-primary">Kính cầu MP</span>
+    <span class="badge badge-primary">Kính cầu MP(diop)</span>
     <input class="form-control" id="kcmp" placeholder="Số cầu">
     </div>
     <div class="col-3">
-    <span class="badge badge-primary">Kính trụ MP</span>
+    <span class="badge badge-primary">Kính trụ MP(PD)</span>
     <input class="form-control" id="ktmp" placeholder="Số trụ">
     </div>
 	<div class="col-3">
-    <span class="badge badge-primary">Trục</span>
+    <span class="badge badge-primary">Trục(&#176;)</span>
     <input class="form-control" id="trucmp" placeholder="Trục">
     </div>
 	<div class="col-3">
@@ -145,15 +148,15 @@ input {
 	
 	<div class="row no-gutters">
   	<div class="col-3">
-    <span class="badge badge-primary">Kính cầu MT</span>
+    <span class="badge badge-primary">Kính cầu MT(diop)</span>
     <input class="form-control" id="kcmt" placeholder="Số cầu">
     </div>
     <div class="col-3">
-    <span class="badge badge-primary">Kính trụ MT</span>
+    <span class="badge badge-primary">Kính trụ MT(PD)</span>
     <input class="form-control" id="ktmt" placeholder="Số trụ">
     </div>
 	<div class="col-3">
-    <span class="badge badge-primary">Trục</span>
+    <span class="badge badge-primary">Trục(&#176;)</span>
     <input class="form-control" id="trucmt" placeholder="Trục">
     </div>
 	<div class="col-3">
@@ -161,6 +164,26 @@ input {
     <input class="form-control" id="tlkmmt" placeholder="TL kính mới">
     </div>
     </div>
+	<div class="row no-gutters">
+	<div class="col-4">
+    <span class="badge badge-primary">Số Add(Diop)</span>
+    <input class="form-control" id="soAdd" placeholder="Số Add">
+    </div>
+	<div class="col-4">
+    <span class="badge badge-primary">PD(mm)</span>
+    <input class="form-control" id="PD" placeholder="Khoảng cách đồng tử">
+    </div>
+	<div class="col-4">
+    <span class="badge badge-primary">Loại kính</span>
+    <select class="form-control" id="loaikinh">
+	<option>Nhìn xa</option>
+	<option>Nhìn gần</option>
+	<option>Một tròng</option>
+	<option>Hai tròng</option>
+	<option>Đa tròng</option>
+	</select>
+    </div>
+	</div>
 
 </div>
 </div>
@@ -248,11 +271,11 @@ input {
    	<div class="col-2">
     <span class="badge badge-primary">Thời điểm</span>
     <select class="form-control" id = "thoidiem">
+	    <option></option>
    		<option>trong ngày</option>
    		<option>sau ăn</option>
    		<option>sau ăn sáng</option>
    		<option>trước khi ngủ</option>
-   		<option></option>
    	</select>
     </div>
     </div>
@@ -356,7 +379,7 @@ input {
         <tr style="border: none; padding: 0px;">
         	<td style="border: none; text-align: center; font-size: 13px;"> 
         	 <b>TÚ MINH</b><br/>
-			 <span style="font-size: 11px;">Đ/c:24 BTS-KĐT Văn Quán<br/>Hà Đông-Hà Nội</span>
+			 <span style="font-size: 11px;">Đ/c:24 BT5-KĐT Văn Quán<br/>Hà Đông-Hà Nội</span>
         	</td>
            
             <td style="border: none;">
@@ -372,9 +395,9 @@ input {
     </table>    
     <!-- Write HTML just like a web page -->
     <h4 align="center"><b>ĐƠN THUỐC</b></h4>
-    <p  style="line-height:1.6">Họ và tên: <span id = "don_ten"></span> &nbsp;&nbsp; Tuổi: <span id = "don_tuoi"></span> &nbsp;&nbsp;Giới: <span id = "don_gioi"></span><br/>
-    Địa chỉ: <span id = "don_diachi"></span> <br/>
-    Số điện thoại: <span id = "don_sdt"></span></p>
+    <p>Họ và tên: <span id = "don_ten"></span> &nbsp; Tuổi: <span id = "don_tuoi"></span> &nbsp;Giới: <span id = "don_gioi"></span></p>
+    <p>Địa chỉ: <span id = "don_diachi"></span></p>
+    <p>Số điện thoại: <span id = "don_sdt"></span></p>
     <table>
         <tr>
         	<td>
@@ -428,8 +451,19 @@ input {
 	<p style="text-align: right;">Hà Nội, <span id = "ngaykham"></span>&nbsp;&nbsp;&nbsp;</p>
 	<p style="text-align: right;">Bác sỹ khám bệnh&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 	<br/>
-	<p style="text-align: right;">Ths.BS Ngô Thị Hồng Thắm <br/>Sđt: 0983112382</p>
-	<p style="text-align: left; font-size: 11px; font-weight: bold;">Khám bệnh từ 5h - 9h tối<br/>Các ngày trong tuần</p>
+	<p style="text-align: right;">Ths.BS Ngô Thị Hồng Thắm <br/>Sđt: 0983.112.382</p>
+	<table style="text-align: left; font-size: 11px; font-weight: bold;">
+	<tr>
+	<td>Làm việc:</td>
+	<td>T2-T6:</td>
+	<td>17h - 21h</td>
+	</tr>
+	<tr>
+	<td></td>
+	<td>T7-CN:</td>
+	<td>07h - 21h</td>
+	</tr>
+	</table>
   </section>
 <div style = "text-align: center;"><button onclick = "DongDonThuoc()">Đóng</button></div>
 </div>
@@ -518,7 +552,7 @@ var maQR = new QRCode("qrcode", {
     $("#donthuoc").on("click",".clickMe",function(e){
     	//$(this).text($(this).text() + "<br/>clicked")
 		e.preventDefault();
-    	console.log($(this).html())
+    	//console.log($(this).html())
     	//console.log($(this).text())
 		var r = confirm("Bạn có muốn xóa thuốc này không?");
 		if(r == true)
@@ -578,7 +612,7 @@ function toTitleCase( str )
 {
    return str.split(/\s+/).map( s => s.charAt( 0 ).toUpperCase() + s.substring(1).toLowerCase() ).join( " " );
 }
-// Viết hoa chữ cái đầu tiên mỗi chữ
+// Viết hoa chữ cái đầu tiên mỗi chữ khi có dấu cách
 $('input').on('keyup', function(event) {
 if(event.keyCode == 32){
     var $t = $(this);
@@ -804,6 +838,18 @@ var kcmt = $("#kcmt").val();
 var ktmt = $("#ktmt").val();
 var trucmt = $("#trucmt").val();
 
+var tlkmmp = $("#tlkmmp").val();
+var tlkmmt = $("#tlkmmt").val();
+
+var soAdd = $("#soAdd").val();
+var kcdt = $("#PD").val();
+var loaikinh = $("#loaikinh option:selected").html();
+
+if(soAdd == "") soAdd = "x";
+if(kcdt == "") kcdt = "x";
+
+
+
 var donkinh = 
 `<table border="1px" style = "text-align:center">
 <tr>
@@ -848,7 +894,9 @@ var donkinh =
    ${trucmt}
  </td>
 </tr>
-</table>`;
+</table>
+<p>Số Add: ${soAdd};&nbsp;PD: ${kcdt};&nbsp;Loại kính: ${loaikinh}.</p>
+`;
 $("#don_donkinh").html(donkinh);
 InDonThuoc();
 }
@@ -887,24 +935,24 @@ return [t1, t2];
 }
 
 function InThanhToan(){
-var thanhtoan = "<table border = '1px' id ='bangthanhtoan'><tr><td style ='col-6'>Tên thuốc/vật tư</td><td style ='col-2'>Số lượng</td><td style ='col-2'>Giá 1 đv</td><td style ='col-4'>Giá thành</td></tr>";
+var thanhtoan = "<table border = '1px' id ='bangthanhtoan'><tr><td style ='col-6'>Tên thuốc/vật tư</td><td style ='col-2'>Số lượng</td><td style ='col-2'>Giá 1 đv (nghìn)</td><td style ='col-4'>Giá thành(nghìn)</td></tr>";
 
 $.each( $(".clickMe"), function( key, value ) {
  if(this.innerText != ""){
     var t = this.innerText.split(" ");
 	var t1 = t[0];
 	var t2 = t[2];
-	var tmp = `<tr><td><input type = "text" class = "form-control" value = "${t1}"></td><td><input type = "text" class = "form-control" value = "${t2}"></td><td><input type = "text" class = "form-control"></td><td><input type = "text" class = "form-control"></td></tr>`;
+	var tmp = `<tr><td><input type = "text" class = "form-control" value = "${t1}"></td><td><input type = "number" class = "form-control" value = "${t2}"></td><td><input type = "number" class = "form-control"></td><td><input type = "number" class = "form-control"></td></tr>`;
 	thanhtoan += tmp;
    }
 });
 
 var tmp = `
-<tr><td><input type = "text" class = "form-control value = ''"></td><td><input type = "text" class = "form-control value = '0'"></td><td><input type = "text" class = "form-control value = '0'"></td><td><input type = "text" class = "form-control value = '0'"></td></tr>
-<tr><td><input type = "text" class = "form-control value = ''"></td><td><input type = "text" class = "form-control value = '0'"></td><td><input type = "text" class = "form-control value = '0'"></td><td><input type = "text" class = "form-control value = '0'"></td></tr>
-<tr><td><input type = "text" class = "form-control value = ''"></td><td><input type = "text" class = "form-control value = '0'"></td><td><input type = "text" class = "form-control value = '0'"></td><td><input type = "text" class = "form-control value = '0'"></td></tr>
-<tr><td><input type = "text" class = "form-control value = ''"></td><td><input type = "text" class = "form-control value = '0'"></td><td><input type = "text" class = "form-control value = '0'"></td><td><input type = "text" class = "form-control value = '0'"></td></tr>
-<tr><td><input type = "text" class = "form-control value = ''"></td><td><input type = "text" class = "form-control value = '0'"></td><td><input type = "text" class = "form-control value = '0'"></td><td><input type = "text" class = "form-control value = '0'"></td></tr>
+<tr><td><input type = "text" class = "form-control" value = ''></td><td><input type = "number" class = "form-control" value = '0'></td><td><input type = "number" class = "form-control" value = '0'></td><td><input type = "number" class = "form-control" value = '0'></td></tr>
+<tr><td><input type = "text" class = "form-control" value = ''></td><td><input type = "number" class = "form-control" value = '0'></td><td><input type = "number" class = "form-control" value = '0'></td><td><input type = "number" class = "form-control" value = '0'></td></tr>
+<tr><td><input type = "text" class = "form-control" value = ''></td><td><input type = "number" class = "form-control" value = '0'></td><td><input type = "number" class = "form-control" value = '0'></td><td><input type = "number" class = "form-control" value = '0'></td></tr>
+<tr><td><input type = "text" class = "form-control" value = ''></td><td><input type = "number" class = "form-control" value = '0'></td><td><input type = "number" class = "form-control" value = '0'></td><td><input type = "number" class = "form-control" value = '0'></td></tr>
+<tr><td><input type = "text" class = "form-control" value = ''></td><td><input type = "number" class = "form-control" value = '0'></td><td><input type = "number" class = "form-control" value = '0'></td><td><input type = "number" class = "form-control" value = '0'></td></tr>
 <tr><td>Tổng</td><td><input type = "text" class = "form-control" id = "tongsoluongvattu"></td><td></td><td><input type = "text" class = "form-control"></td></tr>
 </table>
 <button onclick = "TinhToanChiPhi()">Tính</button>
@@ -919,13 +967,17 @@ $("#thanhtoan").collapse('show');
 
 }
 
+$(document).ready(function() {
+     
+});
+
 function TinhToanChiPhi(){
 var tmp = $("#bangthanhtoan tr");
 var t = tmp.length;
 var last = $("#bangthanhtoan tr").eq(t-1);
 var sosp = 0;
 var sotien = 0;
-$("#bangthanhtoan tr td:not(:first-child, :last-child)").each(function(){
+$("#bangthanhtoan tr").not(':first').not(':last').each(function(){
 var ssp = parseFloat($(this).find("td:eq(1)").find("input").val());
 if (ssp == NaN) ssp = 0;
 var khoantien = ssp * parseFloat($(this).find("td:eq(2)").find("input").val())
