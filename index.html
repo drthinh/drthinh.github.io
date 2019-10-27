@@ -273,7 +273,7 @@ input {
 	</div>
 	<div class="card-body" id = "khungdonthuoc">
 
-	  <ol id = "donthuoc" class ="no-gutters">
+	  <ol id = "donthuoc">
   		
 	  </ol>
 		
@@ -372,11 +372,9 @@ input {
     </table>    
     <!-- Write HTML just like a web page -->
     <h4 align="center"><b>ĐƠN THUỐC</b></h4>
-    <p>Họ và tên: <span id = "don_ten"></span> Tuổi: <span id = "don_tuoi"></span> <br/>
-       Giới: <span id = "don_gioi"></span>
-       Địa chỉ: <span id = "don_diachi"></span><br/>
-       Số điện thoại: <span id = "don_sdt"></span>
-    </p>
+    <p  style="line-height:1.6">Họ và tên: <span id = "don_ten"></span> &nbsp;&nbsp; Tuổi: <span id = "don_tuoi"></span> &nbsp;&nbsp;Giới: <span id = "don_gioi"></span><br/>
+    Địa chỉ: <span id = "don_diachi"></span> <br/>
+    Số điện thoại: <span id = "don_sdt"></span></p>
     <table>
         <tr>
         	<td>
@@ -582,8 +580,11 @@ function toTitleCase( str )
 }
 // Viết hoa chữ cái đầu tiên mỗi chữ
 $('input').on('keyup', function(event) {
+if(event.keyCode == 32){
     var $t = $(this);
     $t.val( toTitleCase( $t.val() ) );
+    }
+    
 });
 	
 $("#ten").change(function(){
@@ -899,11 +900,11 @@ $.each( $(".clickMe"), function( key, value ) {
 });
 
 var tmp = `
-<tr><td><input type = "text" class = "form-control"></td><td><input type = "text" class = "form-control"></td><td><input type = "text" class = "form-control"></td><td><input type = "text" class = "form-control"></td></tr>
-<tr><td><input type = "text" class = "form-control"></td><td><input type = "text" class = "form-control"></td><td><input type = "text" class = "form-control"></td><td><input type = "text" class = "form-control"></td></tr>
-<tr><td><input type = "text" class = "form-control"></td><td><input type = "text" class = "form-control"></td><td><input type = "text" class = "form-control"></td><td><input type = "text" class = "form-control"></td></tr>
-<tr><td><input type = "text" class = "form-control"></td><td><input type = "text" class = "form-control"></td><td><input type = "text" class = "form-control"></td><td><input type = "text" class = "form-control"></td></tr>
-<tr><td><input type = "text" class = "form-control"></td><td><input type = "text" class = "form-control"></td><td><input type = "text" class = "form-control"></td><td><input type = "text" class = "form-control"></td></tr>
+<tr><td><input type = "text" class = "form-control value = ''"></td><td><input type = "text" class = "form-control value = '0'"></td><td><input type = "text" class = "form-control value = '0'"></td><td><input type = "text" class = "form-control value = '0'"></td></tr>
+<tr><td><input type = "text" class = "form-control value = ''"></td><td><input type = "text" class = "form-control value = '0'"></td><td><input type = "text" class = "form-control value = '0'"></td><td><input type = "text" class = "form-control value = '0'"></td></tr>
+<tr><td><input type = "text" class = "form-control value = ''"></td><td><input type = "text" class = "form-control value = '0'"></td><td><input type = "text" class = "form-control value = '0'"></td><td><input type = "text" class = "form-control value = '0'"></td></tr>
+<tr><td><input type = "text" class = "form-control value = ''"></td><td><input type = "text" class = "form-control value = '0'"></td><td><input type = "text" class = "form-control value = '0'"></td><td><input type = "text" class = "form-control value = '0'"></td></tr>
+<tr><td><input type = "text" class = "form-control value = ''"></td><td><input type = "text" class = "form-control value = '0'"></td><td><input type = "text" class = "form-control value = '0'"></td><td><input type = "text" class = "form-control value = '0'"></td></tr>
 <tr><td>Tổng</td><td><input type = "text" class = "form-control" id = "tongsoluongvattu"></td><td></td><td><input type = "text" class = "form-control"></td></tr>
 </table>
 <button onclick = "TinhToanChiPhi()">Tính</button>
@@ -919,28 +920,24 @@ $("#thanhtoan").collapse('show');
 }
 
 function TinhToanChiPhi(){
-/*
-$.each( $("#thanhtoan form-control"), function( key, value ) {
- if(this.innerText != ""){
-    
-   }
-});
-*/
 var tmp = $("#bangthanhtoan tr");
 var t = tmp.length;
-var last = tmp[t-1];
+var last = $("#bangthanhtoan tr").eq(t-1);
 var sosp = 0;
 var sotien = 0;
-$("#bangthanhtoan tr").each(function(){
-var ssp = parseFloat($(this).find("td:eq(2)"));
-var khoantien = ssp * parseFloat($(this).find("td:eq(1)"))
-$(this).find("td:eq(3)").val(khoantien.toString());
+$("#bangthanhtoan tr td:not(:first-child, :last-child)").each(function(){
+var ssp = parseFloat($(this).find("td:eq(1)").find("input").val());
+if (ssp == NaN) ssp = 0;
+var khoantien = ssp * parseFloat($(this).find("td:eq(2)").find("input").val())
+if (khoantien == NaN) khoantien = 0;
+$(this).find("td:eq(3)").find("input").val(khoantien.toString());
 sosp += ssp;
 sotien += khoantien;	
+console.log(sosp, sotien, $(this).find("td:eq(0)").find("input").val(), $(this).find("td:eq(1)").find("input").val(), $(this).find("td:eq(2)").val(), $(this).find("td:eq(3)").val());
 });
 	
-last.find("td:eq(3)").val(sotien.toString());
-last.find("td:eq(1)").val(sosp.toString());	
+last.find("td:eq(3)").find("input").val(sotien.toString());
+last.find("td:eq(1)").find("input").val(sosp.toString());	
 }
 
 </script>
