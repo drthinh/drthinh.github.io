@@ -613,13 +613,12 @@ function toTitleCase( str )
    return str.split(/\s+/).map( s => s.charAt( 0 ).toUpperCase() + s.substring(1).toLowerCase() ).join( " " );
 }
 // Viết hoa chữ cái đầu tiên mỗi chữ khi có dấu cách
-$('input').on('keyup', function(event) {
-if(event.keyCode == 32){
-    var $t = $(this);
-    $t.val( toTitleCase( $t.val() ) );
-    }
-    
-});
+//$('input').on('keyup', function(event) {
+//if(event.keyCode == 32){
+//    var $t = $(this);
+//    $t.val( toTitleCase( $t.val() ) );
+//    }
+    //});
 	
 $("#ten").change(function(){
 $("#don_ten").html($("#ten").val());
@@ -803,11 +802,22 @@ $("#namt" ).autocomplete({
 
 
 function InDonThuoc(){
+  
+  $('input[type="text"]').each(function() {
+    var $t = $(this);
+    $t.val( toTitleCase( $t.val() ));
+  });
+
   var z = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
   var t = new Date(z);
-  var ngaygio =  "".concat(t.getHours(),":",t.getMinutes()," ngày ",t.getDate(),"/",t.getMonth(),"/",t.getFullYear());
+  var m = parseInt(t.getMonth())+1;
+  m = m.toString();
+  
+  var ngaygio =  "".concat(t.getHours(),":",t.getMinutes()," ngày ",t.getDate(),"/",m,"/",t.getFullYear());
   $("#ngaykham").html(ngaygio);
   $("#don_donthuoc").html($("#donthuoc").html());
+  $("#maKB").html("".concat(t.getFullYear(),m,t.getDate()));
+  maQR.makeCode("".concat(t.getFullYear(),m,t.getDate()));
   
   var huonggq = "Ghi chú: " + $("#luachonkt option:selected").html() + " " + $("#thoigian").val()+ $("#donvithoigian option:selected").html() 
                 + "<br>Khám lại theo hẹn hoặc ngay khi có dấu hiệu bất thường!";
