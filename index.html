@@ -684,10 +684,9 @@ var cdmt = "MT: "+$("#cdMT").val();
 var cd2m = "2M: "+$("#cd2M").val();
 var cdkhac = $("#cdKhac").val();
 
-if (cdmp != "") cdmp = cdmp+"\\ ";
-if (cdmt != "") cdmt = cdmt+"\\ ";
-if (cd2m != "") cd2m = cd2m+"\\ ";
-if (cd2m == "") cd2m = "";
+if (cdmp != "MP: ") cdmp = cdmp+"\\ "; else cdmp = "";
+if (cdmt != "MT: ") cdmt = cdmt+"\\ "; else cdmt = "";
+if (cd2m != "2M: ") cd2m = cd2m+"\\ "; else cd2m = "";
 
 var r = "Chẩn đoán: " + cdmp + cdmt + cd2m + cdkhac;
 $("#don_chandoan").html(r);
