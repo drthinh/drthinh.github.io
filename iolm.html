@@ -1174,7 +1174,7 @@ function CalcMyAge(){
 
 <div name="FrmIOLData" class="card"> 
  
-		<input type="text" name="IOLblank" id="idIOLblank" value="" class = "form-control"> 
+		<input type="text" name="IOLblank" id="idIOLblank" value="" class = "form-control" readonly style="color: blue;"> 
 			
     	<select name="IOLPick" id ="idIOLPick" onchange="FillConstants()" class = "form-control">
     		
@@ -1400,7 +1400,7 @@ function CalcMyAge(){
 	var ua = navigator.userAgent.toLowerCase();
 	var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
 	if(isAndroid) {
-	if(confirm('Bạn có muốn tải phiên bản Android về điện thoại?') == true)
+	 if(confirm('Bạn có muốn tải phiên bản Android về điện thoại?') == true)
         window.location = 'https://drive.google.com/open?id=1JTHfftgL8BHHF8sPWOSKzOJLKPn9L6Qf';
 }
 	</script>
