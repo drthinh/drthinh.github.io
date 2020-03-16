@@ -48,5 +48,13 @@ a:active {
 <h2>8. <a href="help.html">Thông tin</a></h2> 
 <h2>9. <a href="setting.html">Công cụ</a></h2> 
 </div>
+<script>
+	var ua = navigator.userAgent.toLowerCase();
+	var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
+	if(isAndroid) {
+	 if(confirm('Bạn có muốn tải phiên bản Android về điện thoại?') == true)
+        window.location = 'https://github.com/drthinh/drthinh.github.io/releases/download/1.0/congcunhankhoa.apk';
+}
+	</script>
 </body>
 </html>
