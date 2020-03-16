@@ -1,0 +1,1036 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- Trang gốc http://www.eyecalcs.com/WEBCALCS/IOLcalc/IOL.html -->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable = no">
+  <link rel="stylesheet" href="bootstrap.min.css">
+ 
+<title>Tính công suất IOL v1.2</title>
+<h3 align="center">TÍNH CÔNG SUẤT IOL</h3>
+<style type="text/css">
+	/*eventually put all CSS in isolated file for all web pages*/, 
+.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+  > .col,
+  > [class*="col-"] {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+* {
+      font-family: "Times New Roman", Times, sans-serif;
+    }
+input {
+    text-transform: capitalize;
+}
+ol {
+  margin: 15px; 
+  padding:0
+}
+	.imgcenter {
+ 			 display: block;
+ 			 margin-left: auto;
+ 			 margin-right: auto;
+ 			 width: 100%;
+			} 		
+			
+</style> 
+<script src="jquery-2.2.1.min.js"></script>
+<script src="bootstrap.min.js"></script>
+<script type="text/javascript">
+
+
+//scripting placed in HEADING section
+
+//var jg = new jsGraphics();
+
+function SelectAll(MyBox){ //select all text in textbox
+	//document.getElementById("TargRx").select();
+	document.getElementById(MyBox).select();
+	}
+	
+function SetFocus(MyBox){
+	document.getElementById(MyBox).focus();
+	}	
+	
+function RoundToSpec(MyNum, RoundTo){
+	//rounds given number to next highest RoundTo number
+	//used to calc the next highest IOL power to Plano
+	var Divis = MyNum / RoundTo;
+	var TheAns;
+	
+	TheAns = (Math.ceil(Divis))*RoundTo;
+	//alert("Divis is " + Divis);
+	//alert("Ceil is " + Math.ceil(Divis));
+	//alert("TheAns is " + TheAns);
+	return TheAns;
+}   
+   
+function CalcMySF(){   //calc SF from A constant
+   
+   	var MyAcon = parseFloat($("#idAconst").val());
+   	var My_SF=(MyAcon*0.5663) - 65.600;
+   	$("#idSF").val(My_SF.toFixed(2));
+   	}
+   	
+function CalcMypACD(){   //calc pACD from A constant
+   
+   	var My_Acon = parseFloat($("#idAconst").val());
+   	var My_pACD = ((My_Acon * 0.5663) - 65.600 +3.595) / 0.9704;
+   	$("#idpACD").val(My_pACD.toFixed(2));   	
+   	}
+   	
+function CalcMyHag_a0(){  
+   
+   	var My_Acon = parseFloat($("#idAconst").val());   	//get A constant
+    var My_AL = parseFloat($("#idAL").val());  //get axial length data  
+   $("#idHag_a1").val(0.4);  //write in the default values
+   $("#idHag_a2").val(0.1);  //write in the default values
+  	
+   	var My_ACDconst = 0.62467 * My_Acon - 68.747; //calculate ACD constant from A constant   	
+   	var My_a0 = My_ACDconst - 0.4 * 3.37 - 0.1 * 23.39;  //calculate default a0
+   	
+   	$("#idHag_a0").val(My_a0.toFixed(2));
+   	}   	
+   
+function WriteEmmCalcs(ident, text){
+	var MyElement = document.getElementById(ident);
+	with(MyElement){	   
+	          firstChild.nodeValue = text;   
+	          //appendChild(document.createTextNode(text));    
+       		  style.fontFamily = "arial";
+       		  style.color = "gray";
+       		  style.visibility = "visible";
+       		  }	   	
+   }
+   
+function ClearEmmCalcs(){
+		
+	document.getElementById("SRKTresult").firstChild.nodeValue = "";	
+	document.getElementById("Hollresult").firstChild.nodeValue = "";	
+	document.getElementById("Hoffresult").firstChild.nodeValue = "";
+	document.getElementById("Haigisresult").firstChild.nodeValue = "";
+	ClearTable();
+	IOLtipsDisappear();
+	SetFocus("idAconst");
+	
+   }	   	
+
+
+function MainCalc() {
+	var MyK1 = parseFloat($("#idK1").val());
+	var MyK2 = parseFloat($("#idK2").val());
+	var MyAL = parseFloat($("#idAL").val());
+	
+	var MySF = parseFloat($("#idSF").val());
+	var MypACD= parseFloat($("#idpACD").val());
+	var MyAconst = parseFloat($("#idAconst").val());
+	
+	var MyACD= parseFloat($("#idACD").val()); //used for Haigis calculation
+	
+	var MyA0= parseFloat($("#idHag_a0").val());
+	var MyA1= parseFloat($("#idHag_a1").val());
+	var MyA2= parseFloat($("#idHag_a2").val());
+	
+	var MyTargRx = parseFloat($("#idTargRx").val());
+	var MyAxis1 = parseFloat($("#idA1").val());
+	var MyAxis2 = parseFloat($("#idA2").val());
+	
+	var Kavg = (MyK1+MyK2)/2;
+	
+	DrawAllScales(MyAL, Kavg, MyACD);
+
+	$("#idSRK").html((MyAconst-2.5*MyAL-0.9*Kavg).toFixed(2));
+	
+	var srkIIAConst = MyAconst;
+	if (MyAL<20.0) {srkIIAConst += 1.5;}
+	if ((MyAL>=20.0)&&(MyAL<21.0)) {srkIIAConst += 1.0;}
+	if ((MyAL>=21.0)&&(MyAL<22.0)) {srkIIAConst += 0.5;}
+	if ((MyAL>=24.5)&&(MyAL<26.0)) {srkIIAConst -= 1.0;}
+	if (MyAL>26.0) {srkIIAConst -= 1.5;}
+
+	$("#idSRK2").html((srkIIAConst-2.5*MyAL-0.9*Kavg).toFixed(2));
+	
+	WriteToTable(1,1,MyAconst.toFixed(2),"green");	
+	WriteToTable(1,2,MySF.toFixed(2),"green");
+	WriteToTable(1,3,MypACD.toFixed(2),"green");
+	WriteToTable(1,4,MyA0.toFixed(3) + ", " + MyA1.toFixed(3) + ", " + MyA2.toFixed(3),"green");		
+	
+	var BigAxis;
+	
+	if(MyK1 >= MyK2){
+		BigAxis = MyAxis1;
+		}
+	else 
+		{
+		BigAxis = MyAxis2;
+		}
+		
+	var TheCyl = Math.abs(MyK1 - MyK2);
+	var TheR = (337.5 / MyK1 + 337.5 / MyK2) / 2;
+	
+	var cylStr = "CYL:  " + TheCyl.toFixed(2) + " @ " + BigAxis + "\u00B0 \u00A0 \u00A0 \u00A0 Kavg = " + Kavg.toFixed(2) + " D (" + TheR.toFixed(2) + " mm)";	
+	
+	var MyElement = document.getElementById("CylAmount");
+	   with(MyElement){	   
+	          firstChild.nodeValue = cylStr;   
+	          //appendChild(document.createTextNode(text));    
+       		  style.fontFamily = "arial";
+       		  style.color = "gray";
+       		  style.visibility = "visible";
+       		  }	  
+	
+
+	var HollValue = HolladayIOL(MyK1, MyK2, MyAL, MySF, MyTargRx);
+	var HoffValue = HofferQiol(MyK1, MyK2, MyAL, MypACD, MyTargRx);	
+	var SRKTValue = SRKtIOL(MyK1, MyK2, MyAL, MyAconst, MyTargRx);	
+	var HaigisValue = HaigisIOL(MyK1, MyK2, MyAL, MyAconst, MyACD, MyTargRx, MyA2, MyA1, MyA0);	
+	
+	var SRKTVal = SRKTValue.toFixed(2);
+	var HoffVal = HoffValue.toFixed(2);
+	var HollVal = HollValue.toFixed(2);
+	var HaigisVal = HaigisValue.toFixed(2);
+	
+	WriteEmmCalcs("SRKTresult", "SRK/T IOL:  " + SRKTVal);
+	WriteEmmCalcs("Hoffresult", "Hoff IOL:  " + HoffVal);
+	WriteEmmCalcs("Hollresult", "Holl IOL:  " + HollVal);	
+	WriteEmmCalcs("Haigisresult", " Haigis IOL:  " + HaigisVal);	
+
+	var CenterIOL = 0;
+	var MySpec = ChooseRounding();
+	CenterIOL = RoundToSpec(HollValue, MySpec);
+	
+	IOLarray = new Array(7);//array to store table IOLs		
+	//fill in the table IOLs, centered around the rounded, Holladay emmetropic IOL
+	for(i = 0; i < 7; i++){
+		var TheIOL = CenterIOL + MySpec*(3)
+		IOLarray[i] = TheIOL; //fill the array with these IOL values to use later
+		WriteToTable(i+2,0,IOLarray[i].toFixed(2),"blue");
+		CenterIOL -= MySpec;	
+	}	
+	
+	for(i = 0; i < 7; i++){
+	
+		var HollRxCalc = Holl(MyK1, MyK2, MyAL, MySF, IOLarray[i]);
+		var HoffRxCalc = HoffQ(MyK1, MyK2, MyAL, MypACD, IOLarray[i]);
+		var SRKTRxCalc = SRK_T(MyK1, MyK2, MyAL, MyAconst, IOLarray[i]);
+		var HaigisRxCalc = HaigisRx(MyK1, MyK2, MyAL, MyAconst, MyACD, IOLarray[i], MyA2, MyA1, MyA0);
+		
+		WriteToTable(i+2, 1, SRKTRxCalc.toFixed(2), "black");		
+		WriteToTable(i+2, 2, HollRxCalc.toFixed(2), "black");		
+		WriteToTable(i+2, 3, HoffRxCalc.toFixed(2), "black");
+		WriteToTable(i+2, 4, HaigisRxCalc.toFixed(2), "black");		
+	}	
+
+	SeeTable();
+	SetFocus("id_IOLTable");	
+	
+ 	//alert(HaigisIOL(45, 23, 118, 3, 0, 0.1, 0.4, 1.273) + "," + HaigisValue);
+ 	SeeImage();
+}
+
+function SeeImage(){
+	document.getElementById("id_Image").style.visibility="visible";
+}
+
+function SeeTable(){
+	//document.getElementById("id_IOLTable").style.visibility="visible";
+	$("#id_IOLTable").show();
+}
+function ClearTable(){
+	//clears IOL table of all calc values
+	for(r = 1; r < 9; r++){	//ROWS
+		for(c = 0; c < 5; c++){	//COLS
+		//i=3;
+		//j=1;
+			WriteToTable(r, c, "N/A", "black");			
+			}
+		}
+	WriteToTable(1, 0, "x", "white");	//space in cell 1, 0
+}
+
+
+
+//-->
+</script>	
+
+<script type="text/javascript">
+
+//IOL Calcs
+
+function HaigisIOL(K1, K2, AL, Aconst, ACDmeas, REF, a2, a1, a0){
+
+    //IOL calc according to Haigis (GOOGLE this for ref; Warren Hill's spreadsheet)
+    var RC; //radius of curvature for cornea (converted from K//s)
+    var nC; //fudged index of refr for cornea
+    var n; //index of refraction for aqueous and vitreous
+    var meanACD;
+    var meanAL;
+    var d; //optical ACD
+    var Vertex; //vertex distance for refraction
+    var DC; //refractive corneal power
+    var z;
+    var ACDconst;
+
+	var R1 = 337.5 / K1;
+	var R2 = 337.5/ K2;	
+    RC = (R1 + R2)/2; // Radius of Curvature	
+	
+    nC = 1.3315;
+    n = 1.336 * 1000;
+    meanACD = 3.37;
+    meanAL = 23.39;
+    Vertex = 12.5 / 1000;
+    ACDconst = 0.62467 * Aconst - 68.747; //calculate ACD constant from A constant
+
+    //if a0 is null (not entered) then use calculated value
+    //if(!a0){
+        //a1 = 0.4;
+        //a2 = 0.1;
+        //a0 = ACDconst - a1 * meanACD - a2 * meanAL;
+    //}
+    
+    d = a0 + a1 * ACDmeas + a2 * AL;
+
+    DC = (1000 * (nC - 1)) / RC;
+    z = DC + (REF / (1 - REF * Vertex));
+
+    return ((n / (AL - d)) - (n / ((n / z) - d)));
+}
+
+function HaigisRx(K1, K2, AL, Aconst, ACDmeas, IOL, a2, a1, a0){
+
+    //calculate Rx, given IOL
+    var RC; //radius of curvature for cornea (converted from Ks)
+    var nC; //fudged index of refr for cornea
+    var n; //index of refraction for aqueous and vitreous
+    var meanACD;
+    var meanAL;
+    var d; //optical ACD
+    var Vertex; //vertex distance for refraction
+    var DC; //refractive corneal power
+    var ACDconst;
+    
+    var qTOP;
+    var qBOTTOM;
+    var q;
+    var RxTOP;
+    var RxBOTTOM;
+    var dBC;
+        
+    var R1 = 337.5 / K1;
+	var R2 = 337.5/ K2;	
+    RC = (R1 + R2)/2; // Radius of Curvature	
+	
+    nC = 1.3315;
+    n = 1.336 * 1000;
+    meanACD = 3.37;
+    meanAL = 23.39;
+    Vertex = 12.5 / 1000;
+    ACDconst = 0.62467 * Aconst - 68.747; //calculate ACD constant from A constant
+    dBC = 12.5 / 1000;
+
+   //if a0 is null (not entered) then use calculated value
+    //if(!a0){
+        //a1 = 0.4;
+        //a2 = 0.1;
+        //a0 = ACDconst - a1 * meanACD - a2 * meanAL;
+    //}
+
+    d = a0 + a1 * ACDmeas + a2 * AL;
+
+    DC = (1000 * (nC - 1)) / RC;
+       
+    qTOP = n * (n - IOL * (AL - d));
+    qBOTTOM = n * (AL - d) + d * (n - IOL * (AL - d));
+    q = qTOP / qBOTTOM;
+    
+    RxTOP = q - DC;
+    RxBOTTOM = 1 + dBC * (q - DC);
+
+    return (RxTOP / RxBOTTOM);
+}
+
+function SRK_T(K1, K2, AL, ACONACD, IOL){
+         //return Rx from a given IOL
+         //revised 7/16/00
+         //JCatRefrSurg May 1990, p.333-40
+
+	var Na;   //refractive index aqueous
+	var NC;   //refractive index cornea
+	var R;  //cornea radius of curvature
+	var R1;
+	var R2;
+	var RETHICK;   //retinal thickness
+	var ACDSRK;   //ACD constant for SRK formula
+	var LCOR;   //axial length with long eye correction
+	var Cw;   //corneal width
+	var H;   //corneal dome height
+	var ACD;   //computed postop ACD
+	var NCM1;   //NC minus 1
+	var top;   //numerator of big equation
+	var bottom;   //denominator of big equation
+	var Offset;   //difference between IOL vs. natural lens to cornea
+	var LOPT;   //optical axial length
+	var V;  //vertex distance
+	var TestForNeg;
+	var Kav;
+
+	Na = 1.336;
+	NC = 1.333;
+	
+	//need to average Ks AFTER conversion to Radius of Curvature!!
+	R1 = 337.5 / K1;
+	R2 = 337.5 / K2;
+	R = (R1 + R2) / 2;
+	Kav = 337.5 / R;
+	
+	V = 12; //vertex distance
+
+	RETHICK = 0.65696 - 0.02029 * AL;
+	LOPT = AL + RETHICK;
+	NCM1 = NC - 1;
+
+	if(ACONACD > 100){
+			   ACDSRK = ACONACD * 0.62467 - 68 - 0.74709;
+	}
+	else ACDSRK = ACONACD;
+
+	Offset = ACDSRK - 3.3357;
+
+	if(AL <= 24.2){
+		  LCOR = AL;
+	}
+	else LCOR = -3.446 + 1.716 * AL - 0.0237 * AL * AL;
+
+	Cw = -5.40948 + 0.58412 * LCOR + 0.098 * Kav;
+
+	TestForNeg = R * R - ((Cw * Cw) / 4);
+
+	if(TestForNeg < 0){
+		 TestForNeg = 0;
+	}
+	//NOTE square root "SQRT" in Excel is the "Sqr" equivalent in VBA!!
+	H = R - Math.sqrt(TestForNeg);
+
+	if(H > 5.5){
+		 H = 5.5;
+	}
+
+	ACD = H + Offset;
+
+	top = 1000 * Na * (Na * R - NCM1 * LOPT) - IOL * (LOPT - ACD) * (Na * R - NCM1 * ACD);
+	bottom = (Na * (V * (Na * R - NCM1 * LOPT) + LOPT * R) - 0.001 * IOL * (LOPT - ACD) * (V * (Na * R - NCM1 * ACD) + ACD * R));
+
+	return (top / bottom);
+}
+
+function SRKtIOL(K1, K2, AL, ACONACD, REFTG){
+         //revised 7/16/00
+         //return IOL from a given Rx
+         //JCatRefrSurg May 1990, p.333-40
+	var Na; //refractive index aqueous
+	var NC; //refractive index cornea
+	var R1; //cornea radius of curvature
+	var R2;
+	var R;
+	var RETHICK; //retinal thickness
+	var ACDSRK; //ACD constant for SRK formula
+	var LCOR; //axial length with long eye correction
+	var Cw; //corneal width
+	var H; //corneal dome height
+	var ACD; //computed postop ACD
+	var NCM1; //NC minus 1
+	var top; //numerator of big equation
+	var bottom; //denominator of big equation
+	var Offset; //difference between IOL vs. natural lens to cornea
+	var LOPT; //optical axial length
+	var V; //vertex distance
+	var TestForNeg;
+	var Kav;
+
+	Na = 1.336;
+	NC = 1.333;
+	
+	//need to average Ks AFTER conversion of each to Radius of cuvature!!
+	R1 = 337.5 / K1;
+	R2 = 337.5 / K2;
+	R = (R1 + R2) / 2;
+	Kav = 337.5 / R;
+	
+	V = 12; //vertex distance
+
+	RETHICK = 0.65696 - 0.02029 * AL;
+	LOPT = AL + RETHICK;
+	NCM1 = NC - 1;
+
+	if(ACONACD > 100){
+			   ACDSRK = ACONACD * 0.62467 - 68 - 0.74709;
+	}
+
+	if(ACONACD <= 100){
+			   ACDSRK = ACONACD;
+	} 
+
+	Offset = ACDSRK - 3.3357;
+
+	if(AL <= 24.2){
+		  LCOR = AL;
+		  }
+	else LCOR = -3.446 + 1.716 * AL - 0.0237 * AL * AL;
+
+	Cw = -5.40948 + 0.58412 * LCOR + 0.098 * Kav;
+
+	TestForNeg = R * R - ((Cw * Cw) / 4);
+
+	if(TestForNeg < 0){
+		  TestForNeg = 0;
+	}
+	//NOTE square root "SQRT" in Excel is the "Sqr" equivalent in VBA!!
+	H = R - Math.sqrt(TestForNeg);
+
+	if(H > 5.5){
+		 H = 5.5;
+	}
+	
+	ACD = H + Offset;
+
+	top = 1000 * Na * (Na * R - NCM1 * LOPT - 0.001 * REFTG * (V * (Na * R - NCM1 * LOPT) + LOPT * R));
+	bottom = (LOPT - ACD) * (Na * R - NCM1 * ACD - 0.001 * REFTG * (V * (Na * R - NCM1 * ACD) + ACD * R));
+
+	return (top / bottom);
+}
+
+function HofferQiol(K1, K2, A, pACD, Rx){
+	//return IOL from a given Rx
+	//revised 9/24/02  	
+
+	var ACD;
+	var MyPi;
+	var M;
+	var G;
+	var R;
+	var Ax;
+	var Ax = A; //store measured axial length prior to modification
+	  
+	//need to average Ks AFTER conversion of each to Radius of cuvature!!
+	var R1 = 337.5 / K1;
+	var R2 = 337.5 / K2;
+	var R = (R1 + R2) / 2;
+	var K = 337.5 / R;
+
+	//MyPi = 3.14159265358979;
+	var MyPi = Math.PI;
+	R = Rx / (1 - 0.012 * Rx); //adjust for vertex distance of 12mm
+
+	if(A <= 23){
+		M = 1;
+		G = 28;
+		}
+	else
+		{
+		M = -1;
+		G = 23.5;
+		}
+
+	if(A > 31){
+		A = 31;
+	    }
+	  
+	if (A < 18.5){
+		A = 18.5;
+	    }
+
+	ACD = pACD + 0.3 * (A - 23.5) + (Math.tan(K * MyPi / 180))*(Math.tan(K * MyPi / 180)) + (0.1 * M * ((23.5 - A)*(23.5 - A)) * (Math.tan(0.1 * ((G - A)*(G - A)) * MyPi / 180))) - 0.99166;
+
+	var ans =  ((1336 / (Ax - ACD - 0.05)) - (1.336 / ((1.336 / (K + R)) - ((ACD + 0.05) / 1000))));
+	return ans;
+}
+
+function HoffQ(K1, K2, A, pACD, P){
+    //return Rx from a given IOL
+    //revised 9/24/02
+
+    var ACD;
+	var MyPi ;
+	var CornealPlaneRx;
+	var M;
+	var G;
+	var Ax; //axial length before modification
+	
+	//need to average Ks AFTER conversion of each to Radius of cuvature!!
+	var R1 = 337.5 / K1;
+	var R2 = 337.5 / K2;
+	var R = (R1 + R2) / 2;
+	var K = 337.5 / R;	  	  
+
+    Ax = A; //store measured axial length prior to modification
+
+    //MyPi = 3.14159265358979;
+    MyPi = Math.PI;
+
+    if(A <= 23){
+		M = 1;
+		G = 28;
+    }
+    else {
+	   M = -1;
+	   G = 23.5;
+    }
+
+    if(A > 31){
+		A = 31;
+    }
+    if(A < 18.5){
+		A = 18.5;
+    }
+
+    ACD = pACD + 0.3 * (A - 23.5) + (Math.tan(K * MyPi / 180))*(Math.tan(K * MyPi / 180)) + (0.1 * M * ((23.5 - A)*(23.5 - A)) * (Math.tan(0.1 * ((G - A)*(G - A)) * MyPi / 180))) - 0.99166;
+
+    CornealPlaneRx = (1.336 / (1.336 / (1336 / (Ax - ACD - 0.05) - P) + (ACD + 0.05) / 1000)) - K;
+
+    return (CornealPlaneRx / (1 + 0.012 * CornealPlaneRx));
+}
+
+function HolladayIOL(K1, K2, AL, SF, REF){
+	//return IOL for a given target Rx
+	//J Cat Refr Surg Jan 1988 p. 24
+
+	var Rag;
+	var AG;
+	var Alm;
+	var NcTerm;
+	var Na;
+	var V; //vertex distance (initialize the variable!!)
+	var ACD;
+	var R;
+	var top;
+	var bottom;
+	
+	//need to average Ks AFTER conversion of each to Radius of cuvature!!
+	var R1 = 337.5 / K1;
+	var R2 = 337.5 / K2;
+	var R = (R1 + R2) / 2;
+	var K = 337.5 / R;	 
+
+	Alm = 0.2 + AL;
+	NcTerm = (4 / 3) - 1;
+	Na = 1.336;
+	V = 12;
+	R = 337.5 / K;
+
+	if(R < 7) Rag = 7;
+	else Rag = R;
+	
+	if((12.5 * AL / 23.45) > 13.5) AG = 13.5;
+	else AG = (12.5 * AL / 23.45);
+
+	//calculates ACD value 
+	ACD = 0.56 + Rag - (Math.sqrt(Rag * Rag - (AG * AG / 4)));
+
+	top = 1000 * Na * (Na * R - NcTerm * Alm - 0.001 * REF * (V * (Na * R - NcTerm * Alm) + Alm * R));
+	bottom = (Alm - ACD - SF) * (Na * R - NcTerm * (ACD + SF) - 0.001 * REF * (V * (Na * R - NcTerm * (ACD + SF)) + (ACD + SF) * R));
+
+	return (top/bottom);
+	}
+
+function Holl(K1, K2, AL, SF, I){ 
+	//return Rx from a given IOL
+	//J Cat Refr Surg Jan 1988 p. 24
+	//revised 7/16/00
+
+	var Rag; 
+	var AG;  
+	var Alm;  
+	var NcTerm;  
+	var Na;  
+	var V;
+	var ACD;
+	var R;
+	var top;
+	var bottom;
+		
+	//need to average Ks AFTER conversion of each to Radius of cuvature!!
+	var R1 = 337.5 / K1;
+	var R2 = 337.5 / K2;
+	var R = (R1 + R2) / 2;
+	var K = 337.5 / R;	 	
+
+	Alm = 0.2 + AL;
+	NcTerm = (4 / 3) - 1;
+	Na = 1.336;
+	V = 12;
+	R = 337.5 / K;
+
+	if(R < 7) Rag = 7;
+	else Rag = R;
+
+	if((12.5 * AL / 23.45) > 13.5) AG = 13.5;
+	else AG = (12.5 * AL / 23.45);
+
+	//calculates ACD value
+	ACD = 0.56 + Rag - (Math.sqrt(Rag * Rag - (AG * AG / 4)));
+
+	top = 1000 * Na * (Na * R - NcTerm * Alm) - I * (Alm - ACD - SF) * (Na * R - NcTerm * (ACD + SF));
+	bottom = Na * (V * (Na * R - NcTerm * Alm) + Alm * R) - 0.001 * I * (Alm - ACD - SF) * (V * (Na * R - NcTerm * (ACD + SF)) + (ACD + SF) * R);
+
+	return (top / bottom);
+	}
+	
+	
+	
+</script>
+
+<script type="text/javascript">
+   
+   function ReportError(ident){
+   	   var MyElement = document.getElementById(ident);
+	   with(MyElement){	   
+	          firstChild.nodeValue = "<giá trị ngoài khoảng giới hạn>";       
+       		  style.fontFamily = "monospace";
+       		  style.color = "gray";
+       		  style.visibility = "visible";
+       		  }	   		
+   }
+   
+   function DrawScale(mean, stdev, dots, ident, ptVal){
+         
+ 	   var DotMark = ".";
+       var MinVal = Math.round(mean - 3*stdev - 1);
+       var MaxVal = Math.round(mean + 3*stdev + 1);
+       
+       if(ptVal >= MaxVal || ptVal <= MinVal || !parseFloat(ptVal)){
+       		ReportError(ident);
+       		return;
+       		}
+       
+       var RangeVal = (MaxVal - MinVal);
+       
+       var strScale = "";
+
+	   //create array of periods	   
+       var myStr = new Array(dots);	   		
+       for(var i = 0; i < dots; i++){
+               myStr[i] = DotMark;
+               }
+               
+	   //build array of stan dev values, then scale to dots length  
+	   var myBraces = new Array(7);
+	   var bracLen = myBraces.length;	   
+
+	   for(var k = 0; k < bracLen; k++){
+	   		   var theVal = (mean - 3*stdev) + stdev*(k);
+	           myBraces[k] = Math.round((theVal - MinVal)*(dots/RangeVal));
+       }
+       
+       //convert patient value to scaled value for marking 
+       var ptMarkVal = Math.round((ptVal - MinVal)*(dots/RangeVal));
+       //alert(RangeVal + "," + MinVal + "," + dots + "," + ptVal + " to " + ptMarkVal);
+       
+       //write array values to debug
+	  var kLen = myBraces.length;	   
+	   //for(var z = 0; z < kLen; z++){
+	   	   //document.write(myBraces[z] + "<br>");
+	   	   //}
+
+       //alert(kLen);
+       //draw braces for the scale of dots
+             
+       var MyLen = myStr.length;
+       var Lbr = "]";
+       var Rbr = "[";
+       var Nbr = DotMark;
+       //var Mid = "|";
+       var Mark = ""; //initialize 
+       var PtValMark = "X";      
+
+       		for(var a = 0; a < kLen; a++){
+       		   if(a < 3) Mark = Rbr;       		   		
+       		   else if(a > 3) Mark = Lbr;
+       		   else Mark = Nbr;
+       		   	
+		       myStr[myBraces[a]] = Mark;
+		       }      
+       
+       myStr[ptMarkVal] = PtValMark;  //mark the measured value with an "x"
+       
+       //write array of periods and x's       
+        for(var j = 0; j < MyLen; j++){
+               strScale += myStr[j];
+                 }  
+
+	   //establish the style
+	   var MyElement = document.getElementById(ident);
+	   with(MyElement){	   
+	          firstChild.nodeValue = strScale;       
+       		  style.fontFamily = "monospace";
+       		  style.color = "gray";
+       		  style.visibility = "visible";
+       		  }	   		  
+   }
+   
+   function ClearScale(ident){  //clear the scale
+   
+      document.getElementById(ident).style.visibility = "hidden";
+   }
+   
+   function DrawAllScales(valAL, valK, valACD){
+   
+   		DrawScale(23.54, 1.19, 21, 'ALscale', valAL);
+   		DrawScale(43.98, 1.57, 21, 'Kscale', valK);
+   		DrawScale(3.04, 0.4, 21, 'ACDscale', valACD);
+  }
+  
+   function HideAllScales(){
+   
+ 		document.getElementById('ALscale').style.visibility = "hidden";
+ 		document.getElementById('ACDscale').style.visibility = "hidden";
+ 		document.getElementById('Kscale').style.visibility = "hidden";
+		document.getElementById('CylAmount').style.visibility = "hidden";
+		SetFocus("idAL");
+  }
+  
+  function WriteToTable(row, col, mytext, color){
+
+	mybody = document.getElementsByTagName("body")[0]; //html body in document
+	mytable = mybody.getElementsByTagName("table")[0]; //first table in document
+	mytablebody = mytable.getElementsByTagName("tbody")[0];  //first table body
+	myrow = mytablebody.getElementsByTagName("tr")[row]; //passed row value
+	mycell = myrow.getElementsByTagName("td")[col]; //passed col value
+	
+	with(mycell){
+		firstChild.nodeValue = mytext;
+		style.fontWeight = 'normal';
+		style.color = color;
+		}
+}
+
+
+</script>
+<!--This style is for positioning the IOL table; initial invisibility   -->
+
+</head>
+
+<body>
+	
+<div name="FrmPtData" action="" class="card">  	
+  	
+  	<div class="col-12"> 
+  		<span class="badge badge-secondary">Chiều dài trục nhãn cầu (AL):</span> 
+  		<input type="number" name="AL" id="idAL" class="form-control">
+  	</div>
+
+
+	&nbsp;&nbsp;&nbsp;&nbsp;<span id="ALscale"> &nbsp;&nbsp; </span>
+  		  	
+  	<div class="col-12">
+  		<span class="badge badge-secondary">Độ sâu tiền phòng (ACD): </span>
+  		<input type="number" name="ACD" id="idACD" class="form-control">
+  	</div>
+	
+  	&nbsp;&nbsp;&nbsp;&nbsp;<span id="ACDscale"> &nbsp;&nbsp; </span>  		
+
+  	<div class = "card"> 
+  	<div class="card-heading">Khúc xạ giác mạc</div>  	  		
+    <div class="card-body">
+  	<div class="row no-gutters">
+  	<div class="col-6"> 
+  		<span class="badge badge-secondary">K1: </span>
+  		<input type="number" name="K1" id="idK1" value="" class = "form-control">
+  	</div>
+  	</div>
+
+  	<div class="row no-gutters">
+  	<div class="col-6"> 
+  		<span class="badge badge-secondary">K2: </span>
+  		<input type="number" name="K2" id="idK2" value="" class = "form-control">
+  	</div>
+  	</div>
+	
+  		&nbsp;&nbsp;&nbsp;&nbsp;<span id="Kscale">&nbsp;&nbsp;</span>	
+
+		&nbsp;&nbsp;&nbsp;&nbsp;<span id="CylAmount">&nbsp;&nbsp;</span>			
+	</div>
+	</div>	  			
+  	<br>
+  	<br>
+
+</div>
+
+<div name="FrmIOLData" class="card"> 
+ 
+	<div class="row no-gutters">
+		<span>A-Const:</span>
+		<input type="number" name="Aconst" id="idAconst" value="" onkeypress="AConstEditting()"> 
+	</div>
+	
+	<span id="SRKTresult">&nbsp;</span>
+		
+	<div class="row no-gutters" onclick="CalcMySF()" style="visibility: hidden;"> 
+		<span>SF:</span>		
+		<input type="number" name="SF" id="idSF" value="">	
+	</div>
+	<span id="Hollresult">&nbsp;</span>
+
+	<div class="row no-gutters" onclick="CalcMypACD()" style="visibility: hidden;"> 
+		<span>pACD:</span>			
+		<input type="number" name="pACD" id="idpACD" value="">	
+	</div>
+	
+	<span id="Hoffresult">&nbsp;</span>
+	
+	<div class="row no-gutters" onclick="CalcMyHag_a0()" style="visibility: hidden;"> 
+		<span>a0:</span>
+	
+		<input type="number" name="Hag_a0" id="idHag_a0" value="">			
+	</div>		
+	<span id="Haigisresult">&nbsp;</span>				
+	
+	<div class="row no-gutters" style="visibility: hidden;">
+		<span>a1: </span>
+		<input type="number" name="Hag_a1" id="idHag_a1" value="">	
+	</div>			
+	<br>				
+			
+	
+	<div class="row no-gutters" style="visibility: hidden;"> 
+		<span>a2:</span>
+		<input type="number" name="Hag_a2" id="idHag_a2"  value="">
+	</div>		
+
+	<br>	
+  	
+	<button onclick="MainCalc()" class="btn btn-primary"> TÍNH CÔNG SUẤT IOL </button>
+	<br>
+		
+	<table cellspacing="1" cellpadding="2" border="1" id="id_IOLTable" bgcolor="white" 
+  style="font-weight: normal; 
+		 font-family: arial; 
+		 text-align: center;
+		 color: black;
+		 ">
+	
+	<colgroup>
+	<col width="20%">		
+	<col width="20%">	
+	<col width="20%">	
+	<col width="20%">	
+	<col width="20%">	
+	
+	</colgroup><tbody>
+	<tr>
+		<td>IOL</td>
+		<td>SRK/T</td>		
+		<td>Holl</td>
+		<td>Hoff</td>
+		<td>Haigis</td>
+	</tr>
+
+	<tr> 
+		<td> &nbsp; </td> 
+		<td> (Factor)</td>
+		<td> (Factor)</td>
+		<td> (Factor)</td>
+		<td> (Factor)</td>
+	</tr>
+
+	
+	<tr> 
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+	</tr>
+	
+	
+	<tr> 
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+	</tr>
+
+	<tr> 
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+	</tr>
+
+	<tr> 
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>	
+	</tr>
+
+	<tr> 
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+	</tr>
+
+	<tr> 
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>	
+	</tr>
+
+	<tr>  
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>	
+	</tr>
+	</tbody>
+	<tr>
+		<td style="color: red;">SRK</td>
+		<td id="idSRK"></td>
+	</tr>
+	<tr>
+		<td style="color: red;">SRKII</td>
+		<td id="idSRK2"></td>
+	</tr>
+</table>
+	<br>	
+	<button name="ResetIOLData" onclick="ClearEmmCalcs();" class="btn btn-primary">NHẬP LẠI </button>	
+
+	<br>	
+	<br>
+		
+	<textarea name="txtIOLtips" id="idIOLtips" class="txtAreaStyle" rows="4" cols="45" style="visibility: hidden;">Hướng dẫn...
+	</textarea>	
+	
+		
+</div>
+	<br>
+		
+	<br>
+	<br> 
+		
+		
+
+
+<div> 
+<img id="id_Image" src="iol_cals.jpg" style="visibility: hidden;" alt="Chọn công thức tính IOL" class="imgcenter">
+</div>
+	<script>
+	function AConstEditting(){
+		CalcMySF();
+		CalcMypACD();
+		CalcMyHag_a0();
+	}
+	$("#id_IOLTable").hide();
+	</script>
+</body></html>

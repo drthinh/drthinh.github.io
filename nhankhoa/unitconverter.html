@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Quy đổi đơn vị</title>
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	  <link rel="stylesheet" href="bootstrap.min.css">
+</head>
+<style type="text/css">
+img {
+  max-width: 100%;
+  height: auto;
+}
+</style>
+<body>
+<p id="mucluc">Danh sách bảng quy đổi</p>
+<div>
+<p><img src="quydoithiluc.png" alt="Bảng quy đổi thị lực"/></p>
+</div>
+<br/>
+
+<hr>
+
+<div>
+
+<div>
+<form name="tIOPForm" class="form-group">
+Nhãn áp ban đầu (mmHg): <input type="text" name="IP" size="10" class="form-control"><br />
+Tình trạng bệnh (0-5): <input type="text" name="Z" size="10" class="form-control"><br />
+<input type="button" value="Tính Nhãn áp đích" onClick="calculateTargetIOP()" class="form-control"><br />
+<blockquote> Theo Jampel (1999) <br>
+	NA đích = NA ban đầu x (1-NA ban đầu/100) - Z +/- 2 <br>
+	Trong đó: <br>
+	Z = 0 với glôcôm gđ tiềm tàng, nguy cơ thấp  <br>
+	Z = 1 với glôcôm gđ tiềm tàng, nguy cơ cao <br>
+	Z = 2 với glôcôm gđ sớm <br>
+	Z = 3 với glôcôm gđ tiến triển <br>
+	Z = 4 với glôcôm gđ trầm trọng <br>
+	Z = 5 với glôcôm gđ cuối/mù <br>
+</blockquote><br>
+NA đích: <input type="text" name="targetIOP" size="10" class="form-control"><br/>
+<input type="reset" value="Nhập lại" class="form-control"/>
+</form>
+</div>
+
+<br>
+<p>Một số hướng dẫn tính nhãn áp đích</p>
+<img src="target-iop-14-638.jpg">
+<img src="target-iop-15-638.jpg">
+<img src="target-iop-16-638.jpg">
+<hr>	
+</div>
+
+<div class="jrListingFulltext ">Bảng hiệu chỉnh nh&atilde;n &aacute;p theo chiều d&agrave;y gi&aacute;c mạc
+<table class="table table-striped table-hover">
+<tbody>
+<tr>
+<td>
+<p><strong>Chiều d&agrave;y GM&nbsp;(micrometers)</strong></p>
+</td>
+<td><strong>IOP&nbsp;Hiệu chỉnh&nbsp;(mmHg)</strong></td>
+</tr>
+<tr>
+<td>445</td>
+<td>+7</td>
+</tr>
+<tr>
+<td>455</td>
+<td>+6</td>
+</tr>
+<tr>
+<td>465</td>
+<td>+6</td>
+</tr>
+<tr>
+<td>475</td>
+<td>+5</td>
+</tr>
+<tr>
+<td>485</td>
+<td>+4</td>
+</tr>
+<tr>
+<td>495</td>
+<td>+4</td>
+</tr>
+<tr>
+<td>505</td>
+<td>+3</td>
+</tr>
+<tr>
+<td>515</td>
+<td>+2</td>
+</tr>
+<tr>
+<td>525</td>
+<td>+1</td>
+</tr>
+<tr>
+<td>535</td>
+<td>+1</td>
+</tr>
+<tr>
+<td>545</td>
+<td>0</td>
+</tr>
+<tr>
+<td>555</td>
+<td>-1</td>
+</tr>
+<tr>
+<td>565</td>
+<td>-1</td>
+</tr>
+<tr>
+<td>575</td>
+<td>-2</td>
+</tr>
+<tr>
+<td>585</td>
+<td>-3</td>
+</tr>
+<tr>
+<td>595</td>
+<td>-4</td>
+</tr>
+<tr>
+<td>605</td>
+<td>-4</td>
+</tr>
+<tr>
+<td>615</td>
+<td>-5</td>
+</tr>
+<tr>
+<td>625</td>
+<td>-6</td>
+</tr>
+<tr>
+<td>635</td>
+<td>-6</td>
+</tr>
+<tr>
+<td>645</td>
+<td>-7</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+
+<div>
+<form name="bmiForm" class="form-group">
+Cân nặng (kg): <input type="text" name="weight" size="10" class="form-control"><br />
+Chiều cao (cm): <input type="text" name="height" size="10" class="form-control"><br />
+<input type="button" value="Tính BMI" onClick="calculateBmi()" class="form-control"><br />
+Chỉ số BMI: <input type="text" name="bmi" size="10" class="form-control"><br />
+Ý nghĩa: <input type="text" name="meaning" size="25" class="form-control"><br />
+<input type="reset" value="Nhập lại" class="form-control"/>
+</form>
+</div>
+<br>
+<hr>
+
+
+<div id="blank" style="background-color: white; width: 100%; height: 800px;">
+</div>
+<br/>
+
+<script type="text/javascript">
+  function GotoTop(){
+    window.location.hash = "mucluc";
+  }
+  function calculateBmi() {
+var weight = document.bmiForm.weight.value
+var height = document.bmiForm.height.value
+if(weight > 0 && height > 0){	
+var finalBmi = weight/(height/100*height/100)
+document.bmiForm.bmi.value = finalBmi.toFixed(2)
+if(finalBmi < 18.5){
+document.bmiForm.meaning.value = "Bạn quá gầy.";
+}
+if(finalBmi > 18.5 && finalBmi < 25){
+document.bmiForm.meaning.value = "Trông bạn ổn đấy.";
+}
+if(finalBmi > 25){
+document.bmiForm.meaning.value = "Bạn quá cân rồi.";
+}
+}
+else{
+alert("Hãy điền chính xác!");
+}
+}
+function calculateTargetIOP(){
+var NABandau = document.tIOPForm.IP.value
+var Giaidoan = document.tIOPForm.Z.value
+var semifinalTP = (NABandau*(1-NABandau/100)-Giaidoan).toFixed(1)
+document.tIOPForm.targetIOP.value = semifinalTP + " +/- 2 mmHg"
+
+}
+</script>
+</body>
+</html>
