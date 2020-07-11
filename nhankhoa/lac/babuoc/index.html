@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en-gb" dir="ltr"  style="cursor: auto;">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Thử nghiệm ba bước Bielchovsky</title>
+	<link href="parks3step.css" rel="stylesheet" type="text/css">
+	<script src="jquery.min.js" type="text/javascript"></script>
+	<script src="parks3step.js" type="text/javascript"></script>	
+<!-- META FOR IOS & HANDHELD -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+	<style type="text/stylesheet">
+		@-webkit-viewport   { width: device-width; }
+		@-moz-viewport      { width: device-width; }
+		@-ms-viewport       { width: device-width; }
+		@-o-viewport        { width: device-width; }
+		@viewport           { width: device-width; }
+	</style>
+<!-- //META FOR IOS & HANDHELD -->
+	
+
+</head>
+
+<body>
+
+<div> <!-- t3_wrapper Need this wrapper for off-canvas menu. Remove if you don't use of-canvas -->
+
+  
+<div id = "gioithieu">
+    					<h2>Thử nghiệm ba bước Bielchovsky</h2>
+    					<h5>Lập trình và Việt hóa: Nguyễn Đức Thịnh CH27 Nhãn khoa HMU</h5>
+</div>
+
+<div id = "parks_container">
+	<img id="right_eye" src="parks_eye_od.png" class="parks_eye parks_od_eye">
+	<img id="right_eye" src="parks_eye_os.png" class="parks_eye parks_os_eye">
+	
+	<div class="eomlabel rm so" id="rso">
+		Cơ chéo trên (RSO)
+		<img class="line" src="line.png" id="rso_line" style="display: block;">
+		<img class="circle" src="circle.png" id="rso_circle" style="display: none;">
+
+	</div>
+	
+	<div class="eomlabel rm sr" id="rsr">
+		Cơ trực trên (RSR)
+		<img class="line" src="line.png" id="rsr_line" style="display: block;">
+		<img class="circle" src="circle.png" id="rsr_circle" style="display: none;">
+	
+	</div>
+	
+	<div class="eomlabel rm ir" id="rir">
+		Cơ trực dưới (RIR)
+		<img class="line" src="line.png" id="rir_line" style="display: none;">
+		<img class="circle" src="circle.png" id="rir_circle" style="display: block;">
+	</div>
+	
+	<div class="eomlabel rm io" id="rio">
+		Cơ chéo dưới (RIO)
+		<img class="line" src="line.png" id="rio_line" style="display: block;">
+		<img class="circle" src="circle.png" id="rio_circle" style="display: none;">
+	</div>
+	
+	<div class="eomlabel lm so" id="lso">
+		Cơ chéo trên (LSO)
+		<img class="line" src="line.png" id="lso_line" style="display: block;">
+		<img class="circle" src="circle.png" id="lso_circle" style="display: none;">
+	</div>
+	
+	<div class="eomlabel lm sr" id="lsr">
+		Cơ trực trên (LSR)
+			<img class="line" src="line.png" id="lsr_line" style="display: block;">
+		<img class="circle" src="circle.png" id="lsr_circle" style="display: none;">
+	
+	
+	</div>
+	<div class="eomlabel lm ir" id="lir">
+		Cơ trực dưới (LIR)
+		<img class="line" src="line.png" id="lir_line" style="display: block;">
+		<img class="circle" src="circle.png" id="lir_circle" style="display: none;">
+	</div>
+	
+	<div class="eomlabel lm io" id="lio">
+		Cơ chéo dưới (LIO)
+		<img class="line" src="line.png" id="lio_line" style="display: block;">
+		<img class="circle" src="circle.png" id="lio_circle" style="display: none;">
+	</div>
+	
+
+	<div class="question q1">Mắt bên nào lác trên trong tư thế nhìn thẳng?</div>
+	<div class="question q2">Lác trên tăng lên ở tư thế liếc trái hay liếc phải?</div>
+	<div class="question q3">Lác trên tăng lên khi nghiêng đầu sang trái hay phải?</div>
+	
+	<a class="parks_btn rb br1 parks_off" id="primary_r" onclick="buttonClicked(event)">Lác trên phải</a>
+	<a class="parks_btn parks_off  lb br1" id="primary_l" onclick="buttonClicked(event)">Lác trên trái</a>
+	<a class="parks_btn  rb br2 parks_off" id="gaze_r" onclick="buttonClicked(event)">Liếc phải</a>
+	<a class="parks_btn parks_off  lb br2" id="gaze_l" onclick="buttonClicked(event)">Liếc trái</a>
+	<a class="parks_btn parks_off  rb br3" id="tilt_r" onclick="buttonClicked(event)">Nghiêng phải</a>
+	<a class="parks_btn  lb br3 parks_off" id="tilt_l" onclick="buttonClicked(event)">Nghiêng trái</a>
+	
+</div>
+<!-- END CONTAINER -->
+
+<div style="justify-content: center;display: flex;">
+	<button type="button" onclick="LamLai()">Làm lại</button>
+</div>
+
+
+<div id="parks_discussion" style="display: none;">
+	<h3><u><b>Bàn luận</b></u></h3>
+	<div id="d_primary" style="display: none;">
+	<b>Mắt bên nào lác trên trong tư thế nhìn thẳng?</b>
+		<div id="d_primary_r" style="display: none;">  
+			<img src="eom-parks-step-1-right.png">
+			<p>Nếu mắt phải là mắt lác trên, thì có 2 nhóm khả năng xảy ra là: <br>
+				1) Yếu liệt các cơ đưa nhãn cầu mắt phải xuống dưới: Cơ chéo trên (RSO) hoặc Cơ trực dưới (RIR) <br>
+				2) Yếu liệt các cơ đưa nhãn cầu mắt trái lên trên: Cơ trực trên (LSR) hoặc Cơ chéo dưới (LIO) <br>
+			Ta sẽ xem xét tất cả các trường hợp này. 
+			</p>
+		</div>
+		<div id="d_primary_l" style="display: none;">
+			<img src="eom-parks-step-1-left.png">
+		    <p>Nếu mắt trái là mắt lác trên, thì có 2 nhóm khả năng xảy ra là: <br>
+				1) Yếu liệt các cơ đưa nhãn cầu mắt trái xuống dưới: Cơ chéo trên (LSO) hoặc Cơ trực dưới (LIR) <br>
+				2) Yếu liệt các cơ đưa nhãn cầu mắt phải lên trên: Cơ trực trên (PSR) hoặc Cơ chéo dưới (RIO) <br>
+			Ta sẽ xem xét tất cả các trường hợp này. 
+			</p>
+		</div>
+		
+	</div>
+	<div id="d_gaze" style="display: none;">
+		<b>Lác trên tăng lên ở tư thế liếc trái hay liếc phải?</b>
+		<div id="d_gaze_r" style="display: none;">
+			<img src="eom-parks-step-2-right-gaze.png">
+			<p>
+				Khi ta nhìn về bên phải, các cơ tham gia vào động tác này gồm các cơ trực mắt phải và các cơ chéo mắt trái.<br>
+				Tức là có 4 cơ có thể bị yếu liệt: Cơ trực trên MP (RSR), Cơ trực dưới MP (RIR), Cơ chéo trên MT (LSO), Cơ chéo dưới MT (LIO) <br>
+				Ta xem xét 4 cơ này.
+			</p>
+		</div>
+		<div id="d_gaze_l" style="display: none;">
+			<img src="eom-parks-step-2-left-gaze.png">
+			<p>
+				Khi ta nhìn về bên trái, các cơ tham gia vào động tác này gồm các cơ trực mắt trái và các cơ chéo mắt phải.<br>
+				Tức là có 4 cơ có thể bị yếu liệt: Cơ trực trên MT (LSR), Cơ trực dưới MT (LIR), Cơ chéo trên MP (RSO), Cơ chéo dưới MP (RIO) <br>
+				Ta xem xét 4 cơ này.
+			</p>
+		</div>
+	</div>
+	<div id="d_tilt" style="display: none;">
+		<b>Lác trên tăng lên khi nghiêng đầu sang trái hay phải?</b>
+<p></p>		<div id="d_tilt_r" style="display: none;">
+			<img src="eom-parks-step-3-right-tilt.png">		
+			<p>
+				Khi nghiêng đầu sang phải, mắt phải sẽ xoáy trong và mắt trái sẽ xoáy ngoài để bù trừ tư thế<br>
+				Các cơ tham gia vào động rác này gồm: <br>
+				Động tác xoáy trong MP: Cơ trực trên MP (RSR), Cơ chéo trên MP (RSO) <br>
+				Động tác xoáy ngoài MT: Cơ trực dưới MT (LIR), Cơ chéo dưới MT (LIO) <br>
+				Một trong 4 cơ này bị yếu liệt.
+			</p>
+		</div>
+		<div id="d_tilt_l" style="display: none;">
+			<img src="eom-parks-step-3-left-tilt.png">		
+			<p>
+				Khi nghiêng đầu sang trái, mắt trái sẽ xoáy trong và mắt phải sẽ xoáy ngoài để bù trừ tư thế<br>
+				Các cơ tham gia vào động rác này gồm: <br>
+				Động tác xoáy trong MT: Cơ trực trên MT (LSR), Cơ chéo trên MT (LSO) <br>
+				Động tác xoáy ngoài MP: Cơ trực dưới MP (RIR), Cơ chéo dưới MP (RIO) <br>
+				Một trong 4 cơ này bị yếu liệt.
+			</p>
+		</div>
+		
+
+	</div>
+	<div id="d_answer" style="display: none;"></div>
+</div>
+<!-- END park_discussion -->
+
+<br><br>
+<div>
+Thử nghiệm Bielchovsky được dùng để đánh giá lác đứng. <br>
+Thích hợp cho các đánh giá một số rối loạn thần kinh có liên quan nhãn khoa; cho kết quả kém chính xác hơn với những bệnh nhân đã phẫu thuật cơ vận nhãn.
+Bằng cách kiểm tra sự thay đổi độ lác đứng ở các tư thế, ta dùng phương pháp bao vây và loại trừ để tìm ra cơ bị yếu liệt.
+</div>
+					</div>
+		<!-- //MAIN CONTENT t3-container-->
+<script type="text/javascript">
+	function LamLai() {
+		location.reload();
+	}
+</script>
+</body>
+</html>
