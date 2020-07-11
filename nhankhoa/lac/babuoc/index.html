@@ -2,7 +2,7 @@
 <html lang="en-gb" dir="ltr"  style="cursor: auto;">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Thử nghiệm ba bước Bielchovsky</title>
+	<title>Thử nghiệm ba bước Bielchowsky</title>
 	<link href="parks3step.css" rel="stylesheet" type="text/css">
 	<script src="jquery.min.js" type="text/javascript"></script>
 	<script src="parks3step.js" type="text/javascript"></script>	
@@ -34,7 +34,7 @@
 
   
 <div id = "gioithieu">
-    					<h2>Thử nghiệm ba bước Bielchovsky</h2>
+    					<h2>Thử nghiệm ba bước Bielchowsky</h2>
     					<h5>Lập trình và Việt hóa: Nguyễn Đức Thịnh CH27 Nhãn khoa HMU</h5>
 </div>
 
@@ -185,8 +185,9 @@
 
 <br><br>
 <div>
+<<a href="help.html">HƯỚNG DẪN</a>
 Thử nghiệm Bielchovsky được dùng để đánh giá lác đứng. <br>
-Thích hợp cho các đánh giá một số rối loạn thần kinh có liên quan nhãn khoa; cho kết quả kém chính xác hơn với những bệnh nhân đã phẫu thuật cơ vận nhãn.
+Thích hợp cho các đánh giá một số rối loạn thần kinh có liên quan nhãn khoa; cho kết quả kém chính xác hơn với những bệnh nhân đã phẫu thuật cơ vận nhãn.<br>
 Bằng cách kiểm tra sự thay đổi độ lác đứng ở các tư thế, ta dùng phương pháp bao vây và loại trừ để tìm ra cơ bị yếu liệt.
 </div>
 					</div>
@@ -195,6 +196,12 @@ Bằng cách kiểm tra sự thay đổi độ lác đứng ở các tư thế, 
 	function LamLai() {
 		location.reload();
 	}
+	var ua = navigator.userAgent.toLowerCase();
+	var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
+	if(isAndroid) {
+	 if(confirm('Bạn có muốn tải phiên bản Android về điện thoại?') == true)
+        window.location = 'https://github.com/drthinh/drthinh.github.io/releases/download/1.1/bielchowsky.apk';
+}
 </script>
 </body>
 </html>
