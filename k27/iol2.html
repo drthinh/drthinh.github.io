@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="metro4:init" content="false">
+
+    <!-- Metro 4 -->
+    <link rel="stylesheet" href="metro-all.min.css">
+    <style type="text/css">
+      body {
+       background-color:powderblue;
+      }
+    </style>
+
+  </head>
+  <body>
+    <h2 style="text-align: center;">Tính công suất IOL</h2>
+    
+    <div class="card" id="hanhchinh">
+    <div class="card-header">
+        {{ cap_head }}
+    </div>
+    
+    <div class="card-content p-2">
+      <input type="text" data-role="input" :data-prepend= "cap_name" v-model="name">
+      <input type="number" data-role="input" :data-prepend= "cap_age" v-model="age">
+      <input type="text" data-role="input" :data-prepend= "cap_code" v-model="code">
+  
+      <select data-role="select" :data-prepend="cap_sex" @change="update">
+        <option value="" disabled selected>{{cap_sex2}}</option>
+        <option v-for="sex in sexs" >
+          {{sex.text}}
+        </option>=
+      </select>
+     
+      
+    </div>
+    <button class="button ribbed-red fg-white" v-on:click="reset">{{ cap_reset }}</button>
+    </div>
+
+    
+    <div class="card" id="tinhtoan">
+    <div class="card-header">
+        {{ cap_head }}
+    </div>
+    
+    <div class="card-content p-2">
+      <input type="radio" data-role="radio" :data-caption="OD" name = "eye">
+      <input type="radio" data-role="radio" :data-caption="OS" name = "eye">
+      <input type="number" data-role="input" :data-prepend= "cap_AL" v-model="AL">
+      <input type="number" data-role="input" :data-prepend= "cap_ACD" v-model="ACD">
+      <input type="number" data-role="input" :data-prepend= "cap_K1" v-model="K1">
+      <input type="number" data-role="input" :data-prepend= "cap_K2" v-model="K2">
+      <hr>
+      <input type="number" data-role="input" data-prepend= "A-const" v-model="AConst" @change = "updateA">
+      <input type="number" data-role="input" data-prepend= "pACD" v-model="pACD">
+      <input type="number" data-role="input" data-prepend= "SF" v-model="SF">
+      <input type="number" data-role="input" data-prepend= "a0" v-model="a0">
+      <input type="number" data-role="input" data-prepend= "a1" v-model="a1">
+      <input type="number" data-role="input" data-prepend= "a2" v-model="a2">
+      <hr>
+      <select data-role="select" :data-prepend="cap_IOL"  @change="updateA" v-model="AConst">
+        <option value="" disabled selected>Chọn một mẫu thể thủy tinh</option>
+        <option v-for="iol in IOLList"  :value = "iol.AConst">
+          {{iol.text}}
+        </option>
+      </select>
+      
+    </div>
+     <div class="card-footer p-2">
+      <button class="button ribbed-red fg-white" v-on:click="showTable">{{ cap_calculate }}</button>
+      <button class="button ribbed-red fg-white" v-on:click="reset">{{ cap_reset }}</button>
+     </div>
+
+<table cellspacing="1" cellpadding="2" border="1" id="id_IOLTable" bgcolor="white" 
+  style="font-weight: normal; 
+     font-family: arial; 
+     text-align: center;
+     color: black;
+     ">
+  
+  <colgroup>
+  <col width="20%">   
+  <col width="20%"> 
+  <col width="20%"> 
+  <col width="20%"> 
+  <col width="20%"> 
+  
+  </colgroup><tbody>
+  <tr>
+    <td>IOL</td>
+    <td>SRK/T</td>    
+    <td>Holl</td>
+    <td>Hoff</td>
+    <td>Haigis</td>
+  </tr>
+
+  <tr> 
+    <td> &nbsp; </td> 
+    <td>  </td>
+    <td> (Factor)</td>
+    <td> (Factor)</td>
+    <td> (Factor)</td>
+  </tr>
+
+  
+  <tr> 
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+  </tr>
+  
+  
+  <tr> 
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+  </tr>
+
+  <tr> 
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+  </tr>
+
+  <tr> 
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>  
+  </tr>
+
+  <tr> 
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+  </tr>
+
+  <tr> 
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>  
+  </tr>
+
+  <tr>  
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>  
+  </tr>
+  </tbody>
+  <tr>
+    <td style="color: red;">SRK</td>
+    <td vmodel = "SRKI"></td>
+  </tr>
+  <tr>
+    <td style="color: red;">SRKII</td>
+    <td vmodel = "SRKII"></td>
+  </tr>
+</table>
+
+
+
+
+
+
+    </div>
+
+    
+    <!-- Metro 4 -->
+    <script src="metro.min.js"></script>
+    <script src="vue.js"></script>
+    <script src="vCalculator.js"></script>
+
+    
+    <script type="text/javascript">
+
+      var hanhchinh = new Vue({
+      el: '#hanhchinh',
+      data: {
+        cap_head: 'Thông tinh bệnh nhân',
+        cap_name: 'Họ và tên',
+        cap_age: 'Tuổi',
+        cap_code: 'Mã BN',
+        cap_reset: 'Nhập lại',
+        cap_sex: 'Giới tính',
+        cap_sex2: 'Chọn giới tính',
+        name: '',
+        age: '',
+        code: '',
+        sexs :[
+        {id: 1, text: 'Nam'},
+        {id: 2, text: 'Nữ'}
+        ]
+      },
+      mounted: function () {
+        //Metro.init();
+        // Chỉ dùng ở lần mount của component cuối cùng!
+      },
+      methods: {
+      update: function(event){
+        console.log(event.target.value)
+      },
+      reset: function (event) {
+      this.name = '';
+      this.age = '';
+      this.code = '';
+      }
+      }
+      })
+
+      var tinhtoan = new Vue({
+      el: '#tinhtoan',
+      data: {
+        cap_head: 'Thông số',
+        OD: 'Mắt phải (OD)',
+        OS: 'Mắt trái (OS)',
+        cap_AL: 'Chiều dài trục NC (L)',
+        cap_ACD: 'Độ sâu TP (ACD)',
+        cap_K1: 'K1',
+        cap_K2: 'K2',
+        cap_reset: 'Nhập lại',
+        cap_IOL: 'Loại IOL',
+        cap_calculate: 'Tính!',
+        AL: '',
+        ACD: '',
+        K1: '',
+        K2: '',
+        AConst: '',
+        pACD: '',
+        SF: '',
+        a0: '',
+        a1: '',
+        a2: '',
+        SRKI: '',
+        SRKII: '',
+        IOLList: [
+         //{ id: 0, text: '', AConst: '0' },
+         { id: 1, text: 'Micropure 123', AConst: '118.5' },
+         { id: 2, text: 'HOYA 250; 251; 254; 255; 351; 150; 151', AConst: '118.5' }
+       ]
+      },
+      mounted: function () {
+        Metro.init();
+      },
+      methods: {
+      updateIOL: function (event){
+        
+      },
+      updateA: function(event){
+        console.log(event.target.value)
+        //nội suy SF từ AConst
+        var MyAcon = parseFloat(this.AConst);
+        var My_SF=(MyAcon*0.5663) - 65.600;
+        this.SF = My_SF.toFixed(2);
+        //nội suy pACD từ AConst
+        var My_pACD = ((MyAcon * 0.5663) - 65.600 +3.595) / 0.9704;
+        this.pACD = My_pACD.toFixed(2);  
+        //nội suy các hằng số Haigis a0, a1, a2
+        var My_AL = parseFloat(this.AL); 
+        this.a1 = '0.4';
+        this.a2 = '0.1';
+        var My_ACDconst = 0.62467 * MyAcon - 68.747;   
+        var My_a0 = My_ACDconst - 0.4 * 3.37 - 0.1 * 23.39;
+        this.a0 = My_a0.toFixed(2);
+      },
+      showTable: function(event){
+        MainCalc(this);
+      },
+      reset: function (event) {
+      this.AL = '';
+      this.ACD = '';
+      this.K1 = '';
+      this.K2 = '';
+      }
+      }
+
+      })
+     
+    </script>
+
+    
+    
+
+  </body>
+</html>
