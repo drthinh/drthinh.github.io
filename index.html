@@ -13,6 +13,10 @@
     body {
       background-color: powderblue;
     }
+
+    input:required {
+      background-color: azure;
+    }
   </style>
 
 </head>
@@ -20,170 +24,274 @@
 <body>
   <h2 style="text-align: center;">Tính công suất IOL</h2>
 
-  <div class="card" id="hanhchinh">
-    <div class="card-header">
-      {{ cap_head }}
-    </div>
+  <ul data-role="tabs" data-tabs-type="pills" data-expand="true" data-on-tab="showSaved">
+    <li><a href="#tab1">Trang chủ</a></li>
+    <li><a href="#tab2">Danh sách</a></li>
+    <li><a href="#tab3">Hướng dẫn</a></li>
+  </ul>
 
-    <div class="card-content p-2">
-      <input type="text" data-role="input" :data-prepend="cap_name" v-model="name">
-      <input type="number" data-role="input" :data-prepend="cap_age" v-model="age">
-      <input type="text" data-role="input" :data-prepend="cap_code" v-model="code">
+  <div class="border bd-default no-border-top p-2">
+    <div id="tab1">
+      <div class="card" id="idNgonngu">
+        <div class="card-content p-2" style="text-align:center">
+          <input type="radio" data-role="radio" data-caption="Tiếng Việt" name="ngonngu" value="vie" checked
+            data-style="2" v-on:click="updateVie">
+          <input type="radio" data-role="radio" data-caption="English" name="ngonngu" value="eng" data-style="2"
+            v-on:click="updateEnglish">
+        </div>
+      </div>
 
-      <select data-role="select" :data-prepend="cap_sex" @change="update">
-        <option value="" disabled selected>{{cap_sex2}}</option>
-        <option v-for="sex in sexs">
-          {{sex.text}}
-        </option>=
-      </select>
+      <div class="card" id="hanhchinh">
+        <div class="card-header">
+          {{ cap_head }}
+        </div>
+
+        <div class="card-content p-2">
+          <input type="text" data-role="input" :data-prepend="cap_name" v-model="name" data-history="true">
+          <input type="number" data-role="input" :data-prepend="cap_age" v-model="age" data-history="true">
+          <input type="text" data-role="input" :data-prepend="cap_code" v-model="code" data-history="true">
+
+          <select data-role="select" :data-prepend="cap_sex" @change="update" v-model="selected_sex">
+            <option value="" disabled selected>{{cap_sex2}}</option>
+            <option v-for="s in sexs" :value="s">
+              {{s}}
+            </option>
+          </select>
+
+        </div>
+        <button class="button ribbed-red fg-white" v-on:click="reset">{{ cap_reset }}</button>
+      </div>
 
 
-    </div>
-    <button class="button ribbed-red fg-white" v-on:click="reset">{{ cap_reset }}</button>
-  </div>
+      <div class="card" id="tinhtoan">
+        <div class="card-header">
+          {{ cap_head }}
+        </div>
+
+        <div class="card-content p-2">
+          <input type="radio" data-role="radio" :data-caption="OD" v-model="eye" value="Mắt phải (OD)" required>
+          <input type="radio" data-role="radio" :data-caption="OS" v-model="eye" value="Mắt trái (OS)" required>
+          <input type="number" data-role="input" :data-prepend="cap_AL" v-model="AL" data-history="true" required>
+          <input type="number" data-role="input" :data-prepend="cap_ACD" v-model="ACD" data-history="true">
+          <input type="number" data-role="input" :data-prepend="cap_K1" v-model="K1" data-history="true" required>
+          <input type="number" data-role="input" :data-prepend="cap_K2" v-model="K2" data-history="true" required>
+          <hr>
+          <input type="number" data-role="input" data-prepend="A-const" v-model="AConst" @keyup="updateA"
+            data-history="true" required>
+          <hr>
+          <select data-role="select" :data-prepend="cap_IOL" @change="updateA" v-model="selectedIOL">
+            <option value="" disabled selected>Chọn một mẫu thể thủy tinh</option>
+            <option v-for="iol in IOLList" :value="iol">
+              {{iol.text}}
+            </option>
+          </select>
+          <hr>
+          <input type="number" data-role="input" data-prepend="pACD" v-model="pACD" disabled>
+          <input type="number" data-role="input" data-prepend="SF" v-model="SF" disabled>
+          <input type="number" data-role="input" data-prepend="a0" v-model="a0" disabled>
+          <input type="number" data-role="input" data-prepend="a1" v-model="a1" disabled>
+          <input type="number" data-role="input" data-prepend="a2" v-model="a2" disabled>
+
+        </div>
+        <div class="card-footer p-2">
+          <button class="button ribbed-red fg-white" v-on:click="showTable">{{ cap_calculate }}</button>
+          <button class="button ribbed-red fg-white" v-on:click="fSave">{{ cap_save }}</button>
+          <button class="button ribbed-red fg-white" v-on:click="reset">{{ cap_reset }}</button>
+        </div>
+
+        <div class="dialog" data-role="dialog" id="idDialog" data-close-button="true" data-actions-align="left"
+          data-width="90%">
+          <div class="dialog-title">{{cap_dialogtitle}}</div>
+          <div class="dialog-content">
+
+            <table style="width: 100%;" id="idTableR">
+
+              <thead>
+                <tr>
+                  <td>IOL</td>
+                  <td>SRK/T</td>
+                  <td>Holl</td>
+                  <td>Hoff</td>
+                  <td>Haigis</td>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                </tr>
 
 
-  <div class="card" id="tinhtoan">
-    <div class="card-header">
-      {{ cap_head }}
-    </div>
+                <tr>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                </tr>
 
-    <div class="card-content p-2">
-      <input type="radio" data-role="radio" :data-caption="OD" name="eye">
-      <input type="radio" data-role="radio" :data-caption="OS" name="eye">
-      <input type="number" data-role="input" :data-prepend="cap_AL" v-model="AL">
-      <input type="number" data-role="input" :data-prepend="cap_ACD" v-model="ACD">
-      <input type="number" data-role="input" :data-prepend="cap_K1" v-model="K1">
-      <input type="number" data-role="input" :data-prepend="cap_K2" v-model="K2">
-      <hr>
-      <input type="number" data-role="input" data-prepend="A-const" v-model="AConst" @keyup="updateA">
-      <input type="number" data-role="input" data-prepend="pACD" v-model="pACD">
-      <input type="number" data-role="input" data-prepend="SF" v-model="SF">
-      <input type="number" data-role="input" data-prepend="a0" v-model="a0">
-      <input type="number" data-role="input" data-prepend="a1" v-model="a1">
-      <input type="number" data-role="input" data-prepend="a2" v-model="a2">
-      <hr>
-      <select data-role="select" :data-prepend="cap_IOL" @change="updateA" v-model="AConst">
-        <option value="" disabled selected>Chọn một mẫu thể thủy tinh</option>
-        <option v-for="iol in IOLList" :value="iol.AConst">
-          {{iol.text}}
-        </option>
-      </select>
+                <tr>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                </tr>
 
-    </div>
-    <div class="card-footer p-2">
-      <button class="button ribbed-red fg-white" v-on:click="showTable">{{ cap_calculate }}</button>
-      <button class="button ribbed-red fg-white" v-on:click="reset">{{ cap_reset }}</button>
-    </div>
+                <tr>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                </tr>
 
-    <div class="dialog" data-role="dialog" id = "idDialog">
-      <div class="dialog-title">{{cap_dialogtitle}}</div>
-      <div class="dialog-content">
-         
-        <table class="table">
+                <tr>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                </tr>
 
-          <thead>
-            <tr>
-              <td>IOL</td>
-              <td>SRK/T</td>
-              <td>Holl</td>
-              <td>Hoff</td>
-              <td>Haigis</td>
-            </tr>
-          </thead>
-    
-          <tbody>
-            <tr>
-              <td>N/A</td>
-              <td>N/A</td>
-              <td>N/A</td>
-              <td>N/A</td>
-              <td>N/A</td>
-            </tr>
-    
-    
-            <tr>
-              <td>N/A</td>
-              <td>N/A</td>
-              <td>N/A</td>
-              <td>N/A</td>
-              <td>N/A</td>
-            </tr>
-    
-            <tr>
-              <td>N/A</td>
-              <td>N/A</td>
-              <td>N/A</td>
-              <td>N/A</td>
-              <td>N/A</td>
-            </tr>
-    
-            <tr>
-              <td>N/A</td>
-              <td>N/A</td>
-              <td>N/A</td>
-              <td>N/A</td>
-              <td>N/A</td>
-            </tr>
-    
-            <tr>
-              <td>N/A</td>
-              <td>N/A</td>
-              <td>N/A</td>
-              <td>N/A</td>
-              <td>N/A</td>
-            </tr>
-    
-            <tr>
-              <td>N/A</td>
-              <td>N/A</td>
-              <td>N/A</td>
-              <td>N/A</td>
-              <td>N/A</td>
-            </tr>
-    
-            <tr>
-              <td>N/A</td>
-              <td>N/A</td>
-              <td>N/A</td>
-              <td>N/A</td>
-              <td>N/A</td>
-            </tr>
-          </tbody>
-          <tr>
-            <td style="color: red;">SRK</td>
-            <td vmodel="SRKI">{{SRKI}}</td>
-          </tr>
-          <tr>
-            <td style="color: red;">SRKII</td>
-            <td vmodel="SRKII">{{SRKII}}</td>
-          </tr>
-        </table>
-        
+                <tr>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                </tr>
 
+                <tr>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                </tr>
+              </tbody>
+              <tr>
+                <td style="color: red;">SRK</td>
+                <td vmodel="SRKI">{{SRKI}}</td>
+              </tr>
+              <tr>
+                <td style="color: red;">SRKII</td>
+                <td vmodel="SRKII">{{SRKII}}</td>
+              </tr>
+            </table>
+
+
+
+          </div>
+          <div class="dialog-actions">
+            <button class="button primary" onclick="Metro.dialog.close('#idDialog')">{{cap_dialogButton}}</button>
+          </div>
+        </div>
+
+        <div class="dialog" data-role="dialog" id="idDialogSave" data-close-button="true">
+          <div class="dialog-title">Lưu thông tin</div>
+          <div class="dialog-content">
+            Họ và tên: {{current.name}} <br>
+            Tuổi: {{current.age}} <br>
+            Giới: {{current.selected_sex}} <br>
+            Mã BN: {{current.code}} <br>
+            Bạn hãy điền loại IOL và số IOL đã dùng trên BN này: <br>
+            <input type="text" data-role="input" data-prepend="Đã chọn:" v-model="chosenIOL" required>
+          </div>
+          <div class="dialog-actions">
+            <button class="button primary" onclick="save(); Metro.dialog.close('#idDialogSave');">Lưu và đóng</button>
+          </div>
+        </div>
 
       </div>
-      <div class="dialog-actions">
-          <button class="button primary" onclick="Metro.dialog.close('#idDialog')">{{cap_dialogButton}}</button>
+
+    </div>
+    <div id="tab2">
+      <table class="table striped table-border cell-border" data-role="table" data-horizontal-scroll="true">
+        <thead>
+          <tr>
+            <th>Tên</th>
+            <th>Loại IOL</th>
+            <th>Tuổi</th>
+            <th>Giới</th>
+            <th>Mã BN</th>
+            <th>Mắt</th>
+            <th>K1</th>
+            <th>K2</th>
+            <th>AL</th>
+            <th>ACD</th>
+            <th>Đã chọn</th>
+            <th>Thời điểm</th>
+          </tr>
+        </thead>
+        <tr v-for="r in xData">
+          <td>{{r.name}}</td>
+          <td>{{r.IOL}}</td>
+          <td>{{r.age}}</td>
+          <td>{{r.sex}}</td>
+          <td>{{r.code}}</td>
+          <td>{{r.eye}}</td>
+          <td>{{r.K1}}</td>
+          <td>{{r.K2}}</td>
+          <td>{{r.AL}}</td>
+          <td>{{r.ACD}}</td>
+          <td>{{r.chosen}}</td>
+          <td>{{r.time}}</td>
+        </tr>
+      </table>
+    </div>
+    <div id="tab3">
+      <h2 style="text-align: center;">Hướng dẫn</h2>
+
+      <div class="card">
+        <div class="card-header">
+          <h4>Cách sử dụng</h4>
+        </div>
+        <div class="card-content p-2">
+          <h5>Phần mềm tính công suất thể thủy tinh nhân tạo</h5>
+          <h5>Nhập các thông số Khúc xạ: K1, K2; Trục nhãn cầu: AL, Hằng số IOL: A hoặc loại IOL trong danh sách</h5>
+          <h5>Bấm nút Tính và đọc kết quả là số IOL có độ chênh nhỏ nhất hoặc phù hợp với nhu cầu thị lực của BN</h5>
+          <h5>Bấm nút Lưu sau đó điền loại IOL và công suất của IOL đó, dữ liệu sẽ được lưu vào bảng ở Tab bên cạnh</h5>
+          <h5>Những thắc mắc khác xin liên hệ với tác giả ở Menu liên hệ</h5>
+
+        </div>
+        <div class="card-footer">
+          <div class="img-container" style="text-align: center;">
+            <img src="iol.jpg" style="width: 90%;">
+            <div class="image-overlay op-amber"></div>
+          </div>
+        </div>
       </div>
+    </div>
   </div>
-    
-
-
-
-
-
-
-  </div>
-
 
   <!-- Metro 4 -->
+  <script src="nativeb4x.js"></script>
+  <script src="vcalculator.js"></script>
   <script src="metro.min.js"></script>
   <script src="vue.js"></script>
-  <script src="vCalculator.js"></script>
-
 
   <script type="text/javascript">
+    //https://cdn.metroui.org.ua/v4/js/metro.js
+    //https://cdn.jsdelivr.net/npm/vue/dist/vue.js
+    var B4A = {}
+    var myData = []
+    try {
+      myData = JSON.parse(localStorage.getItem('myLocalData'));
+    } catch (error) {
+      console.log("Lỗi: ", error)
+      myData = JSON.parse(localStorage.getItem('myLocalData'))
+    }
+
+    if (myData == null) {
+      myData = []
+    } else {
+      //B4A.CallSub('SaveData', false, JSON.stringify(myData))
+    }
 
     var hanhchinh = new Vue({
       el: '#hanhchinh',
@@ -198,9 +306,9 @@
         name: '',
         age: '',
         code: '',
+        selected_sex: '',
         sexs: [
-          { id: 1, text: 'Nam' },
-          { id: 2, text: 'Nữ' }
+          'Nam', 'Nữ'
         ]
       },
       mounted: function () {
@@ -209,12 +317,13 @@
       },
       methods: {
         update: function (event) {
-          console.log(event.target.value)
+          console.log(event.target.value, this.selected_sex)
         },
         reset: function (event) {
           this.name = '';
           this.age = '';
           this.code = '';
+          this.selected_sex = '';
         }
       }
     })
@@ -233,7 +342,9 @@
         cap_IOL: 'Loại IOL',
         cap_calculate: 'Tính!',
         cap_dialogButton: 'Đóng',
-        cap_dialogtitle:'Kết quả',
+        cap_dialogtitle: 'Kết quả',
+        cap_save: 'Lưu',
+        eye: '',
         AL: '',
         ACD: '',
         K1: '',
@@ -246,23 +357,27 @@
         a2: '',
         SRKI: '',
         SRKII: '',
+        current: hanhchinh,
+        xData: myData,
+        chosenIOL: '',
+        selectedIOL: { id: 0, text: '', AConst: '0' },
         IOLList: [
           //{ id: 0, text: '', AConst: '0' },
           { id: 1, text: 'Micropure 123 (SA nhúng)', AConst: '119' },
           { id: 2, text: 'Micropure 123 (IOL master)', AConst: '119.4' },
           { id: 3, text: 'HOYA 250; 251; 254; 255; 351; 150; 151', AConst: '118.5' },
-          { id: 4, text: 'AT Liza 809M', AConst: '117.8'},
-          { id: 5, text: 'AT Liza 839M', AConst: '118.8'},
-          { id: 6, text: 'CT Atphina', AConst: '118.0'},
-          { id: 7, text: 'CT Lucia 601PY', AConst: '119.1'},
-          { id: 8, text: 'CZ 70 BD', AConst: '118.8'},
-          { id: 9, text: 'Fine Vision PODF (SA Nhúng)', AConst: '118.73'},
-          { id: 10, text: 'Fine Vision PODF (IOL master)', AConst: '118.95'},
-          { id: 11, text: 'Hoya 125', AConst: '118.4'},
-          { id: 12, text: 'IQ SN60WF', AConst: '118.7'},
-          { id: 13, text: 'IQ Toric SN6AT5', AConst: '119'},
-          { id: 14, text: 'KS-SP', AConst: '119.1'},
-          { id: 15, text: 'Overview', AConst: '118.8'},
+          { id: 4, text: 'AT Liza 809M', AConst: '117.8' },
+          { id: 5, text: 'AT Liza 839M', AConst: '118.8' },
+          { id: 6, text: 'CT Atphina', AConst: '118.0' },
+          { id: 7, text: 'CT Lucia 601PY', AConst: '119.1' },
+          { id: 8, text: 'CZ 70 BD', AConst: '118.8' },
+          { id: 9, text: 'Fine Vision PODF (SA Nhúng)', AConst: '118.73' },
+          { id: 10, text: 'Fine Vision PODF (IOL master)', AConst: '118.95' },
+          { id: 11, text: 'Hoya 125', AConst: '118.4' },
+          { id: 12, text: 'IQ SN60WF', AConst: '118.7' },
+          { id: 13, text: 'IQ Toric SN6AT5', AConst: '119' },
+          { id: 14, text: 'KS-SP', AConst: '119.1' },
+          { id: 15, text: 'Overview', AConst: '118.8' },
           { id: 16, text: 'Precisal', AConst: '118.7' },
           { id: 17, text: 'Restor SN6AD1', AConst: '118.9' },
           { id: 18, text: 'Restor SV25TO', AConst: '119.1' },
@@ -276,15 +391,14 @@
         ]
       },
       mounted: function () {
-        Metro.init();
+        //Metro.init();
       },
       methods: {
         updateIOL: function (event) {
 
         },
         WriteToTable: function (row, col, mytext, color) {
-          mybody = document.getElementsByTagName("body")[0]; //html body in document
-          mytable = mybody.getElementsByTagName("table")[0]; //first table in document
+          mytable = document.getElementById("idTableR") //first table in document
           mytablebody = mytable.getElementsByTagName("tbody")[0];  //first table body
           myrow = mytablebody.getElementsByTagName("tr")[row]; //passed row value
           mycell = myrow.getElementsByTagName("td")[col]; //passed col value
@@ -398,9 +512,11 @@
 
         },
 
-      updateA: function (event) {
-          //console.log(event.target.value)
+        updateA: function (event) {
+          //console.log(event.target)
           //nội suy SF từ AConst
+          if (this.selectedIOL.AConst != '0')
+            this.AConst = this.selectedIOL.AConst;
           var MyAcon = parseFloat(this.AConst);
           var My_SF = (MyAcon * 0.5663) - 65.600;
           this.SF = My_SF.toFixed(2);
@@ -418,19 +534,124 @@
         showTable: function (event) {
           this.MainCalc();
           Metro.dialog.open('#idDialog')
-
         },
         reset: function (event) {
           this.AL = '';
           this.ACD = '';
           this.K1 = '';
           this.K2 = '';
+        },
+
+        fSave: function (event) {
+          // Metro.dialog.create({
+          //   title: "Lưu thông tin",
+          //   content: `
+          //   Họ và tên: {{hanhchinh.name}} <br>
+          //   Tuổi: {{hanhchinh.age}} <br>
+          //   Giới: {{hanhchinh.selected_sex}} <br>
+          //   Mã BN: {{hanhchinh.code}} <br>
+          //   Bạn hãy điền loại IOL và số IOL đã dùng trên BN này: <br>
+          //   <input type="text" data-role="input" data-prepend="Đã chọn:" v-model="chosenIOL" required>
+          //   `,
+          //   actions: [
+          //     {
+          //       caption: "Lưu và đóng",
+          //       cls: "js-dialog-close alert",
+          //       onclick: function () {
+          //         save();
+          //       }
+          //     }]
+          //   ,
+          //   closeButton: true
+          // });
+          Metro.dialog.open("#idDialogSave");
         }
       }
 
     })
 
+    var kq = new Vue
+      (
+        {
+          el: '#tab2',
+          data: {
+            xData: myData
+          }
+        }
+      )
+
+
+    var vueNgonngu = new Vue({
+      el: '#idNgonngu',
+      data: {
+      },
+      mounted: function () {
+        Metro.init();
+        //Metro.window.hide("#idWindowSaved")
+
+        // Chỉ dùng ở lần mount của component cuối cùng!
+      },
+      methods: {
+        updateEnglish: function (event) {
+          hanhchinh.cap_head = "Patient's information"
+          hanhchinh.cap_name = "Name"
+          hanhchinh.cap_age = "Age"
+          hanhchinh.cap_sex = "Sex"
+          hanhchinh.cap_sex2 = "Choose sex"
+          hanhchinh.cap_reset = "Reset"
+          tinhtoan.cap_head = "Paramters"
+          tinhtoan.cap_calculate = "Calculate!"
+          tinhtoan.cap_reset = "Reset"
+          tinhtoan.cap_save = "Save"
+          hanhchinh.sexs = ['Male', 'Female']
+        },
+        updateVie: function (event) {
+          hanhchinh.cap_head = "Thông tin bệnh nhân"
+          hanhchinh.cap_reset = "Nhập lại"
+          tinhtoan.cap_head = "Thông số"
+          tinhtoan.cap_calculate = "Tính!"
+          tinhtoan.cap_reset = "Nhập lại"
+          hanhchinh.sexs = ['Nam', 'Nữ']
+
+        }
+      }
+    })
+
+    function save() {
+      var data = {
+        name: hanhchinh.name,
+        age: hanhchinh.age,
+        code: hanhchinh.code,
+        sex: hanhchinh.selected_sex,
+        eye: tinhtoan.eye,
+        AL: tinhtoan.AL,
+        ACD: tinhtoan.ACD,
+        K1: tinhtoan.K1,
+        K2: tinhtoan.K2,
+        IOL: tinhtoan.selectedIOL.text,
+        AConst: tinhtoan.AConst,
+        chosen: tinhtoan.chosenIOL,
+        time: (new Date()).toLocaleDateString()
+      }
+      myData.push(data)
+      localStorage.setItem('myLocalData', JSON.stringify(myData));
+      Vue.set(kq, 'xData', myData)
+    }
+
+    function showSaved(tab) {
+      console.log("tab", tab, tab.textContent)
+      if (tab.textContent == "Danh sách"){
+        
+        console.log("Bấm vào Danh sách")
+      }
+    }
+
     function test1() {
+      hanhchinh.name = 'nguyễn văn a'
+      hanhchinh.age = '12'
+      hanhchinh.code = 'bn123'
+      hanhchinh.selected_sex = 'Nam'
+      tinhtoan.eye = 'Mắt phải (OD)'
       tinhtoan.AConst = '118.5'
       tinhtoan.AL = '22.4'
       tinhtoan.ACD = '3'
