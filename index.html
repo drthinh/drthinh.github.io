@@ -668,5 +668,13 @@
 
 
 </body>
+<script>
+	var ua = navigator.userAgent.toLowerCase();
+	var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
+	if(isAndroid) {
+	 if(confirm('Bạn có muốn tải phiên bản Android về điện thoại?') == true)
+        window.location = 'https://github.com/drthinh/drthinh.github.io/releases/download/2.0/iol2.apk';
+}
+	</script>
 
 </html>
