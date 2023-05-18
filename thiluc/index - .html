@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>Bảng thị lực</title>
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+    <script type="text/javascript" src="scripts/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="scripts/hammer.min.js"></script>
+    <script type="text/javascript" src="scripts/seedrandom.min.js"></script>
+    <script type="text/javascript" src="scripts/chartType.js"></script>
+    <script type="text/javascript" src="scripts/chartTypeSingle.js"></script>
+    <script type="text/javascript" src="scripts/chartTypeRows.js"></script>
+    <script type="text/javascript" src="scripts/chartTypeModify.js"></script>
+    <script type="text/javascript" src="scripts/chartTypePosition.js"></script>
+    <script type="text/javascript" src="scripts/chartSnellen.js"></script>
+    <script type="text/javascript" src="scripts/chartContrast.js"></script>
+    <script type="text/javascript" src="scripts/init.js"></script>
+    <script type="text/javascript">
+    function initSnellen() {
+        var settings = document.getElementById("settings");
+        var str = "" + "lineSize=" + settings.lineSize.value +
+            "&" + "lineUnits=" + settings.lineUnits.value +
+            "&" + "distance=" + settings.distance.value +
+            "&" + "distanceUnits=" + settings.distanceUnits.value +
+            "&" + "chartType=" + 0 +
+            "&" + "optoType=" + 0 +
+            "&" + "displayType=" + 3 +
+            "&" + "rowIndex=" + 0 +
+            "&" + "mirror=" + $(settings.mirror).prop("checked") +
+            "&" + "crowd=" + $(settings.crowd).prop("checked");
+        location.hash = str;
+        ReadURL();
+        UserUpDown(-7);
+    }
+    </script>
+</head>
+
+<body onload="Boot()">
+    <img id="toggle" src="style/cog.svg" class="cog" onclick="ToggleSettings()" />
+    <div id="console">
+        <form id="settings">
+            <input type="hidden" name="rowIndex" value="6">
+            <table>
+                <tr>
+                    <td>
+                        <h2>Căn chỉnh</h2>
+                        <input type="number" id="lineSize" name="lineSize" step="0.1" min="1" max="10" value="2.5" style="width:5em" "size=" 5">
+                        <select name="lineUnits" value="cm" onchange="WriteURL()">
+                            <option value="cm">cm</option>
+                            <option value="inches">inch</option>
+                        </select>
+                        <i>Đo đoạn thẳng này</i>
+                        <img src="assets/line.svg" width="100" height="5" border="1">
+                    </td>
+                    <td>
+                        <h2>Khoảng cách quan sát</h2>
+                        <input type="number" id="distanceSize" name="distance" value="6" min="0.1" max="30" style="width:5em" size="5" step="0.1" onkeyup="WriteURL()" onpaste="WriteURL()" oninput="WriteURL()">
+                        <select name="distanceUnits" value="meters" onchange="WriteURL()">
+                            <option value="meters">mét</option>
+                            <option value="feet">feet</option>
+                        </select>
+                    </td>
+                    <td>
+                        <h2>Loại bảng</h2>
+                        <select id="chartType" name="chartType" value="0" onchange="WriteURL()">
+                        </select>
+                    </td>
+                    <td>
+                        <h2 class="uiOptoType">Bảng đo thị lực</h2>
+                        <select class="uiOptoType" id="optoType" name="optoType" value="0" onchange="WriteURL()">
+                        </select>
+                    </td>
+                    <td>
+                        <h2 class="uiDisplayType">Số ký tự một dòng</h2>
+                        <select name="displayType" value="3" onchange="WriteURL()" class="uiDisplayType">
+                            <option value="0">[q] Một ký tự</option>
+                            <option value="1">[w] Một hàng</option>
+                            <option value="2">[e] Năm hàng</option>
+                            <option value="3">[r] Mười lăm hàng</option>
+                        </select>
+                    </td>
+                    <td>
+                        <h2>Hiển thị</h2>
+                        <a onclick="Refresh()" class="button buttonHide"></a>
+                        <a id="buttonLarger" onclick="UserUp()" class="button buttonLarger uiMultipleRow"></a>
+                        <a id="buttonSmaller" onclick="UserDown()" class="button buttonSmaller uiMultipleRow"></a>
+                        <input class="check" type="checkbox" name="mirror" onchange="WriteURL()">[m] Gương
+                        <input id="checkCrowd" class="check" type="checkbox" name="crowd" onchange="WriteURL()"><span id="uiCheckCrowd">[b] Hiệu ứng đám đông</span>
+                        <input type="radio" name="nearFar" value="far" onclick="WriteURL()" checked hidden></input>
+                        <input type="button" name="reset" value="Mặc định" onclick="initSnellen()" checked></input>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div id="displayFrame">
+    </div>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        initSnellen();
+    });
+    </script>
+</body>
+
+</html>
