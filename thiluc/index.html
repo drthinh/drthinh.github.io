@@ -48,7 +48,7 @@
                 <tr>
                     <td>
                         <h2>Căn chỉnh</h2>
-                        <input inputmode="numeric" pattern="/^\d+[,]?\d{0,2}$/" type="text" id="lineSize" name="lineSize" step="0.1" min="1" max="10" value="2.5" style="width:5em" "size=" 5">
+                        <input type="text" id="lineSize" name="lineSize" step="0.1" min="1" max="10" value="2.5" style="width:5em" "size=" 5">
                         <select name="lineUnits" value="cm" onchange="WriteURL()">
                             <option value="cm">cm</option>
                             <option value="inches">inch</option>
@@ -58,7 +58,7 @@
                     </td>
                     <td>
                         <h2>Khoảng cách quan sát</h2>
-                        <input inputmode="numeric" pattern="/^\d+[,]?\d{0,2}$/" type="text" id="distanceSize" name="distance" value="6" min="0.1" max="30" style="width:5em" size="5" step="0.1" onkeyup="WriteURL()" onpaste="WriteURL()" oninput="WriteURL()">
+                        <input type="text" id="distanceSize" name="distance" value="6" min="0.1" max="30" style="width:5em" size="5" step="0.1" onkeyup="WriteURL()" onpaste="WriteURL()" oninput="WriteURL()">
                         <select name="distanceUnits" value="meters" onchange="WriteURL()">
                             <option value="meters">mét</option>
                             <option value="feet">feet</option>
