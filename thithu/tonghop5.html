@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Đề tổng hợp số 5</title>
+	<style type="text/css">
+		.cauhoi {
+			 border-style: solid;
+			 border-width: 2px;
+			 color: blue;
+			}
+		.luachon {
+			border-style: solid;
+			 border-width: 2px;
+			 color: black;
+		   }
+		 .dapan {
+			border-style: solid;
+			 border-width: 2px;
+			 color: pink;
+		   }
+#seconds {
+  font-size: 5em;}
+
+#minutes {
+  font-size: 5em;
+}
+#colon {
+  font-size: 5em;
+}
+	</style>
+
+</head>
+<body>
+	<div id = "bangdieukhien" style="position:sticky;top:0;width:100%;background-color: #e2e2e2;">
+		<div style="text-align: center;">
+		<label id="minutes">00</label>
+		<label id="colon">:</label>
+		<label id="seconds">00</label>
+		</div>
+		<div style="text-align: center;">
+		<button onclick="Batdau_click()">Bắt đầu làm test Tổng hợp 5</button>
+		<button onclick="Lamlai_click()">Làm lại</button><br/>
+		Số câu làm đúng: <label id = "so_caulamdung"></label>/<label id = "so_dalam"></label> (Tổng: <label id = "tong_socau"></label>)
+	    </div>
+	</div>
+	<br/>
+	<br/>
+<div id = "ketqua"></div>
+<script type="text/javascript">
+	var noidung = `Câu hỏi 1
+Đoạn văn câu hỏi
+Một bệnh nhân phẫu thuật phối hợp lấy thể thủy tinh đục và cắt bè. Ngày đầu sau mổ nhãn áp là 43, mất tiền phòng phía chu biên và tiền phòng trung tâm nông nhưng không có tiếp xúc thể thủy tinh, giác mạc. Chẩn đoán nào dưới đây là hợp lý nhất ?
+Select one:
+ a. Rò vết mổ 
+ b. Đóng góc
+ c. Bong hắc mạc
+ d. Thủy dịch di chuyển nhầm đường
+Phản hồi
+The correct answer is: Thủy dịch di chuyển nhầm đường
+Câu hỏi 2
+Đoạn văn câu hỏi
+Làm test Hirchberg thu được hình ảnh sau. Kết luận là
+Select one:
+ a. Lác trong MP 30 D lăng kính
+ b. Lác trong MP 90 D lăng kính
+ c. Lác trong MP 60 D lăng kính 
+ d. Lác ngoài MP 60 D lăng kính
+Phản hồi
+The correct answer is: Lác trong MP 60 D lăng kính
+Câu hỏi 3
+Đoạn văn câu hỏi
+Đánh dấu vào câu đúng:
+Select one:
+ a. Nhãn áp hai mắt luôn tương đương nhau
+ b. Chênh lệch nhãn áp sáng chiều thường trên 5 mmHg
+ c. Cứ tăng một tuổi là nhãn áp tăng 5 mmHg
+ d. Chênh lệch nhãn áp giữa hai mắt thường không quá 5 mmHg 
+Phản hồi
+The correct answer is: Chênh lệch nhãn áp giữa hai mắt thường không quá 5 mmHg
+Câu hỏi 4
+Đoạn văn câu hỏi
+Các yếu tố nguy cơ gây xuất huyết tống khứ trong phẫu thuật lấy thủy tinh thể đục gồm có:
+Select one or more:
+ a. Mống mắt sáng màu
+ b. Tiền sử glôcôm
+ c. Cận thị nặng 
+ d. Tiền phòng nông
+ e. Xơ vữa động mạch
+Phản hồi
+The correct answers are: Tiền sử glôcôm, Xơ vữa động mạch
+Câu hỏi 5
+Đoạn văn câu hỏi
+Chọn 1 ý sai về Phẫu thuật điều trị lác:
+Select one:
+ a. Hội chứng lác trong chữ A điều trị bằng lùi cơ trực trong hai bên và dịch cơ lên trên
+ b. Sử dụng phẫu thuật faden điều trị hội chứng phân ly hai mắt theo chiều đứng (DVD)
+ c. Tịnh tiến nửa sau của cơ chéo lớn để chỉnh lác xoáy ngoài
+ d. Chỉnh chỉ nên áp dụng với lác do bệnh lý tuyến giáp trạng 
+Phản hồi
+The correct answer is: Tịnh tiến nửa sau của cơ chéo lớn để chỉnh lác xoáy ngoài
+Câu hỏi 6
+Đoạn văn câu hỏi
+Các thớ sợi thần kinh rõ nét hơn khi:
+Select one:
+ a. Môi trường trong suốt 
+ b. Dùng ánh sáng đỏ
+ c. Trên vùng có teo biểu mô sắc tố võng mạc
+ d. Dùng máy soi đáy mắt trực tiếp
+Phản hồi
+The correct answer is: Môi trường trong suốt
+Câu hỏi 7
+Đoạn văn câu hỏi
+Các câu nói về bong hắc mạc sau phẫu thuật lấy thể thủy tinh đục đều đúng, trừ:
+Select one:
+ a. Diễn biến lâm sàng thường lành tính
+ b. Đi kèm vết khâu không kín
+ c. 20% số trường hợp có bong võng mạc phía trên đi kèm 
+ d. Thường ở trước xích đạo
+ e. Thường xảy ra ở các góc phần tư phía dưới
+Phản hồi
+The correct answer is: 20% số trường hợp có bong võng mạc phía trên đi kèm
+Câu hỏi 8
+Đoạn văn câu hỏi
+Bệnh nhân đã được xác định chẩn đoán glôcôm góc đóng ở 1 mắt, mắt bên kia cần:
+Select one:
+ a. Cắt bè củng giác mạc
+ b. Cắt mống mắt chu biên 
+ c. Theo dõi, không điều trị gì
+ d. Tra thuốc co đồng tử
+Phản hồi
+The correct answer is: Cắt mống mắt chu biên
+Câu hỏi 9
+Đoạn văn câu hỏi
+Tìm câu ít chính xác nhất khi nói về loét giác mạc do vi khuẩn Gram (+) (như tụ cầu vàng và phế cầu)?
+Select one:
+ a. Ổ loét lan đồng tâm ra toàn bộ giác mạc và gây thủng trong vòng 7 ngày 
+ b. Trong trường hợp loét do phế cầu có phản ứng tiền phòng, thường có mủ tiền phòng vô khuẩn
+ c. Có xu hướng khu trú, ít khi ảnh hưởng toàn bộ bề mặt giác mạc
+ d. Ổ loét có hình tròn hay bầu dục và có bờ rất rõ nét
+Phản hồi
+The correct answer is: Ổ loét lan đồng tâm ra toàn bộ giác mạc và gây thủng trong vòng 7 ngày
+Câu hỏi 10
+Đoạn văn câu hỏi
+Câu nào sau đây không đúng khi nói về glôcôm do tiêu thể thủy tinh?
+Select one:
+ a. Cắt mống mắt chu biên chỉ có tác dụng điều trị triệu chứng trong nhiều tháng
+ b. Cần điều trị bằng cách lấy nhân đục
+ c. Thường có tủa sau giác mạc
+ d. Protein thoái hóa là nguyên nhân gây phản ứng đại thực bào
+ e. Thường kèm theo lùi góc 
+Phản hồi
+The correct answer is: Cắt mống mắt chu biên chỉ có tác dụng điều trị triệu chứng trong nhiều tháng
+Câu hỏi 11
+Đoạn văn câu hỏi
+Các cơ nào đưa mắt lên trên
+Select one:
+ a. Chéo bé và chéo lớn
+ b. Chéo bé và trực trên
+ c. Trực trên và chéo lớn
+ d. Trực trên và chéo bé 
+Phản hồi
+The correct answer is: Chéo bé và trực trên
+Câu hỏi 12
+Đoạn văn câu hỏi
+Dấu hiệu nào sau đây là triệu chứng của glôcôm góc đóng cấp
+1 - Giảm thị lực
+2 - Đau mắt và quanh hốc mắt
+3 - Đỏ mắt
+4 - Co đồng tử
+Select one:
+ a. 1,2,3 
+ b. 1,3
+ c. 2,4
+ d. 1,2,3,4
+Phản hồi
+The correct answer is: 1,2,3
+Câu hỏi 13
+Đoạn văn câu hỏi
+Với MP đeo kính đỏ, bệnh nhân có hợp thị sẽ nói nhìn thấy:
+Select one:
+ a. 5 điểm sáng
+ b. 3 điểm sáng
+ c. 6 điểm sáng
+ d. 4 điểm sáng 
+Phản hồi
+The correct answer is: 4 điểm sáng
+Câu hỏi 14
+Đoạn văn câu hỏi
+Kháng nguyên HLA B5 đi kèm theo bệnh nào dưới đây?
+Select one:
+ a. Viêm cột sống dính khớp
+ b. Bệnh Crohn
+ c. Hội chứng Reiter
+ d. Bệnh Behcet 
+Phản hồi
+The correct answer is: Bệnh Behcet
+Câu hỏi 15
+Đoạn văn câu hỏi
+Câu nào không đúng về cấu trúc thủy tinh thể?
+Select one:
+ a. Thủy tinh thể vồng ra trước là do nhân bị đẩy ra trước 
+ b. Lớp vỏ quanh nhân trưởng thành là các sợi còn nhân mới hình thành
+ c. Hoạt động phân bào mạnh nhất xảy ra ở vùng xích đạo
+ d. Khớp nối trước có hình Y ngược
+Phản hồi
+The correct answer is: Khớp nối trước có hình Y ngược
+Câu hỏi 16
+Đoạn văn câu hỏi
+Dấu hiệu lâm sàng nào dưới đây thường gặp trong viêm củng mạc hơn là viêm thượng củng mạc?
+Select one:
+ a. Nếu không điều trị gây hoại tử củng mạc và đe dọa thị lực 
+ b. Đâu đỏ ít hơn viêm thượng củng mạc
+ c. Bệnh xảy ra đơn độc hay có dạng nốt và không đi kèm theo bệnh lý collagen mạch máu
+ d. Mắt đỡ đỏ khi tra phenylephrin, trong khi viêm thượng củng mạc thì không
+Phản hồi
+The correct answer is: Nếu không điều trị gây hoại tử củng mạc và đe dọa thị lực
+Câu hỏi 17
+Đoạn văn câu hỏi
+Phương pháp đo độ lác Krimsky phối hợp Hirschberg sử dụng
+Select one:
+ a. Đeo kính đọc sách
+ b. Lăng kính điều chỉnh 
+ c. Đũa Maddox
+ d. Lăng kính và test bịt mắt
+Phản hồi
+The correct answer is: Lăng kính điều chỉnh
+Câu hỏi 18
+Đoạn văn câu hỏi
+Cách đặt lăng kính đúng để đo độ lác
+Select one:
+ a. Đỉnh lăng kính luôn hướng về cùng phía lác 
+ b. Luôn đặt lăng kính trước mắt lác
+ c. Luôn chia độ lăng kính cho cả 2 mắt
+ d. Đỉnh lăng kính luôn hướng về phía ngược với hướng lác
+Phản hồi
+The correct answer is: Đỉnh lăng kính luôn hướng về cùng phía lác
+Câu hỏi 19
+Đoạn văn câu hỏi
+Trong các thuốc tra sau, thuốc nào tăng thoát thuỷ dịch?
+Select one:
+ a. Timolol
+ b. Neosynephrine
+ c. Atropin
+ d. Kháng men cholinesterase 
+Phản hồi
+The correct answer is: Kháng men cholinesterase
+Câu hỏi 20
+Đoạn văn câu hỏi
+Chọn một câu sai nói về tân mạch võng mạc:
+Select one:
+ a. Tân mạch gai thị là do thiếu máu võng mạc rộng
+ b. Không bao giờ xuất hiện ở vùng hoàng điểm 
+ c. Tân mạch là các cấu trúc mao mạch chỉ có 1 lớp nội mô
+ d. Chụp mạch thấy một vùng tăng sáng ở thì muộn và ranh giới không rõ ràng
+Phản hồi
+The correct answer is: Không bao giờ xuất hiện ở vùng hoàng điểm
+Câu hỏi 21
+Đoạn văn câu hỏi
+Nhiễm đồng, do dị vật nội nhãn, có vòng Kayser Fleischer và đục thể thủy tinh hình hoa hướng dương, làm ta đoán hợp kim đồng có tỷ lệ đồng nguyên chất thấp hơn:
+Select one:
+ a. 1%
+ b. 10%
+ c. 85%
+ d. 40% 
+ e. 0,1%
+Phản hồi
+The correct answer is: 85%
+Câu hỏi 22
+Đoạn văn câu hỏi
+Tìm 1 câu sai về Tư thế đầu bất thường
+Select one:
+ a. Trong liệt cơ chéo lớn mắt phải, đầu nghiêng sang vai bên trái
+ b. Trong liệt cơ chéo bé mắt trái, cằm hạ thấp xuống
+ c. Là cơ chế mắt di chuyển về phía đối diện với trường hoạt động của cơ khỏe hơn
+ d. Trong liệt cơ trực trên, cằm hạ thấp xuống 
+Phản hồi
+The correct answer is: Trong liệt cơ chéo lớn mắt phải, đầu nghiêng sang vai bên trái
+Câu hỏi 23
+Đoạn văn câu hỏi
+Hình thái đục thể thuỷ tinh dưới đây có tên gọi là gì
+Select one:
+ a. Đục hình sao
+ b. Đục viền hoa
+ c. Đục dây chằng 
+ d. Đục nốt xanh
+Phản hồi
+The correct answer is: Đục hình sao
+Câu hỏi 24
+Đoạn văn câu hỏi
+Cách điều trị nào sau đây phù hợp với bệnh nhân nam 30 tuổi bị viêm xoang, viêm củng mạc 2 mắt, viêm màng bồ đào trước nhẹ và có xét nghiệm (c-ANCA) dương tính?
+Select one:
+ a. Tiêm cạnh nhãn cầu 40 mg triamcinolone actetate
+ b. Uống cyclophosphamide 2 mg/kg/ngày 
+ c. Tra thuốc chống viêm không phải steroid như ketralac
+ d. Uống thuốc chống viêm không phải steroid như indomethacin 50 mg 3 lần/ ngày
+Phản hồi
+The correct answer is: Uống cyclophosphamide 2 mg/kg/ngày
+Câu hỏi 25
+Đoạn văn câu hỏi
+Nguyên nhân đục thể thủy tinh sau ghép thận là:
+Select one:
+ a. Dùng thuốc ức chế miễn dịch 
+ b. Thay đổi nồng độ can xi trong thủy dịch và thể thủy tinh
+ c. Thay đổi cân bằng ion, đặc biệt là kali
+ d. Không câu nào đúng
+ e. Thay đổi cân bằng áp lực thẩm thấu sau ghép thận
+Phản hồi
+The correct answer is: Dùng thuốc ức chế miễn dịch
+Câu hỏi 26
+Đoạn văn câu hỏi
+Tương ứng võng mạc bình thường là tình trạng có
+Select one:
+ a. Một mắt sử dụng điểm vàng và mắt kia thì không
+ b. Não có thể hợp thị hai hình đến từ mỗi điểm vàng 
+ c. Một mắt ức chế hình ảnh
+ d. Bệnh nhân có lác sử dụng điểm vàng của mỗi mắt
+Phản hồi
+The correct answer is: Não có thể hợp thị hai hình đến từ mỗi điểm vàng
+Câu hỏi 27
+Đoạn văn câu hỏi
+Tắc động mạch trung tâm võng mạc: câu nào không đúng:
+Select one:
+ a. Khoảng 10-15% trường hợp xuất hiện tân mạch mống mắt
+ b. Dấu hiệu hoàng điểm anh đào sẽ mất đi sau vài tuần
+ c. Cần phải điều trị ngay tất cả các bệnh nhân đến viện trong vòng 48 giờ 
+ d. 1/5 các trường hợp vẫn giữ được thị lực trung tâm do có nhánh động mạch mi võng mạc( cilioretinal)
+Phản hồi
+The correct answer is: Khoảng 10-15% trường hợp xuất hiện tân mạch mống mắt
+Câu hỏi 28
+Đoạn văn câu hỏi
+Tất cả các dấu hiệu sau là biến chứng của bệnh võng mạc trẻ đẻ non (ROP), NGOẠI TRỪ:
+Select one:
+ a. Lác
+ b. Đục thể thủy tinh 
+ c. Bong võng mạc
+ d. Tật khúc xạ
+Phản hồi
+The correct answer is: Đục thể thủy tinh
+Câu hỏi 29
+Đoạn văn câu hỏi
+Nguyên nhân gây mất tiền phòng sau phẫu thuật nội nhãn là:
+Select one:
+ a. Bong hắc mạc
+ b. Viêm nội nhãn
+ c. Thủy dịch lưu thông nhầm đường
+ d. Rò vết mổ 
+Phản hồi
+The correct answer is: Rò vết mổ
+Câu hỏi 30
+Đoạn văn câu hỏi
+Trong các dấu hiệu sau dấu hiệu nào không phải là tổn thương của bệnh võng mạc do cao huyết áp:
+Select one:
+ a. Tắc mạch hắc mạc 
+ b. giãn từng điểm của mao động mạch
+ c. Phình mạch lớn
+ d. Tắc nghẽn trước mao động mạch
+Phản hồi
+The correct answer is: giãn từng điểm của mao động mạch
+Câu hỏi 31
+Đoạn văn câu hỏi
+Khô mắt:
+Select one:
+ a. Phát hiện với test Sjogren
+ b. Có thể là nguyên nhân của chảy nước mắt
+ c. Có thể do thiểu năng chế tiết tuyến Meibomius 
+ d. Không phải là triệu chứng của bệnh sarcoit
+Phản hồi
+The correct answer is: Có thể là nguyên nhân của chảy nước mắt
+Câu hỏi 32
+Đoạn văn câu hỏi
+Bệnh nào dưới đây luôn xảy ra ở cả hai mắt?
+Select one:
+ a. Nhãn viêm giao cảm 
+ b. Bệnh hắc võng mạc Birdshot
+ c. Bệnh Vogt-Koyanagi-Harada
+ d. Viêm pars plana
+Phản hồi
+The correct answer is: Viêm pars plana
+Câu hỏi 33
+Đoạn văn câu hỏi
+Tủa giác mạc trong viêm màng bồ đào không dạng hạt bao gồm các tế bào nào?
+Select one:
+ a. Đa nhân trung tính
+ b. Tế bào bán liên 
+ c. Bạch cầu đơn nhân
+ d. Limpho
+Phản hồi
+The correct answer is: Limpho
+Câu hỏi 34
+Đoạn văn câu hỏi
+Mô tả vòng Sommerring nào sau đây là đúng?
+Select one:
+ a. Không ý nào đúng
+ b. Vòng chất nhân ở xích đạo còn sót sau phẫu thuật lấy thể thủy tinh đục ngoài bao
+ c. Xảy ra sau dị vật nội nhãn
+ d. Xảy ra sau chấn thương đụng dập 
+ e. Là dị dạng bẩm sinh
+Phản hồi
+The correct answer is: Vòng chất nhân ở xích đạo còn sót sau phẫu thuật lấy thể thủy tinh đục ngoài bao
+Câu hỏi 35
+Đoạn văn câu hỏi
+Chọn 1 ý sai trong Glôcôm góc mở:
+Select one:
+ a. Xuất huyết cạnh gai là dấu hiệu nghi ngờ
+ b. Chẩn đoán dựa vào lõm gai
+ c. Nửa thị trường phía trên bị ảnh hưởng trước
+ d. Tránh sử dụng thuốc giãn đồng tử 
+Phản hồi
+The correct answer is: Tránh sử dụng thuốc giãn đồng tử
+Câu hỏi 36
+Đoạn văn câu hỏi
+Các nguyên nhân khô mắt một bên do giảm chế tiết nước mắt không gồm có:
+Select one:
+ a. Viêm tuyến lệ do virut
+ b. Liệt dây VII và viêm giác mạc hở mi đi kèm
+ c. Xạ trị mắt
+ d. Lồi mắt do cường tuyến giáp và viêm giác mạc do hở mi đi kèm 
+Phản hồi
+The correct answer is: Lồi mắt do cường tuyến giáp và viêm giác mạc do hở mi đi kèm
+Câu hỏi 37
+Đoạn văn câu hỏi
+Thoái hóa hoàng điểm tuổi già:
+Select one:
+ a. Do lắng đọng bất thường ở lớp biểu mô sắc tố 
+ b. Đáp ứng chậm với steroid tại chỗ
+ c. Gặp ở 1% người trên 70 tuổi
+ d. Gây thị trường hình ống
+Phản hồi
+The correct answer is: Do lắng đọng bất thường ở lớp biểu mô sắc tố
+Câu hỏi 38
+Đoạn văn câu hỏi
+Đục giác mạc có ý nghĩa trong các bệnh rối loạn chuyển hóa mucopolysaccharide sau, trừ:
+Select one:
+ a. Hội chứng Hunter 
+ b. Hội chứng Marateaux Lamy
+ c. Hội chứng Morquio
+ d. Hội chứng Scheie
+ e. Hội chứng Hurler
+Phản hồi
+The correct answer is: Hội chứng Hunter
+Câu hỏi 39
+Đoạn văn câu hỏi
+Có 1 câu sai về phân loại mô học u hắc tố hắc mạc:
+Select one:
+ a. Các khối u tế bào hình thoi B biệt hóa có tiên lượng tốt nhất 
+ b. Tế bào hình thoi A có hạt nhân lớn
+ c. Tế bào biểu mô không có hình ảnh nhân chia
+ d. Tế bào hình thoi B có bào tương biệt hóa kém
+Phản hồi
+The correct answer is: Tế bào hình thoi A có hạt nhân lớn
+Câu hỏi 40
+Đoạn văn câu hỏi
+Khi làm test 4 điểm Worth bệnh nhân có hợp thị sẽ nói tất cả các câu sau trừ
+Select one:
+ a. Các điểm sáng phía trên và phía dưới màu đỏ, điểm sáng trái và phải màu xanh lục
+ b. Điểm sáng phía dưới lúc thì màu đỏ, lúc thì màu xanh lục
+ c. Chỉ có điểm sáng phía dưới màu đỏ, còn lại là màu xanh lục 
+ d. Chỉ có điểm sáng phía trên màu đỏ, còn lại là màu xanh lục
+Phản hồi
+The correct answer is: Chỉ có điểm sáng phía dưới màu đỏ, còn lại là màu xanh lục
+Câu hỏi 41
+Đoạn văn câu hỏi
+Bệnh võng mạc trung tâm thanh dịch, tình huống nào không đúng:
+Select one:
+ a. Không có triệu chứng khi vùng bong nằm ngoài hố trung tâm 
+ b. Biểu hiện như một bệnh viễn thị mắc phải
+ c. Có tỷ lệ tái phát là 40%
+ d. Thường gặp ở phụ nữ trung niên
+Phản hồi
+The correct answer is: Thường gặp ở phụ nữ trung niên
+Câu hỏi 42
+Đoạn văn câu hỏi
+Hiện tượng tê da mi dưới xảy ra sau:
+1. Phong bế thần kinh mặt Atkinson
+2. Phong bế thần kinh mặt Van Lint
+3. Phong bế thần kinh mặt O’Brien
+4. Cả 1 và 2 đúng
+5. Không ý nào đúng
+Select one:
+ a. 5
+ b. 3
+ c. 4
+ d. 1 
+ e. 2
+Phản hồi
+The correct answer is: 2
+Câu hỏi 43
+Đoạn văn câu hỏi
+Khi làm test 4 điểm Worth, MP đeo kính đỏ, bệnh nhân nói có 2 điểm sáng màu đỏ nằm bên trái 3 điểm sáng màu xanh lục, điều đó nói lên
+Select one:
+ a. Có ức chế
+ b. Không có lác
+ c. Có song thị chéo 
+ d. Có hợp thị
+Phản hồi
+The correct answer is: Có song thị chéo
+Câu hỏi 44
+Đoạn văn câu hỏi
+Một bệnh nhân nữ, trước đây được chẩn đoán là bệnh giang mai giác mạc ổn định, xuất hiện các nốt trắng xanh nhạt ở bề mặt giác mạc quanh diện đồng tử ở một bên mắt. Không có tân mạch. Chẩn đoán có nhiều khả năng là:
+Select one:
+ a. Thoái hóa lipit
+ b. Thoái hóa Salzmann
+ c. Bệnh giác mạc Labrador
+ d. Bệnh viêm giác mạc do giang mai tái hoạt 
+ e. Thâm nhiễm dạng tinh bột
+Phản hồi
+The correct answer is: Thoái hóa Salzmann
+Câu hỏi 45
+Đoạn văn câu hỏi
+Để khám phân ly, lăng kính cần đặt
+Select one:
+ a. Đáy quay lên trên
+ b. Đáy quay vào trong 
+ c. Đáy quay ra ngoài
+ d. Đáy quay xuống dưới
+Phản hồi
+The correct answer is: Đáy quay vào trong
+Câu hỏi 46
+Đoạn văn câu hỏi
+Bệnh nhân nào dưới đây dễ có khả năng bị u limpho nội nhãn?
+Select one:
+ a. Nữ 29 tuổi có xuất tiết vùng pars plana và viêm mạch máu
+ b. Nữ 65 tuổi viêm dịch kính, thâm nhiễm dưới võng mạc và rối loạn tinh thần 
+ c. Nam 40 tuổi có cục bông và xuất tiết cứng
+ d. Nam 59 tuổi bị viêm võng mạc xuất huyết và viêm mạch máu
+Phản hồi
+The correct answer is: Nữ 65 tuổi viêm dịch kính, thâm nhiễm dưới võng mạc và rối loạn tinh thần
+Câu hỏi 47
+Đoạn văn câu hỏi
+Dấu hiệu nào dưới đây không gặp trong viêm màng bồ đào dạng hạt?
+Select one:
+ a. Tủa dạng mỡ cừu
+ b. Hạt Koeppe
+ c. Hạt Busacca
+ d. Không có dấu hiệu nào 
+Phản hồi
+The correct answer is: Không có dấu hiệu nào
+Câu hỏi 48
+Đoạn văn câu hỏi
+Hội chứng giả bong bao có biểu hiện:
+Select one:
+ a. Tăng nhãn áp
+ b. Lắng đọng chất bất thường ở mặt sau giác mạc, mặt trước TTT, dây Zinn và góc tiền phòng 
+ c. 50% có biểu hiện ở cả 2 mắt
+ d. Tất cả các ý
+Phản hồi
+The correct answer is: Tất cả các ý
+Câu hỏi 49
+Đoạn văn câu hỏi
+Khi thăm dò lệ đạo (Chọn 1 câu sai):
+Select one:
+ a. Test Jone I âm tính chứng tỏ bơm túi lệ kém hoạt động
+ b. Cảm giác chạm xương gặp trong vỡ ống lệ tỵ 
+ c. Cảm giác chạm xương gặp trong sỏi lệ đạo
+ d. Test Jone II dương tính chứng tỏ ống lệ tỵ bị bán tắc
+Phản hồi
+The correct answer is: Cảm giác chạm xương gặp trong vỡ ống lệ tỵ
+Câu hỏi 50
+Đoạn văn câu hỏi
+Nốt ruồi (naevi) hắc mạc: nêu tình huống không đúng:
+Select one:
+ a. Có thể kèm tân mạch võng mạc 
+ b. Cần được theo dõi thường xuyên suốt đời đề phòng bệnh ác tính hóa
+ c. Phát triển trong thời kỳ tiền dậy thì
+ d. Có thể kèm hiện tượng bong thanh dịch võng mạc cạnh hoàng điểm
+Phản hồi
+The correct answer is: Có thể kèm tân mạch võng mạc
+Câu hỏi 51
+Đoạn văn câu hỏi
+Ở mắt nhược thị:
+Select one:
+ a. Phản xạ đồng tử bình thường
+ b. Có teo gai thị
+ c. Thị trường hai mắt không bị thu hẹp
+ d. Đọc cả hàng chữ khó hơn là đọc một chữ riêng rẽ 
+Phản hồi
+The correct answer is: Có teo gai thị
+Câu hỏi 52
+Đoạn văn câu hỏi
+Chọn 1 câu sai nói về U mi mắt:
+Select one:
+ a. U mạch mi thường thoái triển lúc 5 tuổi
+ b. U mạch mi không bao giờ đi kèm lồi mắt 
+ c. U gai sừng có thể tự thoái triển
+ d. U gai sừng có thể giống như mụn đỏ trên mi
+Phản hồi
+The correct answer is: U mạch mi không bao giờ đi kèm lồi mắt
+Câu hỏi 53
+Đoạn văn câu hỏi
+Tương ứng võng mạc bất thường có thể
+Select one:
+ a. Là đáp ứng với giả lác
+ b. Là đáp ứng với lác ẩn
+ c. Là đáp ứng với lác 
+ d. Là đáp ứng với lão thị
+Phản hồi
+The correct answer is: Là đáp ứng với lác
+Câu hỏi 54
+Đoạn văn câu hỏi
+Các thuốc có thể làm khởi phát cơn glôcôm góc đóng cấp:
+Select one:
+ a. Lomudal®
+ b. Chlorpromazin 
+ c. Ethambutol
+ d. Cordaron
+Phản hồi
+The correct answer is: Chlorpromazin
+Câu hỏi 55
+Đoạn văn câu hỏi
+Chọn 1 ý sai sau đây:
+Select one:
+ a. Cắt mống mắt chu biên bằng lade argon nhanh và ít gây đau hơn là lade YAG 
+ b. Mống mắt nâu dễ cắt hơn với lade argon
+ c. Khi cắt mống mắt bằng lade argon, lỗ cắt dễ bị bít lại hơn, nhưng ít gây chảy máu hơn
+ d. Viêm mống mắt có thể xảy ra khi cắt mống mắt bằng lade argon
+Phản hồi
+The correct answer is: Cắt mống mắt chu biên bằng lade argon nhanh và ít gây đau hơn là lade YAG
+Câu hỏi 56
+Đoạn văn câu hỏi
+Vi phình mạch võng mạc thường xuất hiện:
+Select one:
+ a. Do tình trạng thiếu oxy võng mạc 
+ b. Ở mao tĩnh mạch
+ c. Do bẩm sinh
+ d. Ở mao động mạch
+Phản hồi
+The correct answer is: Ở mao tĩnh mạch
+Câu hỏi 57
+Đoạn văn câu hỏi
+Để phát hiện và theo dõi glôcôm mãn tính:
+Select one:
+ a. Làm thị trường động Goldmann, chiếu một điểm sáng có kích thước và cường độ sáng cụ thể , di chuyển điểm sáng này từ ngoại vi vào trung tâm cho đến khi bệnh nhân nhận biết được sự có mặt của nó
+ b. Thực hiện test với nguồn sáng cố định, tức là tăng cường độ sáng cho đến khi bệnh nhân nhận thức được sự có mặt của điểm sáng. Đây là khám nghiệm tinh tế của thị trường trung tâm, chỉ định trong các bệnh lý đầu thị thần kinh, thực hiện bằng thị trường kế tự động tĩnh 
+ c. Làm thị trường động nhiều lần với điểm sáng có kích thước và cường độ sáng giảm dần
+ d. Khám cả hai mắt, với chỉnh kính tốt nhất để loại trừ tật khúc xạ, tìm các tổn hại thị trường chu biên, đặc biệt là bán manh và mất phần tư thị trường
+Phản hồi
+The correct answer is: Thực hiện test với nguồn sáng cố định, tức là tăng cường độ sáng cho đến khi bệnh nhân nhận thức được sự có mặt của điểm sáng. Đây là khám nghiệm tinh tế của thị trường trung tâm, chỉ định trong các bệnh lý đầu thị thần kinh, thực hiện bằng thị trường kế tự động tĩnh
+Câu hỏi 58
+Đoạn văn câu hỏi
+Một đặc điểm nào sau đây không nằm trong hội chứng giả bong bao:
+Select one:
+ a. Góc tiền phòng sâu hơn
+ b. Nhãn áp dao động
+ c. Lệch thể thuỷ tinh tự nhiên
+ d. Đục thể thuỷ tinh sớm
+Phản hồi
+The correct answer is: Góc tiền phòng sâu hơn
+Câu hỏi 59
+Đoạn văn câu hỏi
+Loại tế bào nào là tiên lượng tốt nhất với u hắc tố ác tính?
+Select one:
+ a. Tế bào hình thoi B
+ b. Tế bào hỗn hợp
+ c. Tế bào hình thoi A 
+ d. Tế bào dạng biểu mô
+Phản hồi
+The correct answer is: Tế bào hình thoi A
+Câu hỏi 60
+Đoạn văn câu hỏi
+Tác dụng phụ của nhóm cường giao cảm alpha là:
+Select one:
+ a. Tăng huyết áp
+ b. Khô mũi, miệng 
+ c. Co thắt phế quản
+ d. Giảm trương lực cơ tim
+Phản hồi
+The correct answer is: Khô mũi, miệng
+Câu hỏi 61
+Đoạn văn câu hỏi
+Gen GLC1A gây bệnh glôcôm góc mở nằm trên:
+Select one:
+ a. Nhiếm sắc thể Y 
+ b. Nhiễm sắc thể số 1
+ c. Nhiễm sắc thể X
+ d. Nhiễm sắc thể số 2
+Phản hồi
+The correct answer is: Nhiễm sắc thể số 1
+Câu hỏi 62
+Đoạn văn câu hỏi
+Điều trị ban đầu phối hợp corticosteroid với các thuốc ức chế miễn dịch khác không nên áp dụng với bệnh nào dưới đây:
+Select one:
+ a. Bệnh Behcet 
+ b. U hạt Wegener
+ c. Bệnh sarcoit
+ d. Pemphigus niêm mạc
+Phản hồi
+The correct answer is: Bệnh sarcoit
+Câu hỏi 63
+Đoạn văn câu hỏi
+Các câu nói về laser lưới (grid laser) hoàng điểm, đều đúng, trừ:
+Select one:
+ a. Thời gian phát xung ngắn (0,1 giây)
+ b. Năng lượng được điều chỉnh sao cho đạt được vết đốt rất trắng ở đáy mắt 
+ c. Nên sử dụng kính có độ phóng đại bằng 1 (dùng phần trung tâm của kính 3 mặt gương Goldmann)
+ d. Kích thước các vết đốt nói chung là 100 µm
+Phản hồi
+The correct answer is: Năng lượng được điều chỉnh sao cho đạt được vết đốt rất trắng ở đáy mắt
+Câu hỏi 64
+Đoạn văn câu hỏi
+Bệnh nhân được khám và có lác trong, và nói thấy một hình chữ thập khi làm test Bagolini. Điều này nghĩa là
+Select one:
+ a. Bệnh nhân giả vờ
+ b. Bệnh nhân không hợp thị
+ c. Bệnh nhân hợp thị 
+ d. Bệnh nhân có tương ứng võng mạc bình thường
+Phản hồi
+The correct answer is: Bệnh nhân hợp thị
+Câu hỏi 65
+Đoạn văn câu hỏi
+Hình ảnh “dấu chân gấu” là do tế bào nào tạo thành?
+Select one:
+ a. Tế bào hình thoi B
+ b. Tế bào dạng biểu mô
+ c. Không câu nào đúng 
+ d. Tế bào hình thoi A
+Phản hồi
+The correct answer is: Không câu nào đúng
+Câu hỏi 66
+Đoạn văn câu hỏi
+Lác hiện ngoài bẩm sinh:
+Select one:
+ a. Hiếm khi đi kèm nhược thị
+ b. Biểu hiện lúc 1 tuổi
+ c. Kèm theo bất thường thần kinh
+ d. Có góc lác lớn và hằng định 
+Phản hồi
+The correct answer is: Biểu hiện lúc 1 tuổi
+Câu hỏi 67
+Đoạn văn câu hỏi
+Quang đông toàn bộ võng mạc có thể gây ra các biến chứng sau, trừ:
+Select one:
+ a. Phù hoàng điểm
+ b. Quáng gà
+ c. Bệnh hoàng điểm thiếu máu 
+ d. Bong võng mạc xuất tiết
+Phản hồi
+The correct answer is: Bệnh hoàng điểm thiếu máu
+Câu hỏi 68
+Đoạn văn câu hỏi
+Tất cả các câu nói về loét giác mạc do trực khuẩn mủ xanh đều đúng, trừ:
+Select one:
+ a. Trực khuẩn mủ xanh có sẵn trong tự nhiên và có thể có cả trong lọ thuốc chứa fluorescein
+ b. Quá trình hoại tử giác mạc dừng lại khi nuôi cấy vi khuẩn hàng ngày thấy âm tính 
+ c. Phồng màng Descemet sớm
+ d. Vi khuẩn Proteus Morganii thường gây loét giác mạc tương tự như trực khuẩn mủ xanh)
+Phản hồi
+The correct answer is: Quá trình hoại tử giác mạc dừng lại khi nuôi cấy vi khuẩn hàng ngày thấy âm tính
+Câu hỏi 69
+Đoạn văn câu hỏi
+Liều dùng phù hợp của nhóm prostaglandin là:
+Select one:
+ a. Tra mắt 4 lần / ngày
+ b. Tra mắt 3 lần / ngày
+ c. Tra mắt 2 lần / ngày
+ d. Tra mắt 1 lần / ngày 
+Phản hồi
+The correct answer is: Tra mắt 1 lần / ngày
+Câu hỏi 70
+Đoạn văn câu hỏi
+Thuốc nhóm prostaglandin có chỉ định dùng cho:
+Select one:
+ a. Glôcôm góc mở 
+ b. Viêm màng bồ đào tăng nhãn áp
+ c. Glôcôm góc đóng cơn cấp
+ d. Glôcôm do dùng corticoid kéo dài để điều trị viêm kết mạc dị ứng
+Phản hồi
+The correct answer is: Glôcôm góc mở
+Câu hỏi 71
+Đoạn văn câu hỏi
+Bệnh viêm tổ chức hốc mắt (Chọn 1 ý sai):
+Select one:
+ a. Haemophilus influenza là nguyên nhân chủ yếu ở trẻ dưới 5 tuổi 
+ b. Có thể chẩn đoán viêm xoang ở 70% bệnh nhân với chụp X quang
+ c. Nấm Mucor là nguyên nhân ở người ghép tạng
+ d. Thường do viêm xoang bướm gây ra
+Phản hồi
+The correct answer is: Thường do viêm xoang bướm gây ra
+Câu hỏi 72
+Đoạn văn câu hỏi
+Phẫu thuật lấy thể thủy tinh đục bị ra dịch kính có thể do các yếu tố sau, trừ:
+Select one:
+ a. Lệch thể thủy tinh
+ b. Xuất huyết hậu nhãn cầu
+ c. Gây tê dây VII không hoàn toàn
+ d. Không dùng alphachymotrysin khi lấy thể thủy tinh đục trong bao 
+ e. Gây tê dây III không hoàn toàn
+Phản hồi
+The correct answer is: Không dùng alphachymotrysin khi lấy thể thủy tinh đục trong bao
+Câu hỏi 73
+Đoạn văn câu hỏi
+Glôcôm góc mở đi kèm nhiều bệnh trừ:
+Select one:
+ a. Tắc tĩnh mạch võng mạc
+ b. Thoái hóa hoàng điểm tuổi già 
+ c. Cận thị nặng
+ d. Đái tháo đường
+Phản hồi
+The correct answer is: Thoái hóa hoàng điểm tuổi già
+Câu hỏi 74
+Đoạn văn câu hỏi
+Bệnh nào dưới đây có nốt nhỏ trên mống mắt:
+Select one:
+ a. U xơ thần kinh
+ b. U hạt mỡ vàng ở người trẻ
+ c. Ung thư cơ trơn
+ d. Tất cả các bệnh trên 
+Phản hồi
+The correct answer is: Tất cả các bệnh trên
+Câu hỏi 75
+Đoạn văn câu hỏi
+Bệnh nhân sắp được mổ đục thể thủy tinh ngoài bao MP có số đo khúc xạ trước mổ là 42X180, 46X90. Kỹ thuật khâu để loại trừ loạn thị sau mổ bao gồm tất cả các ý dưới đây, trừ:
+Select one:
+ a. Dùng chỉ vicryl 8-0
+ b. Dùng chỉ nylon 10-0 khâu vắt kiểu Troutman, dùng 2 sợi chỉ bắt đầu từ vị trí 9h30 và 3h30 về phía 12h và buộc chỉ ở đó 
+ c. Dùng chỉ catgut crom 7-0
+ d. Dùng chỉ lụa 7-0
+ e. Dùng chỉ nylon 10-0 khâu vắt kiểu Willard, dùng sợi chỉ 2 kim bắt đầu ở vị trí 12h. Khâu sợi trái sang phía phải, sợi phải sang phía trái và buộc đầu từng sợi ở vị trí 9h30 và 2h30
+Phản hồi
+The correct answer is: Dùng chỉ nylon 10-0 khâu vắt kiểu Troutman, dùng 2 sợi chỉ bắt đầu từ vị trí 9h30 và 3h30 về phía 12h và buộc chỉ ở đó
+Câu hỏi 76
+Đoạn văn câu hỏi
+Góc tiền phòng có khả năng bị đóng khi:
+Select one:
+ a. 1/2 - 1/4 chiều dầy của giác mạc 
+ b. Độ mở của góc < 10°
+ c. Độ mở của góc 20°-35°
+ d. Nghiệm pháp Herrick ³ 1/2 chiều dầy của giác mạc
+ e. Nghiệm pháp Herrick
+Phản hồi
+The correct answers are: Độ mở của góc < 10°, 1/2 - 1/4 chiều dầy của giác mạc
+Câu hỏi 77
+Đoạn văn câu hỏi
+Cháu gái 5 tuổi nói bị song thị 1 tuần sau khi mổ lác ngoài. Thị lực 2M 20/30. Đo thấy có lác trong 15 đi ôp lăng kính khi nhìn xa và gần. Phương pháp tốt nhất hiện nay là:
+Select one:
+ a. Chỉnh tật viễn thị đủ số
+ b. Bịt mắt luân phiên hoàn toàn 
+ c. Đeo kính và lăng kính để chỉnh độ lác nhìn xa và gần
+ d. Theo dõi
+Phản hồi
+The correct answer is: Theo dõi
+Câu hỏi 78
+Đoạn văn câu hỏi
+Dây chằng Lockwood:
+Select one:
+ a. Nằm rất sâu bên trong hốc mắt
+ b. Cùng với mỡ hốc mắt, cân cơ làm thành khung đỡ cho nhãn cầu khỏi bị sang chấn 
+ c. Nằm ở sát bờ trên hốc mắt
+ d. Có tác dụng như cái võng đỡ cho nhãn cầu
+Phản hồi
+The correct answer is: Cùng với mỡ hốc mắt, cân cơ làm thành khung đỡ cho nhãn cầu khỏi bị sang chấn
+Câu hỏi 79
+Đoạn văn câu hỏi
+Khi khám vận nhãn hai mắt về cùng phía của bệnh nhân, điểm quan trọng là
+Select one:
+ a. Sử dụng bịt mắt kín để phá vỡ hợp thị
+ b. Khám trong điều kiện ánh sáng yếu
+ c. Bệnh nhân không quay đầu 
+ d. Bệnh nhân nhìn thẳng ở tư thế nguyên phát
+Phản hồi
+The correct answer is: Bệnh nhân không quay đầu
+Câu hỏi 80
+Đoạn văn câu hỏi
+Bệnh võng mạc sắc tố không kèm theo tổn thương nào:
+Select one:
+ a. Đục thể thủy tinh hình hoa hướng dương 
+ b. Drusen đầu đĩa thị
+ c. Cận thị
+ d. màng trước võng mạc hoàng điểm
+Phản hồi
+The correct answer is: Đục thể thủy tinh hình hoa hướng dương
+Câu hỏi 81
+Đoạn văn câu hỏi
+Tân mạch dưới võng mạc thấy trong bệnh nào dưới đây?
+Select one:
+ a. Tắc tĩnh mạch võng mạc
+ b. Thoái hóa hắc võng mạc di truyền
+ c. Vết dạng mạch
+ d. Teo hắc võng mạc bẩm sinh 
+Phản hồi
+The correct answer is: Vết dạng mạch
+Câu hỏi 82
+Đoạn văn câu hỏi
+Cơ chế tác dụng của infliximab?
+Select one:
+ a. Chất gắn cố định hoạt chất
+ b. corticosteroid
+ c. Kháng thể kháng yếu tố hoại tử u (TNF) 
+ d. Chất chống chuyển hóa
+Phản hồi
+The correct answer is: Kháng thể kháng yếu tố hoại tử u (TNF)
+Câu hỏi 83
+Đoạn văn câu hỏi
+Bệnh viêm giác mạc sợi kèm theo sản xuất nước mắt bình thường có thể gặp trong các trường hợp sau, trừ:
+Select one:
+ a. Viêm giác mạc chấm nông Thygerson
+ b. Viêm da cơ địa
+ c. Dị vật dưới mi trên
+ d. Mắt hột 
+ e. Bịt mắt dài ngày
+Phản hồi
+The correct answer is: Mắt hột
+Câu hỏi 84
+Đoạn văn câu hỏi
+Bệnh nhân 76 tuổi, có nhân cứng xơ hóa đục được phẫu thuật phaco và đặt thể thủy tinh nhân tạo. Đã xé bao trước. Đã tạo hai rãnh sâu ở nhân cứng. Dùng đầu phaco và spatun để chia nhân cứng ra làm bốn phần và đã tán được 2 phần không có vấn đề gì. Nhưng khi tán phần thứ 3 thì thấy bao sau rách và mảnh nhân đó rơi vào trong dịch kính. Bờ xé bao trước còn tốt và thấy có dịch kính ở vết mổ khi rút đầu phaco ra. Nếu bạn không phải là phẫu thuật viên dịch kính võng mạc và không thể mời phẫu thuật viên dịch kính đến ngay thì bạn sẽ làm gì?
+Select one:
+ a. Đóng lại vết mổ và gửi ngay đến phẫu thuật viên võng mạc-dịch kính
+ b. Cắt dịch kính trước hạn chế để lấy dịch kính ra khỏi tiền phòng. Lấy hết chất nhân còn sót và đóng vết mổ.
+ c. Cắt dịch kính trước lấy hết chất nhân còn sót. Đặt thể thủy tinh nhân tạo vào rãnh thể mi và gửi bệnh nhân đến phẫu thuật viên dịch kính võng mạc 
+ d. Cắt dịch kính trước hạn chế. Lấy hết chất nhân còn sót. Đưa đầu phaco và dịch kính và cố hút mảnh chất nhân và tán sau mống mắt. Nếu được sẽ đặt thể thủy tinh nhân tạo vào rãnh thể mi
+Phản hồi
+The correct answer is: Cắt dịch kính trước lấy hết chất nhân còn sót. Đặt thể thủy tinh nhân tạo vào rãnh thể mi và gửi bệnh nhân đến phẫu thuật viên dịch kính võng mạc
+Câu hỏi 85
+Đoạn văn câu hỏi
+Tất cả các câu sau đây nói về nhược thị đều đúng, NGOẠI TRỪ:
+Select one:
+ a. Nhược thị đi kèm rung giật nhãn cầu ẩn đáp ứng với bịt mắt kém
+ b. Nhược thị do lác dễ đáp ứng với điều trị bịt mắt hơn nhược thị do che một bên mắt
+ c. Trẻ bị lác trong bẩm sinh có thể bị nhược thị
+ d. Bệnh nhân bị lác ngoài từng lúc thường bị nhược thị 
+Phản hồi
+The correct answer is: Nhược thị đi kèm rung giật nhãn cầu ẩn đáp ứng với bịt mắt kém
+Câu hỏi 86
+Đoạn văn câu hỏi
+Nói về mắt người:
+Select one or more:
+ a. Mắt cận thị được chỉnh bằng kính cộng
+ b. Ám điểm hình vòng nhẫn khi chỉnh kính mắt không có thủy tinh thể là do hiệu ứng lăng kính của kính đeo 
+ c. Chỉnh khúc xạ mắt không có thủy tinh thể bằng đeo kính tạo hiện tượng phóng đại kính 1,1 lần
+ d. Kính lỗ có thể chỉnh tất cả các tật khúc xạ lên đến thị lực 6/6
+ e. Ở mắt viễn thị không được chỉnh kính, hình ảnh rơi phía sau võng mạc 
+Phản hồi
+The correct answers are: Mắt cận thị được chỉnh bằng kính cộng, Ở mắt viễn thị không được chỉnh kính, hình ảnh rơi phía sau võng mạc, Chỉnh khúc xạ mắt không có thủy tinh thể bằng đeo kính tạo hiện tượng phóng đại kính 1,1 lần, Ám điểm hình vòng nhẫn khi chỉnh kính mắt không có thủy tinh thể là do hiệu ứng lăng kính của kính đeo
+Câu hỏi 87
+Đoạn văn câu hỏi
+Hãy tìm đâu là tư thế nhìn thứ hai
+1) Lên trên và sang phải
+2) Thẳng trước mặt
+3) Lên trên
+4) Xuống và sang trái
+5) Lên và sang trái
+6) Sang phải
+7) Xuống và sang phải
+8) Sang trái
+9) Xuống
+Select one:
+ a. 6
+ b. 2
+ c. 7, 1
+ d. 3,6,8,9 
+Phản hồi
+The correct answer is: 3,6,8,9
+Câu hỏi 88
+Đoạn văn câu hỏi
+Một mắt đưa lên trên kém có thể là do các bệnh sau trừ
+Select one:
+ a. Bệnh Grave (hay Basedow)
+ b. Hội chứng Brown
+ c. Hội chứng Duane 
+ d. Vỡ sàn hốc mắt
+Phản hồi
+The correct answer is: Hội chứng Duane
+Câu hỏi 89
+Đoạn văn câu hỏi
+Nói về các dụng cụ quang học:
+Select one or more:
+ a. Soi đáy mắt trực tiếp có tác dụng hơn soi đáy mắt gián tiếp ở các bệnh nhân có đục môi trường trong suốt
+ b. Trong soi bóng đồng tử, đạt đến bóng tỏa lan khi viễn điểm của bệnh nhân nối với điểm nút của mắt người khám
+ c. Khúc xạ giác mạc kế chỉ đánh giá vùng trung tâm của giác mạc 
+ d. Khúc xạ giác mạc kế đo bán kính độ cong giác mạc 
+ e. Trong soi bóng đồng tử ở khoảng cách 0,66 m, số bù trừ cho khoảng cách đo là 0,66 D
+Phản hồi
+The correct answers are: Trong soi bóng đồng tử, đạt đến bóng tỏa lan khi viễn điểm của bệnh nhân nối với điểm nút của mắt người khám, Khúc xạ giác mạc kế đo bán kính độ cong giác mạc, Khúc xạ giác mạc kế chỉ đánh giá vùng trung tâm của giác mạc
+Câu hỏi 90
+Đoạn văn câu hỏi
+Các câu nói về thuốc đi qua biểu mô giác mạc đều đúng, trừ:
+Select one:
+ a. Neomycin thâm nhập dễ
+ b. Sulfacetamide thâm nhập dễ
+ c. Gentamycin thâm nhập kém 
+ d. Tetracycline thâm nhập dễ
+ e. Chloramphenicol thâm nhập dễ
+Phản hồi
+The correct answer is: Neomycin thâm nhập dễ
+Câu hỏi 91
+Đoạn văn câu hỏi
+Cơ chéo bé có chức năng:
+Select one:
+ a. Đưa mắt lên trên, xoáy trong và đưa mắt ra ngoài
+ b. Đưa mắt xuống dưới, xoáy trong và đưa mắt ra ngoài
+ c. Đưa mắt lên trên, xoáy ngoài và đưa mắt vào trong 
+ d. Đưa mắt lên trên, xoáy trong và đưa mắt hơi vào trong
+Phản hồi
+The correct answer is: Đưa mắt lên trên, xoáy ngoài và đưa mắt vào trong
+Câu hỏi 92
+Đoạn văn câu hỏi
+Câu nào nói sai về lác trong do điều tiết:
+Select one:
+ a. Khi bệnh nhân không đeo kính góc lác khi nhìn gần sẽ lớn hơn 
+ b. Cần chỉnh kính đủ số
+ c. Có thể dùng kính hai tròng ở trẻ nhỏ
+ d. Mắt thường bị cận thị
+Phản hồi
+The correct answer is: Mắt thường bị cận thị
+Câu hỏi 93
+Đoạn văn câu hỏi
+Chọn 1 câu đúng nói về Ung thư cơ vân:
+Select one:
+ a. Thường xuất hiện ở người trưởng thành
+ b. Rất dễ nhầm với viêm tổ chức hốc mắt
+ c. Hiếm khi gây lồi mắt
+ d. Chẩn đoán dựa vào hình ảnh giải phẫu bệnh thấy các tế bào cơ trơn ác tính 
+Phản hồi
+The correct answer is: Rất dễ nhầm với viêm tổ chức hốc mắt
+Câu hỏi 94
+Đoạn văn câu hỏi
+Bệnh lồi mắt giả u viêm biểu hiện (Chọn 1 ý sai):
+Select one:
+ a. Viêm tuyến lệ
+ b. Hoàn toàn giống như bệnh lồi mắt do tuyến giáp trạng 
+ c. Viêm phì đại toàn bộ cơ
+ d. Viêm tất cả các cơ vận nhãn
+Phản hồi
+The correct answer is: Hoàn toàn giống như bệnh lồi mắt do tuyến giáp trạng
+Câu hỏi 95
+Đoạn văn câu hỏi
+Trong trường hợp bệnh nhân có các vết dạng mạch ở đáy mắt, tất cả các câu sau đều đúng, trừ:
+Select one:
+ a. Tổn thương ở cả hai bên.
+ b. Thường kết hợp với bệnh lý toàn thân
+ c. Chấn thương có thể gây nên xuất huyết dưới võng mạc
+ d. Nguy cơ tạo tân mạch ít xảy ra 
+Phản hồi
+The correct answer is: Nguy cơ tạo tân mạch ít xảy ra
+Câu hỏi 96
+Đoạn văn câu hỏi
+Dị dạng Peter thường đi kèm, NGOẠI TRỪ:
+Select one:
+ a. Đục thể thủy tinh cực trước
+ b. Di lệch đồng tử 
+ c. Coloboma võng mạc
+ d. Thiểu sản mống mắt, dính mống mắt giác mạc
+Phản hồi
+The correct answer is: Coloboma võng mạc
+Câu hỏi 97
+Đoạn văn câu hỏi
+Bệnh nhân nữ 28 tuổi 3 ngày nay bị đau đầu, giảm thị lực cả 2 mắt. Nhập viện vì nghi ngờ viêm màng não và không sốt. Dịch não tủy có nhiều tế bào limpho nhưng không thấy vi khuẩn. Khám mắt thấy có viêm màng bồ đào trước hai mắt nhẹ kèm theo bong võng mạc thanh dịch. Không có hoại tử võng mạc. Điều trị thích hợp nhất là:
+Select one:
+ a. Cyclophospahmide
+ b. Chờ kết quả nuôi cấy virut dịch não tủy trước khi điều trị
+ c. Tiêm acyclovir vào dịch kính
+ d. Corticosteroids toàn thân 
+Phản hồi
+The correct answer is: Corticosteroids toàn thân
+Câu hỏi 98
+Đoạn văn câu hỏi
+Hạt trai Elschnig biểu hiện:
+Select one:
+ a. Tróc mảng bao TTT
+ b. Di tích bao tăng sinh sau phẫu thuật lấy TTT ngoài bao
+ c. Đục TTT nhân trung tâm bẩm sinh
+ d. Vết nứt trong
+ e. Tăng sinh biểu mô sau phẫu thuật lấy TTT ngoài bao 
+Phản hồi
+The correct answer is: Tăng sinh biểu mô sau phẫu thuật lấy TTT ngoài bao
+Câu hỏi 99
+Đoạn văn câu hỏi
+Câu nào sau đây sai khi nói về viêm pars plana?
+Select one:
+ a. Không gây tân mạch võng mạc và xuất huyết dịch kính 
+ b. 80% bệnh nhân không cần điều trị
+ c. Bệnh nhân đến khám vì triệu chứng ruồi bay
+ d. Có viêm tĩnh mạch võng mạc
+Phản hồi
+The correct answer is: Không gây tân mạch võng mạc và xuất huyết dịch kính
+Câu hỏi 100
+Đoạn văn câu hỏi
+Lưu lượng thuỷ dịch được tiết ra thay đổi do:
+Select one:
+ a. Viêm mống mắt thể mi
+ b. Viêm hắc mạc
+ c. Thể thuỷ tinh to hơn bình thường 
+ d. Viêm võng mạc
+Phản hồi
+The correct answer is: Viêm mống mắt thể mi
+Câu hỏi 101
+Đoạn văn câu hỏi
+Viêm màng bồ đào kèm theo teo mống mắt là dấu hiệu đặc thù của:
+Select one:
+ a. Herpes simplex
+ b. Herpes zoster 
+ c. Thủy đậu
+ d. Sốt phát ban
+Phản hồi
+The correct answer is: Herpes zoster
+Câu hỏi 102
+Đoạn văn câu hỏi
+Bệnh nhân 5 tuổi bị viêm khớp trẻ em mãn tính và viêm màng bồ đào trước được bắt đầu điều trị bằng methotrexate và sau 6 tháng điều trị viêm được kiểm soát tốt. Lúc này, cháu kêu đau bụng và không chịu uống thuốc nữa. Cách nào dưới đây cần thực hiện?
+Select one:
+ a. Cho trẻ uống methotrexate lúc đi ngủ để trẻ không cảm thấy khó chịu khi ngủ
+ b. Tiêm thuốc dưới da on 
+ c. Chuyển sang dùng thuốc ức chế miễn dịch khác
+ d. Trộn methotrexate với món ăn mà trẻ thích
+Phản hồi
+The correct answer is: Tiêm thuốc dưới da on
+Câu hỏi 103
+Đoạn văn câu hỏi
+Điều trị bong màng Descemet sau mổ:
+Select one:
+ a. Bơm dịch nhày vào tiền phòng để ép màng vào phần giác mạc còn lại 
+ b. Bơm không khí vào tiền phòng và đặt chỉ khâu ép màng vào phần giác mạc còn lại
+ c. Bơm không khí vào tiền phòng
+ d. Đặt chỉ khâu ép màng vào phần giác mạc còn lại
+ e. Bơm khí nở vào tiền phòng
+Phản hồi
+The correct answer is: Bơm không khí vào tiền phòng và đặt chỉ khâu ép màng vào phần giác mạc còn lại
+Câu hỏi 104
+Đoạn văn câu hỏi
+Trong hình sau có
+Select one:
+ a. Lác trong
+ b. Lác xuống dưới
+ c. Lác ngoài
+ d. Lác lên trên 
+ e. Mắt thẳng không lác
+Phản hồi
+The correct answer is: Lác lên trên
+Câu hỏi 105
+Đoạn văn câu hỏi
+Vùng Bjerrum là vùng
+Select one:
+ a. Trung tâm quanh điểm định thị
+ b. Xung quanh điểm mù
+ c. Cạnh trung tâm 10-25 o 
+ d. Không liên tục với điểm mù
+Phản hồi
+The correct answer is: Cạnh trung tâm 10-25 o
+Câu hỏi 106
+Đoạn văn câu hỏi
+Cơ chế bệnh sinh của đục thủy tinh thể do đái tháo đường là:
+Select one:
+ a. Biến đổi cấu trúc protein
+ b. Quá trình glycat hóa (đường gắn protein hay lipit)
+ c. Tất cả các ý 
+ d. Tăng tổn hại do oxi hóa
+Phản hồi
+The correct answer is: Tất cả các ý
+Câu hỏi 107
+Đoạn văn câu hỏi
+Bệnh nhân nữ 34 tuổi củng mạc phía mũi bị mỏng. Kết mạc xung quanh không cương tụ. Đã mổ mắt 4 năm trước. Toàn thân bình thường. Có thể bệnh nhân đã được làm phẫu thuật nào dưới đây?
+Select one:
+ a. Cắt mộng và dùng mitomycin C 
+ b. Mổ bong võng mạc
+ c. LASIK
+ d. Cắt bè
+Phản hồi
+The correct answer is: Cắt mộng và dùng mitomycin C
+Câu hỏi 108
+Đoạn văn câu hỏi
+Đục TTT cực trước xuất hiện sau:
+Select one:
+ a. Dùng steroid
+ b. Tia xạ
+ c. Chấn thương xuyên 
+ d. Đái tháo đường
+Phản hồi
+The correct answer is: Chấn thương xuyên
+Câu hỏi 109
+Đoạn văn câu hỏi
+Dấu hiệu nào của nốt ruồi mống mắt là không đúng?
+Select one:
+ a. Khả năng chuyển sang ác tính thấp
+ b. Tăng số lượng hắc tố bào
+ c. Hình ảnh giải phẫu bệnh tương tự như vết sắc tố mống mắt 
+ d. Thường ở mặt trước mống mắt
+Phản hồi
+The correct answer is: Hình ảnh giải phẫu bệnh tương tự như vết sắc tố mống mắt
+Câu hỏi 110
+Đoạn văn câu hỏi
+Câu nào dưới đây mô tả dịch tễ bệnh viêm củng mạc kèm theo bệnh lý collagen mạch máu?
+Select one:
+ a. Nam bị nhiều hơn nữ
+ b. Thường gặp nhất lúc 30 tuổi
+ c. Hiếm khi bị bệnh cả hai mắt
+ d. 1/2 số bệnh nhân có bệnh nội khoa toàn thân đi kèm 
+Phản hồi
+The correct answer is: 1/2 số bệnh nhân có bệnh nội khoa toàn thân đi kèm
+Câu hỏi 111
+Đoạn văn câu hỏi
+Câu nào nói về u hắc tố mống mắt ác tính là đúng?
+Select one:
+ a. Đa số xuất hiện từ nốt ruồi mống mắt trước đó
+ b. Thường ở diện đồng tử
+ c. Cả 3 câu trên đúng 
+ d. Có thể có dạng mống mắt đổi màu
+Phản hồi
+The correct answer is: Cả 3 câu trên đúng
+Câu hỏi 112
+Đoạn văn câu hỏi
+Nếu các mắt có vận động hai mắt về cùng một hướng bình thường, tất cả những điều sau đều có trừ
+Select one:
+ a. Mỗi mắt sẽ di chuyển đều
+ b. Một mắt là mắt định thị 
+ c. Mỗi mắt có cùng vị trí so với mắt kia
+ d. Mỗi mắt sẽ di chuyển với tốc độ như nhau
+Phản hồi
+The correct answer is: Một mắt là mắt định thị
+Câu hỏi 113
+Đoạn văn câu hỏi
+Bệnh nhân nữ 84 tuổi, 2 mắt đã được mổ đục thể thủy tinh, 7 ngày nay thấy thị lực MP giảm đột ngột không kèm theo đau nhức, đỏ mắt hay sợ ánh sáng. Thị lực MP ĐNT 1m và MT 20/25. MP còn có rối loạn đường đồng tử hướng tâm, tủa sau giác mạc và tế bào viêm trong tiền phòng. Dịch kính MP có những đám tế bào trắng. Thể thủy tinh nhân tạo hậu phòng ổn định và đã mở bao sau. MT bình thường. 4 năm trước bệnh nhân được chẩn đoán lao và điều trị lao 1 năm. Xét nghiệm nào dưới đây ít có ý nghĩa để chẩn đoán nhất?
+Select one:
+ a. Chụp mạch huỳnh quang
+ b. Chụp cộng hưởng từ đầu và hốc mắt
+ c. Sinh thiết dịch kính xét nghiệm tế bào và vi khuẩn học 
+ d. Khám nội khoa để xác định bệnh lý ác tính, suy giảm miễn dịch hay lao tái phát
+Phản hồi
+The correct answer is: Chụp mạch huỳnh quang
+Câu hỏi 114
+Đoạn văn câu hỏi
+Trong bệnh viêm động mạch tế bào khổng lồ, tình huống nào không đúng:
+Select one:
+ a. Khi có tổn thương động mạch đốt sống có thể gây nên đột quị
+Thường có tăng nồng độ protein C phản ứng
+ b. Bệnh kèm theo viêm đa khớp dạng nốt
+ c. Hiếm khi có tổn thương mạch máu nội sọ 
+Phản hồi
+The correct answer is: Bệnh kèm theo viêm đa khớp dạng nốt
+Câu hỏi 115
+Đoạn văn câu hỏi
+Các ý sau đều liên quan đến dị dạng Rieger, trừ:
+Select one:
+ a. Di truyền lặn liên kết nhiễm sắc thể thường
+ b. Khả năng xuất hiện dị dạng mặt, răng và xương
+ c. Glôcôm
+ d. Gồm dị dạng Axenfeld và dị dạng trung bì mống mắt do phát triển 
+Phản hồi
+The correct answer is: Di truyền lặn liên kết nhiễm sắc thể thường
+Câu hỏi 116
+Đoạn văn câu hỏi
+Bệnh nhân bị hội chứng Vogt-Koyanagi-Harada được điều trị bằng uống prednisone liề cao và bong thanh dịch đã rút. Giảm dần liều thuốc và sau 4 tháng chỉ còn dùng 20mg prednisone. Bệnh nhân dùng thuốc tra prednislolone acetate 1% 4 lần/ ngày. Thị lực 2 mắt 20/30. Tế bào viêm tiền phòng 2+, không có viêm dịch kính, không có phù hoàng điểm hay dịch dưới võng mạc. Điều trị tiếp theo bằng:
+Select one:
+ a. Đặt thuốc chậm flucinolone
+ b. Tăng liều uống prednisone lên 40 mg/ ngày 
+ c. Dùng thuốc ức chế miễn dịch để loại dần corticosteroid
+ d. Tiêm triamcinolone acetonide dưới bao Tenon
+Phản hồi
+The correct answer is: Dùng thuốc ức chế miễn dịch để loại dần corticosteroid
+Câu hỏi 117
+Đoạn văn câu hỏi
+Sau mổ một bệnh nhân đã được lấy thể thủy tinh đục có các chỉ số đo khúc xạ giác mạc như sau: 43X60, 47X150. Khi cho kính lắp gọng cần thêm kính trụ nào sau đây?
+Select one:
+ a. +3D ở 150 độ
+ b. Không câu nào đúng 
+ c. +5D ở 150 độ
+ d. +4D ở 150 độ
+ e. +4D ở 60 độ
+Phản hồi
+The correct answer is: +3D ở 150 độ
+Câu hỏi 118
+Đoạn văn câu hỏi
+Hiện tượng nào có thể xảy ra sau thoát dịch kính sau khi lấy thể thủy tinh đục?
+1. Bong võng mạc
+2. Treo đồng tử
+3. Bệnh giác mạc bọng
+4. Loạn thị nhiều
+Select one:
+ a. 4
+ b. 2
+ c. 3
+ d. Tất cả đều đúng 
+ e. 1
+Phản hồi
+The correct answer is: Tất cả đều đúng
+Câu hỏi 119
+Đoạn văn câu hỏi
+Trong khi mổ phaco, nếu thấy rách bao và dịch kính ra ngoài tiền phòng. Nhân vẫn chưa được lấy hết. Không nên thực hiện những bước nào sau đây:
+Select one:
+ a. Bơm dịch nhày dưới các mảnh nhân để làm chúng nổi lên 
+ b. Xem xét chuyển sang lấy thể thủy tinh ngoài bao dùng anse để lấy các mảnh nhân còn sót
+ c. Tiếp tục làm phaco vì đầu phaco có thể cắt được dịch kính
+ d. Lấy sạch dịch kính ở tiền phòng bằng máy cắt dịch kính, hạ thấp chai dịch truyền xuống
+Phản hồi
+The correct answer is: Tiếp tục làm phaco vì đầu phaco có thể cắt được dịch kính
+Câu hỏi 120
+Đoạn văn câu hỏi
+Điều trị nhiễm herpes nhu mô giác mạc bằng tra corticosteroid, thuốc mạnh nhất dùng là:
+Select one:
+ a. Prednisolone acetate 1% 
+ b. Medrysome
+ c. Fluorometholone
+ d. Prednisolone phosphate 1%
+Phản hồi
+The correct answer is: Prednisolone acetate 1%`;
+// Đồng hồ bấm giừo
+var minutesLabel = document.getElementById("minutes");
+var secondsLabel = document.getElementById("seconds");
+var totalSeconds = 0;
+
+//tạo mã phần tử
+var UID = 0;
+
+//Theo dõi kết quả
+var so_caulamdung = document.getElementById("so_caulamdung");
+var so_dalam = document.getElementById("so_dalam");
+var tong_socau = document.getElementById("tong_socau");
+
+// Xử lý dữ liệu về kiểu định dạng ta mong muốn
+function so_che_dulieu(s){
+var lines = s.split("\n");
+for (var i = 0; i <= lines.length - 1; i++) {
+	if(lines[i] == "Đoạn văn câu hỏi") lines[i] = "";
+	if(lines[i].startsWith("Câu hỏi ")) lines[i] = "";
+}
+return lines.join("\n");
+}
+
+//Hàm tạo trắc nghiệm
+function tao_trac_nghiem_v2(base, chuoigoc){
+var text = chuoigoc;
+var start = `Select one:`;
+var end = `Phản hồi
+The correct answer is: `;
+if (text.indexOf("Select one or more:") > -1) start = "Select one or more:";
+var cauhoi = text.split(start)[0];
+var dapan = text.split(end)[1];
+console.log("Bắt đầu vào hàm");
+console.log(text);
+console.log(cauhoi);
+console.log(dapan);
+var luachon = text.split(start)[1].split(end)[0];
+
+
+console.log(luachon);
+
+var cauhoi_node = document.createElement("div");
+cauhoi_node.className = 'cauhoi';
+cauhoi_node.style.whiteSpace = 'pre-wrap';
+cauhoi_node.innerHTML = cauhoi;
+base.appendChild(cauhoi_node);
+
+var cac_luachon = luachon.split("\n");
+var cac_luachon_node = document.createElement("div");
+cac_luachon_node.className = 'luachon';
+var may_be_dap_an_ID = UID + cac_luachon.length - 2;
+for (var i = 1; i <= cac_luachon.length - 2; i++) {
+	var cac_luachon_tmp = document.createElement("input");
+	cac_luachon_tmp.type = "checkbox";
+	//cac_luachon_tmp.name = cauhoi;
+	//cac_luachon_tmp.style.whiteSpace = 'pre-wrap';
+	cac_luachon_tmp.id = UID.toString();
+	cac_luachon_tmp.onclick = function(){
+		document.getElementById(may_be_dap_an_ID.toString()).style.display = "block";
+		cac_luachon_node.style.cssText = "pointer-events:none";
+		var elems = cac_luachon_node.querySelectorAll("*"),
+    	res = Array.from(elems).find(v => v.textContent.indexOf(dapan) > -1);
+    	if(res) res.style.color = 'red';
+    	so_dalam.innerHTML ++;
+    	if(res.htmlFor != this.id ) {
+    	var elem2s = cac_luachon_node.querySelectorAll("*"),
+    	res2 = Array.from(elem2s).find(v => v.htmlFor == this.id);
+    	if(res2) res2.style.textDecoration  = "line-through";
+        } else {
+        	res.style.color = 'blue';
+        	so_caulamdung.innerHTML ++;
+        }	
+	}
+
+	var label = document.createElement('label'); 
+    label.htmlFor = UID.toString();
+    label.appendChild(document.createTextNode(cac_luachon[i])); 
+
+    var line_break = document.createElement('br'); 
+
+	cac_luachon_node.appendChild(cac_luachon_tmp);
+	cac_luachon_node.appendChild(label);
+	cac_luachon_node.appendChild(line_break);
+
+	UID++;
+}
+base.appendChild(cac_luachon_node);
+
+var dapan_node = document.createElement("div");
+dapan_node.className = 'dapan';
+dapan_node.id = UID.toString(); UID++;
+dapan_node.style.display = "none";
+dapan_node.appendChild(document.createTextNode("Đáp án là: "+dapan));
+base.appendChild(dapan_node);
+
+	}
+
+
+// Bắt đầu bài thi
+function Batdau_click() {
+	    //Khởi tạo biến
+	    so_dalam.innerHTML = 0;
+	    so_caulamdung.innerHTML = 0;
+	    tong_socau.innerHTML = 0;
+		//var x = document.getElementById("noidunggoc").innerHTML();
+		var kq = document.getElementById("ketqua");
+		var tien_xuly = so_che_dulieu(noidung);
+		console.log(tien_xuly);
+		var y = tien_xuly.split("\n\n");
+		tong_socau.innerHTML = y.length - 1;
+		console.log("Trắc nghiệm Nhãn khoa v0.1");
+		// Riêng chỗ này có 1 lưu ý là do ta đã tẩy xóa dữ liệu phía trên nên bị lệch khung :D
+		for (var i = 1; i <= y.length - 1; i++) {
+			console.log(y[i]);
+			var tmp = document.createElement("div");
+			tao_trac_nghiem_v2(tmp, y[i]);
+			kq.appendChild(tmp);
+			kq.appendChild(document.createElement("br"))
+		}
+
+		 setInterval(setTime, 1000);
+		
+	}
+//Làm lại từ đầu
+function Lamlai_click(){
+	location.reload();
+}
+
+        function setTime()
+        {
+            ++totalSeconds;
+            secondsLabel.innerHTML = pad(totalSeconds%60);
+            minutesLabel.innerHTML = pad(parseInt(totalSeconds/60));
+        }
+
+        function pad(val)
+        {
+            var valString = val + "";
+            if(valString.length < 2)
+            {
+                return "0" + valString;
+            }
+            else
+            {
+                return valString;
+            }
+        }
+</script>
+</body>
+</html>

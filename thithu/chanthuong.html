@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Chấn thương</title>
+	<style type="text/css">
+		.cauhoi {
+			 border-style: solid;
+			 border-width: 2px;
+			 color: blue;
+			}
+		.luachon {
+			border-style: solid;
+			 border-width: 2px;
+			 color: black;
+		   }
+		 .dapan {
+			border-style: solid;
+			 border-width: 2px;
+			 color: pink;
+		   }
+#seconds {
+  font-size: 5em;}
+
+#minutes {
+  font-size: 5em;
+}
+#colon {
+  font-size: 5em;
+}
+	</style>
+
+</head>
+<body>
+	<div id = "bangdieukhien" style="position:sticky;top:0;width:100%;background-color: #e2e2e2;">
+		<div style="text-align: center;">
+		<label id="minutes">00</label>
+		<label id="colon">:</label>
+		<label id="seconds">00</label>
+		</div>
+		<div style="text-align: center;">
+		<button onclick="Batdau_click()">Bắt đầu làm test!</button>
+		<button onclick="Lamlai_click()">Làm lại</button><br/>
+		Số câu làm đúng: <label id = "so_caulamdung"></label>/<label id = "so_dalam"></label> (Tổng: <label id = "tong_socau"></label>)
+	    </div>
+	</div>
+	<br/>
+	<br/>
+<div id = "ketqua"></div>
+<script type="text/javascript" src="chanthuong.js"></script>
+<script type="text/javascript">
+var noidung = NapNoiDung_ChanThuong();
+// Đồng hồ bấm giừo
+var minutesLabel = document.getElementById("minutes");
+var secondsLabel = document.getElementById("seconds");
+var totalSeconds = 0;
+
+//tạo mã phần tử
+var UID = 0;
+
+//Theo dõi kết quả
+var so_caulamdung = document.getElementById("so_caulamdung");
+var so_dalam = document.getElementById("so_dalam");
+var tong_socau = document.getElementById("tong_socau");
+
+//Hàm tạo trắc nghiệm
+function tao_trac_nghiem_v2(base, chuoigoc){
+var text = chuoigoc;
+var start = `Select one:`;
+var end = `Phản hồi
+The correct answer is: `;
+if (text.indexOf("Select one or more:") > -1) start = "Select one or more:";
+var cauhoi = text.split(start)[0];
+var dapan = text.split(end)[1];
+var luachon = text.split(start)[1].split(end)[0];
+
+var cauhoi_node = document.createElement("div");
+cauhoi_node.className = 'cauhoi';
+cauhoi_node.style.whiteSpace = 'pre-wrap';
+cauhoi_node.innerHTML = cauhoi;
+base.appendChild(cauhoi_node);
+
+var cac_luachon = luachon.split("\n");
+var cac_luachon_node = document.createElement("div");
+cac_luachon_node.className = 'luachon';
+var may_be_dap_an_ID = UID + cac_luachon.length - 2;
+for (var i = 1; i <= cac_luachon.length - 2; i++) {
+	var cac_luachon_tmp = document.createElement("input");
+	cac_luachon_tmp.type = "checkbox";
+	//cac_luachon_tmp.name = cauhoi;
+	//cac_luachon_tmp.style.whiteSpace = 'pre-wrap';
+	cac_luachon_tmp.id = UID.toString();
+	cac_luachon_tmp.onclick = function(){
+		document.getElementById(may_be_dap_an_ID.toString()).style.display = "block";
+		cac_luachon_node.style.cssText = "pointer-events:none";
+		var elems = cac_luachon_node.querySelectorAll("*"),
+    	res = Array.from(elems).find(v => v.textContent.indexOf(dapan) > -1);
+    	if(res) res.style.color = 'red';
+    	so_dalam.innerHTML ++;
+    	if(res.htmlFor != this.id ) {
+    	var elem2s = cac_luachon_node.querySelectorAll("*"),
+    	res2 = Array.from(elem2s).find(v => v.htmlFor == this.id);
+    	if(res2) res2.style.textDecoration  = "line-through";
+        } else {
+        	res.style.color = 'blue';
+        	so_caulamdung.innerHTML ++;
+        }	
+	}
+
+	var label = document.createElement('label'); 
+    label.htmlFor = UID.toString();
+    label.appendChild(document.createTextNode(cac_luachon[i])); 
+
+    var line_break = document.createElement('br'); 
+
+	cac_luachon_node.appendChild(cac_luachon_tmp);
+	cac_luachon_node.appendChild(label);
+	cac_luachon_node.appendChild(line_break);
+
+	UID++;
+}
+base.appendChild(cac_luachon_node);
+
+var dapan_node = document.createElement("div");
+dapan_node.className = 'dapan';
+dapan_node.id = UID.toString(); UID++;
+dapan_node.style.display = "none";
+dapan_node.appendChild(document.createTextNode("Đáp án là: "+dapan));
+base.appendChild(dapan_node);
+
+	}
+
+
+// Bắt đầu bài thi
+function Batdau_click() {
+	    //Khởi tạo biến
+	    so_dalam.innerHTML = 0;
+	    so_caulamdung.innerHTML = 0;
+	    tong_socau.innerHTML = 0;
+		//var x = document.getElementById("noidunggoc").innerHTML();
+		var kq = document.getElementById("ketqua");
+		var y = noidung.split("\n\n");
+		tong_socau.innerHTML = y.length;
+		console.log("Trắc nghiệm Nhãn khoa v0.1");
+		for (var i = 0; i <= y.length - 1; i++) {
+			console.log(y[i]);
+			var tmp = document.createElement("div");
+			tao_trac_nghiem_v2(tmp, y[i]);
+			var tmp_number = document.createElement("label");
+			tmp_number.innerHTML = "Câu hỏi " + (i+1) + " :";
+			kq.appendChild(tmp_number)
+			kq.appendChild(tmp);
+			kq.appendChild(document.createElement("br"))
+		}
+
+		 setInterval(setTime, 1000);
+		
+	}
+//Làm lại từ đầu
+function Lamlai_click(){
+	location.reload();
+}
+
+        function setTime()
+        {
+            ++totalSeconds;
+            secondsLabel.innerHTML = pad(totalSeconds%60);
+            minutesLabel.innerHTML = pad(parseInt(totalSeconds/60));
+        }
+
+        function pad(val)
+        {
+            var valString = val + "";
+            if(valString.length < 2)
+            {
+                return "0" + valString;
+            }
+            else
+            {
+                return valString;
+            }
+        }
+</script>
+</body>
+</html>
