@@ -28,7 +28,7 @@
             "&" + "distanceUnits=" + settings.distanceUnits.value +
             "&" + "chartType=" + 0 +
             "&" + "optoType=" + 0 +
-            "&" + "displayType=" + 3 +
+            "&" + "displayType=" + 2 +
             "&" + "rowIndex=" + 0 +
             "&" + "mirror=" + $(settings.mirror).prop("checked") +
             "&" + "crowd=" + $(settings.crowd).prop("checked");
@@ -39,7 +39,7 @@
     </script>
 </head>
 
-<body onload="Boot()">
+<body onload="Boot(); initSnellen();">
     <img id="toggle" src="style/cog.svg" class="cog" onclick="ToggleSettings()" />
     <div id="console">
         <form id="settings">
