@@ -12,7 +12,7 @@ body {
     height: 70px;
     width: 100%;
 
-    overflow-x: auto;
+    overflow-x: hidden;
     overflow-y: hidden;
 
     background-image: url('console_bg.svg');
@@ -53,27 +53,27 @@ body {
 
 .button {
     display: inline-block;
-    width: 65px;
+    width: 30px;
     height: 30px;
 }
 
 .buttonHide {
     background-image: url('refresh.svg');
-    background-size: 30px 40px;
+    background-size: 30px 30px;
     background-repeat: no-repeat;
     background-position: center center;
 }
 
 .buttonLarger {
     background-image: url('plus.svg');
-    background-size: 30px 40px;
+    background-size: 30px 30px;
     background-repeat: no-repeat;
     background-position: center center;
 }
 
 .buttonSmaller {
     background-image: url('minus.svg');
-    background-size: 30px 40px;
+    background-size: 30px 30px;
     background-repeat: no-repeat;
     background-position: center center;
 }
