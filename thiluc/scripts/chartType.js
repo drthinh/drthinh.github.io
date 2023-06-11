@@ -228,7 +228,10 @@ ChartType.prototype.createImageElement = function(fileName, rowIndex, elementInd
 {
 	var i = document.createElement("img");
 	
-	$(i).attr("src", "assets/" + fileName + ".svg?cache=" + (Math.random() * 99999));
+	if(fileName.includes(".gif")||fileName.includes(".png")||fileName.includes(".jpg"))
+		$(i).attr("src", "assets/" + fileName + "?cache=" + (Math.random() * 99999));
+	else
+		$(i).attr("src", "assets/" + fileName + ".svg?cache=" + (Math.random() * 99999));
 	
 	return i;
 }
