@@ -488,9 +488,9 @@ p {
 
 #copyright{
 	position:absolute;
-	height:20px;
+	height: 40px;
 	width:400px;
-	bottom:30px;
+	bottom: 40px;
 	//left:50%;
 	right:30px;
 	text-align:center;
