@@ -1432,7 +1432,7 @@ function openReview(){
 	resetCircNum();
 	
 	$("#menuContainer").hide();
-	$("#modeText").text("Chế độ khám phá");
+	$("#modeText").text("Chế độ học tập");
 	$("#modeText").css("color","#659fd5");
 }
 function openTest(){
@@ -1464,7 +1464,7 @@ function openTest(){
 	
 	//console.log("eyeCenterOS.x = " + eyeCenterOS.x);
 	$("#menuContainer").hide();
-	$("#modeText").text("Chế độ thử nghiệm");
+	$("#modeText").text("Chế độ lượng giá");
 	$("#modeText").css("color","#f2c75c");
 	
 }
